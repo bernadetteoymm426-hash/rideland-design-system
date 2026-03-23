@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>骑迹大陆 Design System v2.0 - 设计系统展示</title>
+    <style>
+        /* 设计系统令牌 */
+        :root {
+            /* 品牌色 */
+            --deep-space: #070E1B;
+            --tech-blue: #3B82F6;
+            --emerald-green: #10B981;
+            --victory-gold: #F59E0B;
+            --passion-red: #EF4444;
+            
+            /* 辅助色 */
+            --light-gray: #F1F5F9;
+            --medium-gray: #94A3B8;
+            --dark-gray: #64748B;
+            --neutral-gray: #6B7280;
+            
+            /* 领土色 */
+            --territory-ally: rgba(34, 197, 94, 0.45);
+            --territory-enemy: rgba(239, 68, 68, 0.35);
+            --territory-contested: rgba(245, 158, 11, 0.4);
+            --territory-neutral: rgba(107, 114, 128, 0.2);
+            
+            /* 间距 */
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-5: 40px;
+            --space-6: 48px;
+            --space-8: 64px;
+            
+            /* 动效 */
+            --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--deep-space);
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+        
+        /* 布局演示 */
+        .demo-section {
+            padding: var(--space-6);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            color: var(--tech-blue);
+        }
+        
+        /* 色彩展示 */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+        
+        .color-card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .color-swatch {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .color-info {
+            padding: var(--space-3);
+            background: rgba(26, 39, 64, 0.8);
+        }
+        
+        .color-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .color-value {
+            font-size: 12px;
+            color: var(--medium-gray);
+            font-family: monospace;
+        }
+        
+        /* 领土着色展示 */
+        .territory-demo {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: var(--deep-space);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: var(--space-4);
+        }
+        
+        .territory-overlay {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .territory-ally {
+            background: var(--territory-ally);
+            top: 40%;
+            left: 60%;
+            width: 15%;
+            height: 12%;
+        }
+        
+        .territory-enemy {
+            background: var(--territory-enemy);
+            top: 35%;
+            left: 30%;
+            width: 12%;
+            height: 10%;
+        }
+        
+        .territory-contested {
+            background: var(--territory-contested);
+            top: 55%;
+            left: 45%;
+            width: 10%;
+            height: 15%;
+        }
+        
+        .territory-neutral {
+            background: var(--territory-neutral);
+            top: 20%;
+            left: 50%;
+            width: 18%;
+            height: 12%;
+        }
+        
+        /* 家乡高亮 */
+        .hometown-marker {
+            position: absolute;
+            top: 32%;
+            left: 65%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hometown-pulse {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--victory-gold);
+            animation: pulse-animation 2s infinite;
+            box-shadow: 0 0 20px var(--victory-gold);
+        }
+        
+        .hometown-label {
+            margin-top: var(--space-2);
+            padding: 8px 16px;
+            background: rgba(26, 39, 64, 0.9);
+            border: 1px solid var(--victory-gold);
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        @keyframes pulse-animation {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.8;
+            }
+        }
+        
+        /* 布局演示 */
+        .layout-demo {
+            display: grid;
+            grid-template-rows: 80px 1fr 100px;
+            height: 600px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: var(--space-4);
+        }
+        
+        .top-bar {
+            background: rgba(7, 14, 27, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 0 var(--space-5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--light-gray);
+        }
+        
+        .weekly-status {
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .map-area {
+            background: linear-gradient(180deg, #0A1628 0%, #070E1B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .map-placeholder {
+            text-align: center;
+            color: var(--medium-gray);
+        }
+        
+        .bottom-bar {
+            background: rgba(26, 39, 64, 0.85);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(59, 130, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 var(--space-4);
+        }
+        
+        .nav-button {
+            width: 100px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            background: rgba(26, 39, 64, 0.6);
+            color: var(--medium-gray);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--tech-blue);
+            color: var(--light-gray);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .nav-button.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--tech-blue);
+            color: var(--light-gray);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .nav-label {
+            font-size: 13px;
+        }
+        
+        /* 组件展示 */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+        
+        .component-card {
+            background: rgba(26, 39, 64, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: var(--space-4);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(180deg, var(--tech-blue) 0%, #1D4ED8 100%);
+            color: white;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--tech-blue);
+            border: 2px solid var(--tech-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        /* 进度条 */
+        .progress-demo {
+            margin-top: var(--space-4);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(148, 163, 184, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--tech-blue), var(--emerald-green));
+            border-radius: 4px;
+            width: 58%;
+            animation: progress-pulse 2s infinite;
+        }
+        
+        @keyframes progress-pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px;
+        }
+        
+        .tag-primary {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--tech-blue);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
+        
+        .tag-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--emerald-green);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        
+        .tag-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--victory-gold);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+        
+        .tag-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--passion-red);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 品牌色展示 -->
+    <section class="demo-section">
+        <h2 class="section-title">🎨 品牌色 (Brand Colors)</h2>
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--deep-space); color: white;">深空黑</div>
+                <div class="color-info">
+                    <div class="color-name">深空黑 (Deep Space)</div>
+                    <div class="color-value">#070E1B</div>
+                    <div class="color-value">主背景色</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--tech-blue); color: white;">科技蓝</div>
+                <div class="color-info">
+                    <div class="color-name">科技蓝 (Tech Blue)</div>
+                    <div class="color-value">#3B82F6</div>
+                    <div class="color-value">主色调、按钮</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--emerald-green); color: white;">翡翠绿</div>
+                <div class="color-info">
+                    <div class="color-name">翡翠绿 (Emerald Green)</div>
+                    <div class="color-value">#10B981</div>
+                    <div class="color-value">积极数据、我方领土</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--victory-gold); color: white;">胜利金</div>
+                <div class="color-info">
+                    <div class="color-name">胜利金 (Victory Gold)</div>
+                    <div class="color-value">#F59E0B</div>
+                    <div class="color-value">成就、家乡高亮</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--passion-red); color: white;">热情红</div>
+                <div class="color-info">
+                    <div class="color-name">热情红 (Passion Red)</div>
+                    <div class="color-value">#EF4444</div>
+                    <div class="color-value">警告、敌方领土</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 2. 领土着色展示 -->
+    <section class="demo-section">
+        <h2 class="section-title">🗺️ 领土着色 (Territory Overlays)</h2>
+        <div class="territory-demo">
+            <div class="territory-overlay territory-ally"></div>
+            <div class="territory-overlay territory-enemy"></div>
+            <div class="territory-overlay territory-contested"></div>
+            <div class="territory-overlay territory-neutral"></div>
+            <div class="hometown-marker">
+                <div class="hometown-pulse"></div>
+                <div class="hometown-label">
+                    <div style="color: var(--victory-gold); font-weight: 700;">家乡基地</div>
+                    <div style="color: var(--light-gray);">BEIJING HQ</div>
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 20px; left: 20px; color: var(--medium-gray); font-size: 12px;">
+                中国地图示意图（实际使用 ECharts 渲染）
+            </div>
+        </div>
+        <div class="color-grid" style="margin-top: var(--space-4);">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--territory-ally); color: white;">我方领土</div>
+                <div class="color-info">
+                    <div class="color-name">我方领土</div>
+                    <div class="color-value">rgba(34, 197, 94, 0.45)</div>
+                    <div class="color-value">绿色半透明</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--territory-enemy); color: white;">敌方领土</div>
+                <div class="color-info">
+                    <div class="color-name">敌方领土</div>
+                    <div class="color-value">rgba(239, 68, 68, 0.35)</div>
+                    <div class="color-value">红色半透明</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--territory-contested); color: white;">争夺中</div>
+                <div class="color-info">
+                    <div class="color-name">争夺中</div>
+                    <div class="color-value">rgba(245, 158, 11, 0.4)</div>
+                    <div class="color-value">橙色半透明</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--territory-neutral); color: white;">无主之地</div>
+                <div class="color-info">
+                    <div class="color-name">无主之地</div>
+                    <div class="color-value">rgba(107, 114, 128, 0.2)</div>
+                    <div class="color-value">灰色半透明</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 3. 横屏布局展示 -->
+    <section class="demo-section">
+        <h2 class="section-title">📐 横屏布局 (Landscape Layout)</h2>
+        <div class="layout-demo">
+            <header class="top-bar">
+                <div class="logo">骑迹大陆</div>
+                <div class="weekly-status">
+                    <span style="color: var(--tech-blue);">⚔️ 对战期</span>
+                    <span style="color: var(--medium-gray); margin-left: 8px;">剩余 3 天 14 小时</span>
+                </div>
+            </header>
+            <main class="map-area">
+                <div class="map-placeholder">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🗺️</div>
+                    <div style="font-size: 20px; font-weight: 700; color: var(--light-gray);">中国地图区域</div>
+                    <div style="font-size: 14px; color: var(--medium-gray); margin-top: 8px;">85% 屏幕高度 · 可缩放交互</div>
+                </div>
+            </main>
+            <nav class="bottom-bar">
+                <div class="nav-button">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">战队</div>
+                </div>
+                <div class="nav-button active">
+                    <div class="nav-icon">⚔️</div>
+                    <div class="nav-label">作战</div>
+                </div>
+                <div class="nav-button">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-label">战报</div>
+                </div>
+                <div class="nav-button">
+                    <div class="nav-icon">🏆</div>
+                    <div class="nav-label">排行</div>
+                </div>
+                <div style="width: 100px; display: flex; justify-content: flex-end;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--victory-gold), #F59E0B); border: 2px solid var(--tech-blue); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);">
+                        <span style="font-size: 24px;">👤</span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div style="margin-top: var(--space-3); display: flex; gap: var(--space-4); color: var(--medium-gray); font-size: 14px;">
+            <div>顶部信息条：<strong style="color: var(--light-gray);">80px</strong></div>
+            <div>地图区域：<strong style="color: var(--light-gray);">~900px (85%)</strong></div>
+            <div>底部功能栏：<strong style="color: var(--light-gray);">100px</strong></div>
+        </div>
+    </section>
+    
+    <!-- 4. 组件展示 -->
+    <section class="demo-section">
+        <h2 class="section-title">🧩 组件系统 (Components)</h2>
+        <div class="component-grid">
+            <div class="component-card">
+                <h3 style="margin-bottom: var(--space-3); color: var(--tech-blue);">按钮 (Buttons)</h3>
+                <button class="btn btn-primary">主按钮 - 科技蓝渐变</button>
+                <button class="btn btn-secondary">次按钮 - 幽灵边框</button>
+                <div style="margin-top: 16px; font-size: 12px; color: var(--medium-gray);">
+                    悬停效果：上浮 2px + 光效增强
+                </div>
+            </div>
+            <div class="component-card">
+                <h3 style="margin-bottom: var(--space-3); color: var(--tech-blue);">标签 (Tags)</h3>
+                <div>
+                    <span class="tag tag-primary">对战期</span>
+                    <span class="tag tag-success">已占领</span>
+                    <span class="tag tag-warning">争夺中</span>
+                    <span class="tag tag-danger">被攻击</span>
+                </div>
+                <div style="margin-top: 16px; font-size: 12px; color: var(--medium-gray);">
+                    圆角：16px · 背景：20% 透明度
+                </div>
+            </div>
+            <div class="component-card">
+                <h3 style="margin-bottom: var(--space-3); color: var(--tech-blue);">进度条 (Progress)</h3>
+                <div style="font-size: 14px; margin-bottom: 8px;">
+                    <span style="color: var(--light-gray); font-weight: 700;">攻城进度</span>
+                    <span style="color: var(--tech-blue); margin-left: 8px;">58%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div style="margin-top: 16px; font-size: 12px; color: var(--medium-gray);">
+                    动画：脉冲呼吸效果
+                </div>
+            </div>
+            <div class="component-card">
+                <h3 style="margin-bottom: var(--space-3); color: var(--tech-blue);">卡片 (Cards)</h3>
+                <div style="background: rgba(26, 39, 64, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 16px;">
+                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">战队卡片示例</div>
+                    <div style="font-size: 14px; color: var(--medium-gray); margin-bottom: 12px;">骑行者联盟 · 128 名成员</div>
+                    <div style="display: flex; gap: 8px;">
+                        <span class="tag tag-success">12 个领土</span>
+                        <span class="tag tag-primary">28,450km</span>
+                    </div>
+                </div>
+                <div style="margin-top: 16px; font-size: 12px; color: var(--medium-gray);">
+                    毛玻璃效果 · 边框：1px · 圆角：12px
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. 间距系统 -->
+    <section class="demo-section">
+        <h2 class="section-title">📏 间距系统 (Spacing)</h2>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 100px; color: var(--medium-gray); font-size: 12px;">space-1</div>
+                <div style="height: 8px; background: rgba(59, 130, 246, 0.3); width: 8px; border-radius: 2px;"></div>
+                <div style="color: var(--light-gray); font-size: 12px;">8px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 100px; color: var(--medium-gray); font-size: 12px;">space-2</div>
+                <div style="height: 16px; background: rgba(59, 130, 246, 0.3); width: 16px; border-radius: 4px;"></div>
+                <div style="color: var(--light-gray); font-size: 12px;">16px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 100px; color: var(--medium-gray); font-size: 12px;">space-3</div>
+                <div style="height: 24px; background: rgba(59, 130, 246, 0.3); width: 24px; border-radius: 6px;"></div>
+                <div style="color: var(--light-gray); font-size: 12px;">24px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 100px; color: var(--medium-gray); font-size: 12px;">space-4</div>
+                <div style="height: 32px; background: rgba(59, 130, 246, 0.3); width: 32px; border-radius: 8px;"></div>
+                <div style="color: var(--light-gray); font-size: 12px;">32px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 100px; color: var(--medium-gray); font-size: 12px;">space-5</div>
+                <div style="height: 40px; background: rgba(59, 130, 246, 0.3); width: 40px; border-radius: 10px;"></div>
+                <div style="color: var(--light-gray); font-size: 12px;">40px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 100px; color: var(--medium-gray); font-size: 12px;">space-6</div>
+                <div style="height: 48px; background: rgba(59, 130, 246, 0.3); width: 48px; border-radius: 12px;"></div>
+                <div style="color: var(--light-gray); font-size: 12px;">48px</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 6. 设计原则 -->
+    <section class="demo-section">
+        <h2 class="section-title">🎯 设计原则 (Design Principles)</h2>
+        <div class="component-grid">
+            <div class="component-card" style="border-left: 4px solid var(--tech-blue);">
+                <h3 style="margin-bottom: 8px; color: var(--light-gray);">P0: 反馈优先</h3>
+                <p style="color: var(--medium-gray); font-size: 14px;">任何用户动作都必须有即时视觉反馈（150ms 内）</p>
+            </div>
+            <div class="component-card" style="border-left: 4px solid var(--victory-gold);">
+                <h3 style="margin-bottom: 8px; color: var(--light-gray);">P1: 情感先于逻辑</h3>
+                <p style="color: var(--medium-gray); font-size: 14px;">先触动用户情感，再解释规则（5 秒内看到家乡）</p>
+            </div>
+            <div class="component-card" style="border-left: 4px solid var(--emerald-green);">
+                <h3 style="margin-bottom: 8px; color: var(--light-gray);">P2: 一目了然</h3>
+                <p style="color: var(--medium-gray); font-size: 14px;">核心信息扫一眼就懂，核心操作点一下就行</p>
+            </div>
+            <div class="component-card" style="border-left: 4px solid var(--passion-red);">
+                <h3 style="margin-bottom: 8px; color: var(--light-gray);">P4: 地图即灵魂</h3>
+                <p style="color: var(--medium-gray); font-size: 14px;">地图占据 85% 屏幕，是所有交互的核心载体</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <section class="demo-section" style="text-align: center; padding: var(--space-8);">
+        <div style="font-size: 14px; color: var(--medium-gray);">
+            <div style="margin-bottom: 8px;"><strong>骑迹大陆 Design System v2.0</strong></div>
+            <div>科技地理深色系 · 横屏游戏化布局 · 1920x1080</div>
+            <div style="margin-top: 16px; font-size: 12px;">最后更新：2026-03-23</div>
+        </div>
+    </section>
+</body>
+</html>
