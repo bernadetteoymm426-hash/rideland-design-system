@@ -243,52 +243,88 @@
             color: var(--medium-gray);
         }
         
-        .bottom-bar {
-            background: rgba(26, 39, 64, 0.85);
-            backdrop-filter: blur(20px);
-            border-top: 2px solid rgba(59, 130, 246, 0.4);
+        /* 底部导航栏 - 悬浮图标按钮风格 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 0 var(--space-4);
+            gap: 16px;
+            padding: 16px 24px;
+            background: rgba(7, 14, 27, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.2);
         }
         
         .nav-button {
-            width: 100px;
+            width: 80px;
             height: 80px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            background: rgba(26, 39, 64, 0.6);
+            border: none;
+            border-radius: 16px;
+            background: transparent;
             color: var(--medium-gray);
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
         
         .nav-button:hover {
-            transform: translateY(-2px);
-            border-color: var(--tech-blue);
+            background: rgba(59, 130, 246, 0.1);
             color: var(--light-gray);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
         }
         
         .nav-button.active {
             background: rgba(59, 130, 246, 0.2);
-            border-color: var(--tech-blue);
             color: var(--light-gray);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+            border: 2px solid var(--tech-blue);
         }
         
         .nav-icon {
-            font-size: 24px;
+            font-size: 32px;
             margin-bottom: 8px;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
         }
         
         .nav-label {
-            font-size: 13px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .user-avatar {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--victory-gold), #F59E0B);
+            border: 3px solid var(--tech-blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: avatar-rotate 8s linear infinite;
+        }
+        
+        @keyframes avatar-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .avatar-inner {
+            font-size: 32px;
+            animation: none;
         }
         
         /* 组件展示 */
@@ -524,35 +560,36 @@
                     <div style="font-size: 20px; font-weight: 700; color: var(--light-gray);">中国地图区域</div>
                     <div style="font-size: 14px; color: var(--medium-gray); margin-top: 8px;">85% 屏幕高度 · 可缩放交互</div>
                 </div>
+                <!-- 悬浮导航按钮 -->
+                <div class="bottom-nav">
+                    <button class="nav-button">
+                        <div class="nav-icon">👥</div>
+                        <div class="nav-label">战队</div>
+                    </button>
+                    <button class="nav-button active">
+                        <div class="nav-icon">⚔️</div>
+                        <div class="nav-label">作战</div>
+                    </button>
+                    <button class="nav-button">
+                        <div class="nav-icon">📊</div>
+                        <div class="nav-label">战报</div>
+                    </button>
+                    <button class="nav-button">
+                        <div class="nav-icon">🏆</div>
+                        <div class="nav-label">排行</div>
+                    </button>
+                </div>
+                <!-- 用户头像（右上角） -->
+                <div class="user-avatar">
+                    <div class="avatar-inner">👤</div>
+                </div>
             </main>
-            <nav class="bottom-bar">
-                <div class="nav-button">
-                    <div class="nav-icon">👥</div>
-                    <div class="nav-label">战队</div>
-                </div>
-                <div class="nav-button active">
-                    <div class="nav-icon">⚔️</div>
-                    <div class="nav-label">作战</div>
-                </div>
-                <div class="nav-button">
-                    <div class="nav-icon">📊</div>
-                    <div class="nav-label">战报</div>
-                </div>
-                <div class="nav-button">
-                    <div class="nav-icon">🏆</div>
-                    <div class="nav-label">排行</div>
-                </div>
-                <div style="width: 100px; display: flex; justify-content: flex-end;">
-                    <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--victory-gold), #F59E0B); border: 2px solid var(--tech-blue); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);">
-                        <span style="font-size: 24px;">👤</span>
-                    </div>
-                </div>
-            </nav>
         </div>
         <div style="margin-top: var(--space-3); display: flex; gap: var(--space-4); color: var(--medium-gray); font-size: 14px;">
             <div>顶部信息条：<strong style="color: var(--light-gray);">80px</strong></div>
             <div>地图区域：<strong style="color: var(--light-gray);">~900px (85%)</strong></div>
-            <div>底部功能栏：<strong style="color: var(--light-gray);">100px</strong></div>
+            <div>悬浮导航：<strong style="color: var(--light-gray);">底部 40px + 图标按钮</strong></div>
+            <div>用户头像：<strong style="color: var(--light-gray);">右上角 64px（旋转光环）</strong></div>
         </div>
     </section>
     
