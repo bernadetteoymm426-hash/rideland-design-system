@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>骑迹大陆 - 首次体验浮层设计</title>
+    <style>
+        :root {
+            --deep-space: #070E1B;
+            --tech-blue: #3B82F6;
+            --emerald-green: #10B981;
+            --victory-gold: #F59E0B;
+            --passion-red: #EF4444;
+            --light-gray: #F1F5F9;
+            --medium-gray: #94A3B8;
+            --card-bg: rgba(26, 39, 64, 0.95);
+            --card-border: rgba(59, 130, 246, 0.3);
+            --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--deep-space);
+            color: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #60A5FA 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--medium-gray);
+            margin-bottom: 48px;
+            font-size: 14px;
+        }
+
+        .overlays-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .overlay-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .overlay-label {
+            font-size: 14px;
+            color: var(--medium-gray);
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .overlay-backdrop {
+            width: 400px;
+            height: 500px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay {
+            width: 360px;
+            max-height: 80vh;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+            animation: overlay-enter 0.5s var(--ease-standard);
+            overflow: hidden;
+        }
+
+        @keyframes overlay-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .overlay-header {
+            padding: 32px 24px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .overlay-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 24px;
+            right: 24px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .hometown-marker {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hometown-marker::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            opacity: 0.3;
+            animation: marker-ring 2s ease-in-out infinite;
+        }
+
+        .hometown-marker::after {
+            content: '';
+            position: absolute;
+            inset: -16px;
+            border-radius: 50%;
+            border: 1px solid currentColor;
+            opacity: 0.15;
+            animation: marker-ring 2s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes marker-ring {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+
+        .hometown-marker svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        .overlay-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .overlay-header p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        .overlay-content {
+            padding: 24px;
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .countdown-bar {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .countdown-icon {
+            font-size: 20px;
+        }
+
+        .countdown-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        .countdown-timer {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .overlay-footer {
+            padding: 0 24px 32px;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-standard);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .skip-btn {
+            background: transparent;
+            border: none;
+            color: var(--medium-gray);
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 16px;
+            padding: 8px;
+            transition: color 0.2s;
+        }
+
+        .skip-btn:hover {
+            color: var(--light-gray);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: var(--medium-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: var(--light-gray);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s var(--ease-standard);
+        }
+
+        .shield-icon, .sword-icon, .flag-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-icon svg, .sword-icon svg, .flag-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .variant-guarded .overlay-header {
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.15) 0%, transparent 100%);
+        }
+
+        .variant-guarded .hometown-marker {
+            background: linear-gradient(135deg, #059669 0%, var(--emerald-green) 100%);
+            color: var(--emerald-green);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .variant-guarded .overlay-header h2 {
+            color: var(--emerald-green);
+        }
+
+        .variant-guarded .action-btn {
+            background: linear-gradient(180deg, #34D399 0%, var(--emerald-green) 100%);
+            color: #000;
+        }
+
+        .variant-guarded .action-btn:hover {
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4);
+        }
+
+        .variant-guarded .progress-fill {
+            background: linear-gradient(90deg, var(--emerald-green), #34D399);
+        }
+
+        .variant-attacked .overlay-header {
+            background: linear-gradient(180deg, rgba(239, 68, 68, 0.15) 0%, transparent 100%);
+        }
+
+        .variant-attacked .hometown-marker {
+            background: linear-gradient(135deg, #DC2626 0%, var(--passion-red) 100%);
+            color: var(--passion-red);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
+            animation: attack-pulse 0.8s ease-in-out infinite;
+        }
+
+        @keyframes attack-pulse {
+            0%, 100% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(239, 68, 68, 0.6); }
+        }
+
+        .variant-attacked .overlay-header h2 {
+            color: var(--passion-red);
+        }
+
+        .variant-attacked .countdown-timer {
+            color: var(--passion-red);
+        }
+
+        .variant-attacked .action-btn {
+            background: linear-gradient(180deg, #F87171 0%, var(--passion-red) 100%);
+            color: white;
+        }
+
+        .variant-attacked .action-btn:hover {
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.4);
+        }
+
+        .variant-attacked .progress-fill {
+            background: linear-gradient(90deg, var(--passion-red), #F87171);
+        }
+
+        .variant-unclaimed .overlay-header {
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.15) 0%, transparent 100%);
+        }
+
+        .variant-unclaimed .hometown-marker {
+            background: linear-gradient(135deg, #D97706 0%, var(--victory-gold) 100%);
+            color: var(--victory-gold);
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+            animation: gold-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes gold-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(245, 158, 11, 1);
+                transform: scale(1.05);
+            }
+        }
+
+        .variant-unclaimed .overlay-header h2 {
+            color: var(--victory-gold);
+        }
+
+        .variant-unclaimed .action-btn {
+            background: linear-gradient(180deg, #FBBF24 0%, var(--victory-gold) 100%);
+            color: #000;
+        }
+
+        .variant-unclaimed .action-btn:hover {
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.4);
+        }
+
+        .urgency-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .variant-guarded .urgency-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald-green);
+        }
+
+        .variant-attacked .urgency-badge {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--passion-red);
+            animation: urgency-blink 1s ease-in-out infinite;
+        }
+
+        @keyframes urgency-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .variant-unclaimed .urgency-badge {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--victory-gold);
+        }
+
+        .emoji-icon {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>首次体验浮层 - 三种状态</h1>
+    <p class="subtitle">家乡定位情感化文案 · 符合 UI&VI 规范 v1.0</p>
+
+    <div class="overlays-container">
+        <div class="overlay-wrapper">
+            <span class="overlay-label">🟢 守护状态 - 绿色主题</span>
+            <div class="overlay-backdrop">
+                <div class="overlay variant-guarded">
+                    <button class="close-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="overlay-header">
+                        <div class="hometown-marker">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                            </svg>
+                        </div>
+                        <span class="urgency-badge">
+                            <span class="emoji-icon">🛡️</span> 正在被守护
+                        </span>
+                        <h2>你的家乡「北京」<br>正在被守护</h2>
+                        <p>「骑行者联盟」已坚守 12 天<br>你的每一次骑行都在加固防线</p>
+                    </div>
+                    <div class="overlay-content">
+                        <div class="info-card">
+                            <div class="info-row">
+                                <span class="info-label">守护战队</span>
+                                <span class="info-value" style="color: var(--emerald-green);">骑行者联盟</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">坚守天数</span>
+                                <span class="info-value">12 天</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">领土防御值</span>
+                                <span class="info-value">78%</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                    <div class="overlay-footer">
+                        <button class="action-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/>
+                            </svg>
+                            骑一圈，为家乡加油
+                        </button>
+                        <button class="skip-btn">稍后再说</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay-wrapper">
+            <span class="overlay-label">🔴 被进攻状态 - 红色主题</span>
+            <div class="overlay-backdrop">
+                <div class="overlay variant-attacked">
+                    <button class="close-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="overlay-header">
+                        <div class="hometown-marker">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                        </div>
+                        <span class="urgency-badge">
+                            <span class="emoji-icon">⚠️</span> 紧急！正在被进攻
+                        </span>
+                        <h2>你的家乡「上海」<br>正在遭受进攻！</h2>
+                        <p>「魔骑行」的攻势还剩<br>你的骑行可以扭转战局</p>
+                    </div>
+                    <div class="overlay-content">
+                        <div class="countdown-bar">
+                            <span class="countdown-icon">⏰</span>
+                            <span class="countdown-text">攻势倒计时</span>
+                            <span class="countdown-timer">2天 14:32</span>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-row">
+                                <span class="info-label">进攻方</span>
+                                <span class="info-value" style="color: var(--passion-red);">魔骑行</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">我方防御</span>
+                                <span class="info-value">45%</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">敌方攻势</span>
+                                <span class="info-value" style="color: var(--passion-red);">62%</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="overlay-footer">
+                        <button class="action-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+                            </svg>
+                            立即骑行，保卫家乡！
+                        </button>
+                        <button class="skip-btn">稍后再说</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay-wrapper">
+            <span class="overlay-label">🟡 无主状态 - 金色主题</span>
+            <div class="overlay-backdrop">
+                <div class="overlay variant-unclaimed">
+                    <button class="close-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="overlay-header">
+                        <div class="hometown-marker">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+                            </svg>
+                        </div>
+                        <span class="urgency-badge">
+                            <span class="emoji-icon">🏴</span> 无主之地
+                        </span>
+                        <h2>你的家乡「杭州」<br>还是无主之地</h2>
+                        <p>成为第一个征服者<br>在骑迹大陆创造历史</p>
+                    </div>
+                    <div class="overlay-content">
+                        <div class="info-card">
+                            <div class="info-row">
+                                <span class="info-label">城市等级</span>
+                                <span class="info-value" style="color: var(--victory-gold);">⭐⭐⭐ 三级城市</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">征服需求</span>
+                                <span class="info-value">50 km 骑行</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">战略价值</span>
+                                <span class="info-value" style="color: var(--victory-gold);">高价值领土</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="overlay-footer">
+                        <button class="action-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+                            </svg>
+                            开始征服
+                        </button>
+                        <button class="skip-btn">稍后再说</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

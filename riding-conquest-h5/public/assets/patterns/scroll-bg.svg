@@ -1,0 +1,58 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 金色渐变 -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E8C547;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8941F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 宣纸纹理 -->
+    <filter id="paperTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#F5F5DC" surfaceScale="1">
+        <feDistantLight azimuth="45" elevation="60"/>
+      </feDiffuseLighting>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    
+    <!-- 卷轴边框 -->
+    <g id="scrollBorder">
+      <!-- 顶部装饰 -->
+      <rect x="0" y="0" width="800" height="60" fill="url(#goldGradient)" opacity="0.2"/>
+      <path d="M0 30 Q100 10, 200 30 T400 30 T600 30 T800 30" stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M0 40 Q100 20, 200 40 T400 40 T600 40 T800 40" stroke="url(#goldGradient)" stroke-width="1" fill="none" opacity="0.4"/>
+      
+      <!-- 底部装饰 -->
+      <rect x="0" y="540" width="800" height="60" fill="url(#goldGradient)" opacity="0.2"/>
+      <path d="M0 570 Q100 550, 200 570 T400 570 T600 570 T800 570" stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M0 560 Q100 540, 200 560 T400 560 T600 560 T800 560" stroke="url(#goldGradient)" stroke-width="1" fill="none" opacity="0.4"/>
+      
+      <!-- 两侧卷轴 -->
+      <rect x="0" y="0" width="30" height="600" fill="url(#goldGradient)" opacity="0.3"/>
+      <rect x="770" y="0" width="30" height="600" fill="url(#goldGradient)" opacity="0.3"/>
+      
+      <!-- 四角装饰 -->
+      <circle cx="30" cy="30" r="8" fill="url(#goldGradient)" opacity="0.8"/>
+      <circle cx="770" cy="30" r="8" fill="url(#goldGradient)" opacity="0.8"/>
+      <circle cx="30" cy="570" r="8" fill="url(#goldGradient)" opacity="0.8"/>
+      <circle cx="770" cy="570" r="8" fill="url(#goldGradient)" opacity="0.8"/>
+    </g>
+  </defs>
+  
+  <!-- 宣纸背景 -->
+  <rect width="800" height="600" fill="#F5F5DC" opacity="0.95"/>
+  
+  <!-- 宣纸纹理 -->
+  <rect width="800" height="600" fill="url(#paperTexture)" opacity="0.3"/>
+  
+  <!-- 卷轴边框 -->
+  <use href="#scrollBorder"/>
+  
+  <!-- 云纹装饰 -->
+  <path d="M50 80 Q100 60, 150 80 T250 80" stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M550 80 Q600 60, 650 80 T750 80" stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  
+  <path d="M50 520 Q100 500, 150 520 T250 520" stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M550 520 Q600 500, 650 520 T750 520" stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

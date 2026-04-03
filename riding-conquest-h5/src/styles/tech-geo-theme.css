@@ -1,0 +1,694 @@
+/**
+ * 科技地理 · 全局主题样式 v1.0
+ * Tech-Geo Dark Theme - 骑行征服 H5
+ * 
+ * 基于 UX 设计规范文档
+ * 视觉主题：「科技地理」深色系
+ * 整体感受：卫星夜景图 + 战略指挥屏
+ */
+
+/* ════════════════════════════════════════════════════════
+   1. 色彩系统 - 科技地理深色
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── 基础背景层（Background Layers）─── */
+  --bg-base: #070E1B;           /* 最底层背景 - 近乎纯黑的深蓝，营造太空/夜景感 */
+  --bg-surface: #0A1628;        /* 地图底色、页面背景 - 主要承载面 */
+  --bg-elevated: #1A2740;       /* 卡片、浮层背景 - 比底色稍亮，形成层次 */
+  --bg-overlay: rgba(10, 22, 40, 0.85);  /* 弹出层遮罩 - 半透明深色遮罩 */
+
+  /* ─── 领土着色（Territory Colors）─── */
+  /* 核心视觉：半透明色块叠加在深色地图上 */
+  --territory-own: rgba(59, 130, 246, 0.45);      /* 我方战队已占领土 - 蓝色 */
+  --territory-own-strong: rgba(59, 130, 246, 0.7); /* 我方核心领土（高防御） */
+  --territory-enemy: rgba(239, 68, 68, 0.35);     /* 敌方领土 - 红色 */
+  --territory-contested: rgba(245, 158, 11, 0.4);  /* 正在争夺中的领土 - 橙色 */
+  --territory-neutral: rgba(107, 114, 128, 0.2);   /* 无主之地 - 灰色 */
+  --territory-border: rgba(148, 163, 184, 0.3);    /* 省/县边界线 */
+
+  /* ─── 语义色（Semantic Colors）─── */
+  --accent-primary: #3B82F6;      /* 主操作按钮、我方进度、链接 - 科技蓝 */
+  --accent-gold: #F59E0B;         /* 胜利、成就、高亮数据 */
+  --status-attack: #EF4444;       /* 攻击相关（进攻标记、攻击力数据） */
+  --status-defend: #22C55E;       /* 防守相关（防御标记、领土稳固） */
+  --status-warning: #F97316;      /* 警告（领土受威胁、倒计时紧迫） */
+  --status-neutral: #6B7280;      /* 中性信息、禁用状态 */
+
+  /* ─── 文字色阶（Text Hierarchy）─── */
+  --text-primary: #F1F5F9;        /* 标题、核心数据 - 对比度 15.4:1 ✅ AAA */
+  --text-secondary: #94A3B8;      /* 正文、描述 - 对比度 5.8:1 ✅ AA */
+  --text-tertiary: #475569;       /* 辅助信息、时间戳 - 仅用于大号字 */
+  --text-on-accent: #FFFFFF;      /* 按钮上的文字 */
+
+  /* ─── 动效色（Animation Colors）─── */
+  --pulse-attack: rgba(239, 68, 68, 0.6);      /* 攻击脉冲光效 */
+  --pulse-progress: rgba(59, 130, 246, 0.5);   /* 进度推进光效 */
+  --pulse-victory: rgba(245, 158, 11, 0.7);    /* 攻克庆祝光效 */
+  --glow-skeleton: rgba(59, 130, 246, 0.15);   /* 骨架屏呼吸灯 */
+}
+
+/* ════════════════════════════════════════════════════════
+   2. 字体系统 - 系统字体栈，零额外加载
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* 字体家族 - 系统优先 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC",
+               "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  
+  /* 等宽数字 - 防止倒计时跳动 */
+  --font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", monospace;
+  
+  /* 字阶（Type Scale） */
+  --text-display: 32px;    /* 攻城进度数字、核心数据 */
+  --text-h1: 20px;         /* 页面标题 */
+  --text-h2: 16px;         /* 区块标题、卡片标题 */
+  --text-body: 14px;       /* 正文、列表项 */
+  --text-caption: 12px;    /* 辅助信息、时间戳 */
+  --text-micro: 10px;      /* 地图标注、角标 */
+  
+  /* 字重 */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* 行高 */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+}
+
+/* 全局字体应用 */
+* {
+  font-family: var(--font-sans);
+}
+
+/* 数字用等宽字体防止跳动 */
+.countdown, .timer, .progress-num, .font-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 所有数值展示场景自动使用等宽字体 */
+.stat-num, .defense-value, .defense-num,
+.timer-value, .contrib-value, .bar-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ════════════════════════════════════════════════════════
+   3. 间距系统 - 4px 基础网格
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;      /* 页面水平边距（安全区） */
+  --space-6: 24px;
+  --space-8: 32px;
+  
+  /* 圆角系统 */
+  --radius-btn: 8px;
+  --radius-card: 12px;
+  --radius-floater: 16px;
+  --radius-full: 9999px;
+}
+
+/* ════════════════════════════════════════════════════════
+   4. 动画系统 - 科技感动效
+   ════════════════════════════════════════════════════════ */
+
+/* 脉冲动画 - 攻击/进度光效 */
+@keyframes pulse-attack {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes pulse-progress {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes pulse-victory {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(245, 158, 11, 0);
+  }
+}
+
+/* 骨架屏呼吸灯 */
+@keyframes skeleton-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 领土扩张动画 */
+@keyframes territory-expand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 动画时长规范 */
+:root {
+  --duration-fast: 150ms;     /* 微交互反馈 - 按钮点击、Tab 切换 */
+  --duration-normal: 300ms;   /* 状态过渡 - 进度条更新、颜色变化 */
+  --duration-slow: 500ms;     /* 浮层出入、地图动效 */
+  --duration-slower: 800ms;   /* 领土攻克庆祝 */
+  
+  /* 缓动函数 */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 动画工具类 */
+.animate-pulse-attack {
+  animation: pulse-attack 2s infinite;
+}
+
+.animate-pulse-progress {
+  animation: pulse-progress 2s infinite;
+}
+
+.animate-pulse-victory {
+  animation: pulse-victory 1.5s infinite;
+}
+
+.animate-skeleton {
+  animation: skeleton-glow 1.5s ease-in-out infinite;
+}
+
+.animate-territory {
+  animation: territory-expand var(--duration-slower) var(--ease-out);
+}
+
+/* 尊重系统减弱动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   5. 页面结构 - 固定布局
+   ════════════════════════════════════════════════════════ */
+
+/* 页面容器 */
+.page-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* 主内容区 */
+.page-content {
+  position: absolute;
+  top: 44px;  /* 状态条高度 */
+  bottom: 56px;  /* 底部导航高度 */
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 周循环状态条（固定顶部） */
+.week-status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--territory-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* 底部 Tab 导航（固定底部） */
+.bottom-tab-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(56px + env(safe-area-inset-bottom));
+  background: var(--bg-surface);
+  border-top: 1px solid var(--territory-border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 100;
+}
+
+/* ════════════════════════════════════════════════════════
+   6. 地图样式 - 核心视觉载体
+   ════════════════════════════════════════════════════════ */
+
+/* 地图容器 */
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+
+/* 地图底色 */
+.map-base {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-surface);
+  background-image: 
+    radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 70%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(59, 130, 246, 0.03) 2px, rgba(59, 130, 246, 0.03) 4px);
+}
+
+/* 领土着色层 */
+.territory-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.territory-own {
+  background-color: var(--territory-own);
+  transition: background-color var(--duration-normal) var(--ease-in-out);
+}
+
+.territory-enemy {
+  background-color: var(--territory-enemy);
+}
+
+.territory-contested {
+  background-color: var(--territory-contested);
+  animation: pulse-attack 3s infinite;
+}
+
+.territory-neutral {
+  background-color: var(--territory-neutral);
+}
+
+/* 边界线 */
+.territory-border {
+  position: absolute;
+  border: 1px solid var(--territory-border);
+  pointer-events: none;
+}
+
+/* 地图交互层 */
+.map-interaction {
+  position: absolute;
+  inset: 0;
+  touch-action: none;  /* 支持手势缩放 */
+  cursor: grab;
+}
+
+.map-interaction:active {
+  cursor: grabbing;
+}
+
+/* ════════════════════════════════════════════════════════
+   7. 卡片组件 - 深色浮层
+   ════════════════════════════════════════════════════════ */
+
+/* 基础卡片 */
+.card-dark {
+  background: var(--bg-elevated);
+  border: 1px solid var(--territory-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.card-dark:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.2);
+}
+
+/* 数据卡片 */
+.data-card {
+  background: rgba(26, 39, 64, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.data-value {
+  font-size: var(--text-display);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.data-value.accent {
+  color: var(--accent-primary);
+}
+
+.data-value.gold {
+  color: var(--accent-gold);
+}
+
+.data-label {
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════════════════════════
+   8. 进度条 - 攻城进度可视化
+   ════════════════════════════════════════════════════════ */
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), #60A5FA);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-slow) var(--ease-out);
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 进度数字 */
+.progress-text {
+  font-size: var(--text-h2);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+/* ════════════════════════════════════════════════════════
+   9. 按钮组件 - 科技蓝主调
+   ════════════════════════════════════════════════════════ */
+
+.btn {
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-btn);
+  font-size: var(--text-body);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  border: none;
+  transition: all var(--duration-fast) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: var(--text-on-accent);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--territory-border);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-primary);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.btn-sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-caption);
+}
+
+.btn-lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-h2);
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════
+   10. 徽章/状态标签
+   ════════════════════════════════════════════════════════ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: var(--font-medium);
+  gap: var(--space-1);
+}
+
+.badge-attack {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--status-attack);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-defend {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--status-defend);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge-warning {
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--status-warning);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.badge-neutral {
+  background: rgba(107, 114, 128, 0.15);
+  color: var(--text-secondary);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* ════════════════════════════════════════════════════════
+   11. 骨架屏 - 三层渲染
+   ════════════════════════════════════════════════════════ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(59, 130, 246, 0.2) 50%,
+    rgba(59, 130, 246, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-glow 1.5s ease-in-out infinite;
+  border-radius: var(--radius-card);
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: var(--space-2);
+}
+
+.skeleton-card {
+  height: 120px;
+  margin: var(--space-4);
+}
+
+.skeleton-map {
+  width: 100%;
+  height: 300px;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* ════════════════════════════════════════════════════════
+   12. 浮层/弹窗
+   ════════════════════════════════════════════════════════ */
+
+.floater {
+  position: fixed;
+  background: var(--bg-elevated);
+  border: 1px solid var(--territory-border);
+  border-radius: var(--radius-floater);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 200;
+  animation: floater-enter var(--duration-slow) var(--ease-out);
+}
+
+@keyframes floater-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.floater-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: 199;
+  animation: overlay-fade-in var(--duration-normal) var(--ease-out);
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   13. 触控目标规范
+   ════════════════════════════════════════════════════════ */
+
+/* 所有可交互元素最小 44px×44px */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tab 项均分屏幕宽度 */
+.tab-item {
+  flex: 1;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+}
+
+/* ════════════════════════════════════════════════════════
+   14. 辅助工具类
+   ════════════════════════════════════════════════════════ */
+
+/* 文字对齐 */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* 弹性布局 */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+
+/* 边距 */
+.m-2 { margin: var(--space-2); }
+.m-4 { margin: var(--space-4); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mx-4 { margin-left: var(--space-4); margin-right: var(--space-4); }
+
+/* 内边距 */
+.p-2 { padding: var(--space-2); }
+.p-4 { padding: var(--space-4); }
+.px-5 { padding-left: var(--space-5); padding-right: var(--space-5); }
+.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+
+/* 显示 */
+.hidden { display: none; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+
+/* 透明度 */
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+/* 过渡 */
+.transition { transition: all var(--duration-normal) var(--ease-out); }
+.transition-fast { transition: all var(--duration-fast) var(--ease-out); }
+.transition-slow { transition: all var(--duration-slow) var(--ease-out); }
+
+/* ════════════════════════════════════════════════════════
+   15. 快速应用类（Quick Classes）
+   ════════════════════════════════════════════════════════ */
+
+.q-card { @apply card-dark; }
+.q-data-card { @apply data-card; }
+.q-btn-primary { @apply btn-primary btn; }
+.q-btn-secondary { @apply btn-secondary btn; }
+.q-badge-attack { @apply badge-attack badge; }
+.q-badge-defend { @apply badge-defend badge; }
+.q-progress { @apply progress-container; }
+.q-skeleton { @apply skeleton; }

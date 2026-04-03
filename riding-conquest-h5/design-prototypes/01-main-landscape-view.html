@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>骑迹大陆 - 横屏主界面设计</title>
+    <style>
+        /* ============================================
+           骑迹大陆 - UI&VI 设计规范 v1.0
+           横屏主界面 (Landscape Main View)
+           ============================================ */
+
+        :root {
+            /* 主色调 */
+            --deep-space: #070E1B;
+            --tech-blue: #3B82F6;
+            --emerald-green: #10B981;
+            --victory-gold: #F59E0B;
+            --passion-red: #EF4444;
+
+            /* 辅助色 */
+            --light-gray: #F1F5F9;
+            --medium-gray: #94A3B8;
+            --dark-gray: #64748B;
+            --neutral-gray: #6B7280;
+
+            /* 领土色（半透明） */
+            --territory-ally: rgba(34, 197, 94, 0.45);
+            --territory-enemy: rgba(239, 68, 68, 0.35);
+            --territory-contested: rgba(245, 158, 11, 0.4);
+            --territory-neutral: rgba(107, 114, 128, 0.2);
+
+            /* 组件色 */
+            --card-bg: rgba(26, 39, 64, 0.6);
+            --card-border: rgba(59, 130, 246, 0.3);
+            --overlay-bg: rgba(26, 39, 64, 0.95);
+
+            /* 动效 */
+            --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--deep-space);
+            color: var(--light-gray);
+            overflow: hidden;
+            width: 1920px;
+            height: 1080px;
+        }
+
+        /* ============================================
+           主容器布局
+           ============================================ */
+        .game-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--deep-space);
+            position: relative;
+        }
+
+        /* ============================================
+           顶部信息条 (80px)
+           ============================================ */
+        .top-bar {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            background: linear-gradient(180deg, rgba(7, 14, 27, 0.95) 0%, rgba(7, 14, 27, 0.8) 100%);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            z-index: 100;
+        }
+
+        /* Logo 区域 */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--tech-blue) 0%, #1D4ED8 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            animation: logo-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes logo-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #60A5FA 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            color: var(--medium-gray);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* 周循环状态条 */
+        .week-status-bar {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .phase-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+        }
+
+        .phase-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--tech-blue);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .phase-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--tech-blue);
+        }
+
+        .phase-timer {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 16px;
+            color: var(--light-gray);
+            background: rgba(59, 130, 246, 0.2);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .week-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        .week-number {
+            color: var(--victory-gold);
+            font-weight: 600;
+        }
+
+        /* 头像区域 */
+        .avatar-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--tech-blue);
+            background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-standard);
+            position: relative;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .avatar-level {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            background: linear-gradient(180deg, #FBBF24 0%, #F59E0B 100%);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 8px;
+            border: 2px solid var(--deep-space);
+        }
+
+        .user-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--light-gray);
+        }
+
+        .user-mileage {
+            font-size: 12px;
+            color: var(--emerald-green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ============================================
+           地图区域 (85% ~ 900px)
+           ============================================ */
+        .map-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0A1628 0%, var(--deep-space) 100%);
+        }
+
+        /* 地图背景网格 */
+        .map-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        /* 中国地图 SVG */
+        .china-map {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 85%;
+        }
+
+        .map-province {
+            fill: rgba(10, 22, 40, 0.8);
+            stroke: var(--tech-blue);
+            stroke-width: 1;
+            transition: all 0.3s var(--ease-standard);
+            cursor: pointer;
+        }
+
+        .map-province:hover {
+            fill: rgba(59, 130, 246, 0.2);
+            stroke-width: 2;
+        }
+
+        /* 领土颜色 */
+        .territory-ally {
+            fill: var(--territory-ally);
+            stroke: #22C55E;
+        }
+
+        .territory-enemy {
+            fill: var(--territory-enemy);
+            stroke: var(--passion-red);
+        }
+
+        .territory-contested {
+            fill: var(--territory-contested);
+            stroke: var(--victory-gold);
+        }
+
+        .territory-neutral {
+            fill: var(--territory-neutral);
+            stroke: var(--neutral-gray);
+        }
+
+        /* 地图光效 */
+        .map-glow {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+
+        /* 领土标记点 */
+        .territory-marker {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            animation: marker-pulse 2s ease-in-out infinite;
+        }
+
+        .marker-ally {
+            background: #22C55E;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.8);
+        }
+
+        .marker-enemy {
+            background: var(--passion-red);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
+        }
+
+        .marker-hometown {
+            background: var(--victory-gold);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.8);
+            animation: hometown-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes marker-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes hometown-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(245, 158, 11, 1);
+                transform: scale(1.3);
+            }
+        }
+
+        /* 领土标签 */
+        .territory-label {
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* 地图控制按钮 */
+        .map-controls {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .map-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-standard);
+            color: var(--tech-blue);
+        }
+
+        .map-btn:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
+        .map-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* 战队领土统计 */
+        .territory-stats {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--medium-gray);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .stat-value.green { color: var(--emerald-green); }
+        .stat-value.red { color: var(--passion-red); }
+        .stat-value.blue { color: var(--tech-blue); }
+
+        /* ============================================
+           底部功能栏 (100px)
+           ============================================ */
+        .bottom-bar {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            background: linear-gradient(180deg, rgba(7, 14, 27, 0.8) 0%, rgba(7, 14, 27, 0.95) 100%);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 0 64px;
+        }
+
+        .game-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-standard);
+            min-width: 100px;
+            position: relative;
+        }
+
+        .game-button:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+        }
+
+        .game-button.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--tech-blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .game-button .icon {
+            width: 32px;
+            height: 32px;
+            color: var(--tech-blue);
+        }
+
+        .game-button .label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--light-gray);
+            letter-spacing: 1px;
+        }
+
+        /* 角标 */
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            min-width: 20px;
+            height: 20px;
+            background: var(--passion-red);
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .badge.breathing {
+            width: 12px;
+            height: 12px;
+            min-width: 12px;
+            padding: 0;
+            animation: breathing 1.5s ease-in-out infinite;
+        }
+
+        @keyframes breathing {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* ============================================
+           设计说明面板
+           ============================================ */
+        .design-notes {
+            position: absolute;
+            bottom: 120px;
+            right: 24px;
+            background: rgba(26, 39, 64, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            max-width: 320px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--medium-gray);
+        }
+
+        .design-notes h4 {
+            color: var(--tech-blue);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .design-notes ul {
+            padding-left: 16px;
+        }
+
+        .design-notes li {
+            margin-bottom: 4px;
+        }
+
+        /* ============================================
+           标注和尺寸指示器
+           ============================================ */
+        .dimension-label {
+            position: absolute;
+            background: rgba(245, 158, 11, 0.9);
+            color: #000;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .dimension-label.top { top: -24px; left: 50%; transform: translateX(-50%); }
+        .dimension-label.bottom { bottom: -24px; left: 50%; transform: translateX(-50%); }
+        .dimension-label.left { left: -60px; top: 50%; transform: translateY(-50%); }
+
+        .dimension-line {
+            position: absolute;
+            background: var(--victory-gold);
+        }
+
+        .dimension-line.horizontal {
+            height: 1px;
+            left: 0;
+            right: 0;
+        }
+
+        .dimension-line.vertical {
+            width: 1px;
+            top: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- ============================================
+             顶部信息条 (80px)
+             ============================================ -->
+        <header class="top-bar">
+            <!-- Logo 区域 -->
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">骑迹大陆</span>
+                    <span class="logo-subtitle">RIDELAND</span>
+                </div>
+            </div>
+
+            <!-- 周循环状态条 -->
+            <div class="week-status-bar">
+                <div class="phase-indicator">
+                    <div class="phase-dot"></div>
+                    <span class="phase-text">⚔️ 对战期</span>
+                    <span class="phase-timer">3天 14:32:08</span>
+                </div>
+                <div class="week-info">
+                    第 <span class="week-number">12</span> 赛季 · 第 3 周
+                </div>
+            </div>
+
+            <!-- 头像区域 -->
+            <div class="avatar-area">
+                <div class="user-stats">
+                    <span class="user-name">骑行勇士</span>
+                    <span class="user-mileage">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                        2,456 km
+                    </span>
+                </div>
+                <div class="avatar">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <span class="avatar-level">Lv.28</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============================================
+             地图区域 (~900px / 85%)
+             ============================================ -->
+        <main class="map-container">
+            <!-- 地图网格背景 -->
+            <div class="map-grid"></div>
+
+            <!-- 地图光效 -->
+            <div class="map-glow"></div>
+
+            <!-- 中国地图 (简化 SVG) -->
+            <svg class="china-map" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet">
+                <!-- 简化的中国地图轮廓 -->
+                <g class="china-provinces">
+                    <!-- 东北 -->
+                    <path class="map-province territory-ally" d="M450,80 L520,60 L550,100 L540,150 L500,180 L460,160 L440,120 Z"/>
+                    <path class="map-province territory-ally" d="M400,100 L450,80 L440,120 L460,160 L420,180 L380,160 L390,130 Z"/>
+                    <path class="map-province territory-ally" d="M350,120 L400,100 L390,130 L380,160 L340,170 L320,150 Z"/>
+
+                    <!-- 华北 -->
+                    <path class="map-province territory-ally" d="M320,150 L350,120 L340,170 L380,160 L420,180 L400,220 L360,230 L310,200 Z"/>
+                    <path class="map-province territory-ally" d="M280,170 L320,150 L310,200 L360,230 L340,270 L290,250 L260,210 Z"/>
+
+                    <!-- 华东 -->
+                    <path class="map-province territory-contested" d="M400,220 L420,180 L460,160 L500,180 L490,240 L450,270 L400,250 Z"/>
+                    <path class="map-province territory-enemy" d="M420,270 L400,250 L450,270 L490,240 L500,300 L460,310 L420,300 Z"/>
+                    <path class="map-province territory-enemy" d="M380,280 L400,250 L420,270 L420,300 L380,320 L350,300 Z"/>
+
+                    <!-- 华中 -->
+                    <path class="map-province territory-ally" d="M320,250 L360,230 L400,220 L400,250 L380,280 L340,290 L300,270 Z"/>
+                    <path class="map-province territory-ally" d="M280,280 L320,250 L300,270 L340,290 L320,340 L280,330 Z"/>
+
+                    <!-- 华南 -->
+                    <path class="map-province territory-ally" d="M320,340 L380,320 L420,300 L460,310 L450,370 L400,400 L340,390 Z"/>
+                    <path class="map-province territory-neutral" d="M280,330 L320,340 L340,390 L300,420 L260,400 L250,360 Z"/>
+                    <path class="map-province territory-neutral" d="M340,390 L400,400 L420,450 L380,480 L320,460 L300,420 Z"/>
+
+                    <!-- 西南 -->
+                    <path class="map-province territory-ally" d="M200,280 L280,280 L280,330 L250,360 L200,350 L180,310 Z"/>
+                    <path class="map-province territory-neutral" d="M140,300 L200,280 L180,310 L200,350 L160,380 L120,350 Z"/>
+                    <path class="map-province territory-neutral" d="M160,380 L200,350 L250,360 L260,400 L220,440 L160,420 Z"/>
+
+                    <!-- 西北 -->
+                    <path class="map-province territory-ally" d="M140,180 L200,160 L280,170 L260,210 L290,250 L240,260 L180,240 L140,210 Z"/>
+                    <path class="map-province territory-neutral" d="M60,140 L140,120 L200,160 L140,180 L100,200 L60,180 Z"/>
+                    <path class="map-province territory-neutral" d="M40,200 L100,200 L140,210 L140,250 L100,280 L50,260 Z"/>
+                </g>
+
+                <!-- 地图边框发光效果 -->
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+                <g filter="url(#glow)" style="pointer-events: none;">
+                    <rect x="0" y="0" width="600" height="500" fill="none" stroke="rgba(59, 130, 246, 0.3)" stroke-width="2" rx="20"/>
+                </g>
+            </svg>
+
+            <!-- 领土标记点 -->
+            <div class="territory-marker marker-hometown" style="top: 35%; left: 70%;" title="北京 (家乡)"></div>
+            <div class="territory-marker marker-ally" style="top: 40%; left: 75%;" title="天津"></div>
+            <div class="territory-marker marker-ally" style="top: 45%; left: 72%;" title="石家庄"></div>
+            <div class="territory-marker marker-enemy" style="top: 55%; left: 80%;" title="上海 (敌方)"></div>
+            <div class="territory-marker marker-enemy" style="top: 58%; left: 78%;" title="杭州"></div>
+
+            <!-- 领土标签 -->
+            <div class="territory-label" style="top: 33%; left: 70%;">北京 · 我方</div>
+            <div class="territory-label" style="top: 53%; left: 80%;">上海 · 敌方</div>
+
+            <!-- 战队领土统计 -->
+            <div class="territory-stats">
+                <div class="stat-card">
+                    <div class="stat-label">我方领土</div>
+                    <div class="stat-value green">47</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">敌方领土</div>
+                    <div class="stat-value red">23</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">争夺中</div>
+                    <div class="stat-value blue">8</div>
+                </div>
+            </div>
+
+            <!-- 地图控制按钮 -->
+            <div class="map-controls">
+                <button class="map-btn" title="放大">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </button>
+                <button class="map-btn" title="缩小">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </button>
+                <button class="map-btn" title="定位家乡">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                    </svg>
+                </button>
+                <button class="map-btn" title="全屏">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- 设计说明 -->
+            <div class="design-notes">
+                <h4>📐 设计说明</h4>
+                <ul>
+                    <li><strong>布局</strong>: 横屏 1920×1080，地图占比 85%</li>
+                    <li><strong>顶部</strong>: 80px 高度，Logo + 周循环状态</li>
+                    <li><strong>底部</strong>: 100px 高度，4 个功能按钮</li>
+                    <li><strong>地图</strong>: SVG 矢量图，支持缩放交互</li>
+                    <li><strong>领土</strong>: 绿色(我方)/红色(敌方)/金色(争夺)</li>
+                    <li><strong>动效</strong>: 脉冲光效，上浮悬停</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- ============================================
+             底部功能栏 (100px)
+             ============================================ -->
+        <footer class="bottom-bar">
+            <button class="game-button active">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span class="label">战队</span>
+                <span class="badge">3</span>
+            </button>
+
+            <button class="game-button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.5 17.5L3 6V3h3l11.5 11.5"/>
+                    <path d="M13 19l6-6"/>
+                    <path d="M16 16l4 4"/>
+                    <path d="M19 21l2-2"/>
+                </svg>
+                <span class="label">作战</span>
+                <span class="badge breathing"></span>
+            </button>
+
+            <button class="game-button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14,2 14,8 20,8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10,9 9,9 8,9"/>
+                </svg>
+                <span class="label">战报</span>
+                <span class="badge">NEW</span>
+            </button>
+
+            <button class="game-button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="20" x2="18" y2="10"/>
+                    <line x1="12" y1="20" x2="12" y2="4"/>
+                    <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+                <span class="label">排行</span>
+            </button>
+        </footer>
+    </div>
+
+    <script>
+        // 按钮交互演示
+        document.querySelectorAll('.game-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.game-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 地图省份交互
+        document.querySelectorAll('.map-province').forEach(province => {
+            province.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.3)';
+            });
+            province.addEventListener('mouseleave', function() {
+                this.style.filter = '';
+            });
+        });
+    </script>
+</body>
+</html>

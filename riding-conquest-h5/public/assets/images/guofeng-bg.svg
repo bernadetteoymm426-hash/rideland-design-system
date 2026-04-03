@@ -1,0 +1,129 @@
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 深蓝渐变背景 -->
+    <linearGradient id="deepBlueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D1B2A;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#1B263B;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#1B263B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D1B2A;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 金色渐变 -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E8C547;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8941F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 云纹图案 -->
+    <pattern id="cloudPattern" x="0" y="0" width="200" height="100" patternUnits="userSpaceOnUse">
+      <path d="M20 50 Q40 30, 60 50 T100 50 T140 50 T180 50" 
+            stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.3"/>
+      <circle cx="30" cy="50" r="3" fill="#D4AF37" opacity="0.2"/>
+      <circle cx="70" cy="50" r="2.5" fill="#D4AF37" opacity="0.2"/>
+      <circle cx="110" cy="50" r="3" fill="#D4AF37" opacity="0.2"/>
+      <circle cx="150" cy="50" r="2" fill="#D4AF37" opacity="0.2"/>
+    </pattern>
+    
+    <!-- 海浪纹 -->
+    <pattern id="wavePattern" x="0" y="0" width="150" height="80" patternUnits="userSpaceOnUse">
+      <path d="M10 40 Q25 25, 40 40 T70 40 T100 40 T130 40" 
+            stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M10 50 Q25 35, 40 50 T70 50 T100 50 T130 50" 
+            stroke="url(#goldGradient)" stroke-width="1" fill="none" opacity="0.3"/>
+    </pattern>
+    
+    <!-- 回纹边框 -->
+    <pattern id="meanderPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 20 L10 20 L10 10 L20 10 L20 30 L30 30 L30 20 L40 20" 
+            stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.6"/>
+    </pattern>
+    
+    <!-- 祥云装饰 - 顶部 -->
+    <g id="topCloud">
+      <ellipse cx="540" cy="80" rx="200" ry="60" fill="url(#goldGradient)" opacity="0.15"/>
+      <ellipse cx="340" cy="100" rx="150" ry="50" fill="url(#goldGradient)" opacity="0.12"/>
+      <ellipse cx="740" cy="100" rx="150" ry="50" fill="url(#goldGradient)" opacity="0.12"/>
+      <path d="M200 120 Q250 100, 300 120 T400 120" stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M680 120 Q730 100, 780 120 T880 120" stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.4"/>
+    </g>
+    
+    <!-- 底部海浪装饰 -->
+    <g id="bottomWave">
+      <rect x="0" y="1720" width="1080" height="200" fill="url(#wavePattern)"/>
+      <path d="M0 1750 Q100 1730, 200 1750 T400 1750 T600 1750 T800 1750 T1000 1750 T1080 1750" 
+            stroke="url(#goldGradient)" stroke-width="3" fill="none" opacity="0.6"/>
+      <path d="M0 1780 Q100 1760, 200 1780 T400 1780 T600 1780 T800 1780 T1000 1780 T1080 1780" 
+            stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M0 1810 Q100 1790, 200 1810 T400 1810 T600 1810 T800 1810 T1000 1810 T1080 1810" 
+            stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.3"/>
+    </g>
+    
+    <!-- 四角装饰 -->
+    <g id="cornerDecoration">
+      <path d="M0 100 L0 0 L100 0" stroke="url(#goldGradient)" stroke-width="3" fill="none" opacity="0.8"/>
+      <path d="M20 0 L20 20 L0 20" stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.6"/>
+      <circle cx="20" cy="20" r="4" fill="#D4AF37" opacity="0.8"/>
+    </g>
+    
+    <!-- 远山剪影 -->
+    <g id="mountainSilhouette">
+      <path d="M0 600 L150 450 L300 550 L450 400 L600 500 L750 350 L900 480 L1080 420 L1080 600 L0 600 Z" 
+            fill="#1B263B" opacity="0.5"/>
+      <path d="M0 620 L200 500 L400 580 L600 480 L800 560 L1080 500 L1080 620 L0 620 Z" 
+            fill="#1B263B" opacity="0.3"/>
+    </g>
+    
+    <!-- 金色光点 -->
+    <g id="goldParticles">
+      <circle cx="100" cy="300" r="2" fill="#D4AF37" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.3;0.6" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="200" cy="400" r="1.5" fill="#D4AF37" opacity="0.5">
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="880" cy="350" r="2" fill="#D4AF37" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.3;0.6" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="980" cy="450" r="1.5" fill="#D4AF37" opacity="0.5">
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="4.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1080" height="1920" fill="url(#deepBlueGradient)"/>
+  
+  <!-- 云纹背景 -->
+  <rect x="0" y="200" width="1080" height="1500" fill="url(#cloudPattern)"/>
+  
+  <!-- 顶部祥云 -->
+  <use href="#topCloud"/>
+  
+  <!-- 远山 -->
+  <use href="#mountainSilhouette"/>
+  
+  <!-- 金色光点 -->
+  <use href="#goldParticles"/>
+  
+  <!-- 底部海浪 -->
+  <use href="#bottomWave"/>
+  
+  <!-- 四角装饰 -->
+  <g transform="translate(0,0)">
+    <use href="#cornerDecoration"/>
+  </g>
+  <g transform="translate(1080,0) rotate(90)">
+    <use href="#cornerDecoration"/>
+  </g>
+  <g transform="translate(1080,1920) rotate(180)">
+    <use href="#cornerDecoration"/>
+  </g>
+  <g transform="translate(0,1920) rotate(270)">
+    <use href="#cornerDecoration"/>
+  </g>
+  
+  <!-- 两侧边框装饰 -->
+  <rect x="0" y="0" width="4" height="1920" fill="url(#goldGradient)" opacity="0.4"/>
+  <rect x="1076" y="0" width="4" height="1920" fill="url(#goldGradient)" opacity="0.4"/>
+</svg>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG 美术素材预览 - 白金帝王风</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Noto Serif SC", "KaiTi", serif;
+      background: linear-gradient(180deg, #FFF8E7 0%, #F5E6D3 50%, #D4C5B0 100%);
+      min-height: 100vh;
+      padding: 60px 40px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .title {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #D4AF37, #B8941F);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 60px;
+      letter-spacing: 2px;
+    }
+
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      color: #2D2D2D;
+      margin-bottom: 30px;
+      padding-left: 16px;
+      border-left: 4px solid #D4AF37;
+      font-weight: 600;
+    }
+
+    /* 边角装饰展示 */
+    .corners-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 40px;
+      border-radius: 16px;
+      border: 2px solid #D4AF37;
+    }
+
+    .corner-item {
+      text-align: center;
+    }
+
+    .corner-item svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .corner-label {
+      margin-top: 16px;
+      font-size: 15px;
+      color: #2D2D2D;
+      font-weight: 600;
+    }
+
+    .corner-desc {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* 边框展示 */
+    .border-showcase {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 60px;
+      border-radius: 16px;
+      border: 2px solid #D4AF37;
+      position: relative;
+    }
+
+    .border-showcase svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* 分割线展示 */
+    .divider-showcase {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 40px 60px;
+      border-radius: 16px;
+      border: 2px solid #D4AF37;
+    }
+
+    .divider-item {
+      margin-bottom: 40px;
+    }
+
+    .divider-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .divider-item svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .divider-label {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 15px;
+      color: #2D2D2D;
+      font-weight: 600;
+    }
+
+    /* 使用示例 */
+    .usage-section {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 16px;
+      border: 2px solid #D4AF37;
+      margin-top: 60px;
+    }
+
+    .usage-title {
+      font-size: 24px;
+      color: #2D2D2D;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .usage-code {
+      background: #1A1A1A;
+      color: #F5E6D3;
+      padding: 24px;
+      border-radius: 8px;
+      font-family: "SF Mono", "Monaco", monospace;
+      font-size: 14px;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .usage-code .tag {
+      color: #D4AF37;
+    }
+
+    .usage-code .attr {
+      color: #C9A961;
+    }
+
+    .usage-code .value {
+      color: #F5E6A3;
+    }
+
+    /* 文件列表 */
+    .file-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .file-item {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .file-icon {
+      font-size: 24px;
+    }
+
+    .file-name {
+      font-family: "SF Mono", "Monaco", monospace;
+      font-size: 13px;
+      color: #2D2D2D;
+      flex: 1;
+    }
+
+    .file-size {
+      font-size: 12px;
+      color: #666;
+    }
+
+    @media (max-width: 1024px) {
+      .corners-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .file-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title"> SVG 美术素材预览</h1>
+    <p class="subtitle">白金帝王风 · 中国风 UI 装饰元素 · 2026-03-16 生成</p>
+
+    <!-- 边角装饰 -->
+    <div class="section">
+      <h2 class="section-title">☁️ 祥云边角装饰（4 个角）</h2>
+      <div class="corners-grid">
+        <div class="corner-item">
+          <img src="public/assets/decorations/cloud-corner-tl.svg" alt="左上角">
+          <div class="corner-label">左上角</div>
+          <div class="corner-desc">512×512 · SVG 矢量</div>
+        </div>
+        <div class="corner-item">
+          <img src="public/assets/decorations/cloud-corner-tr.svg" alt="右上角">
+          <div class="corner-label">右上角</div>
+          <div class="corner-desc">512×512 · SVG 矢量</div>
+        </div>
+        <div class="corner-item">
+          <img src="public/assets/decorations/cloud-corner-bl.svg" alt="左下角">
+          <div class="corner-label">左下角</div>
+          <div class="corner-desc">512×512 · SVG 矢量</div>
+        </div>
+        <div class="corner-item">
+          <img src="public/assets/decorations/cloud-corner-br.svg" alt="右下角">
+          <div class="corner-label">右下角</div>
+          <div class="corner-desc">512×512 · SVG 矢量</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 回纹边框 -->
+    <div class="section">
+      <h2 class="section-title">🔲 回纹边框（完整方形）</h2>
+      <div class="border-showcase">
+        <img src="public/assets/decorations/hui-border.svg" alt="回纹边框">
+      </div>
+      <p style="text-align: center; margin-top: 16px; color: #666; font-size: 14px;">
+        1024×1024 · SVG 矢量 · 中空设计 · 可缩放
+      </p>
+    </div>
+
+    <!-- 分割线 -->
+    <div class="section">
+      <h2 class="section-title">〰️ 分割线（2 种样式）</h2>
+      <div class="divider-showcase">
+        <div class="divider-item">
+          <img src="public/assets/decorations/cloud-divider.svg" alt="祥云分割线">
+          <div class="divider-label">祥云分割线 · 800×80 · 金色渐变</div>
+        </div>
+        
+        <div style="height: 40px;"></div>
+        
+        <div class="divider-item">
+          <img src="public/assets/decorations/knot-divider.svg" alt="中国结分割线">
+          <div class="divider-label">中国结分割线 · 800×100 · 红金配色</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 使用示例 -->
+    <div class="usage-section">
+      <h3 class="usage-title">📝 使用方法</h3>
+      
+      <div class="usage-code">
+<span class="tag">&lt;!--</span> 在 Vue 组件中使用 <span class="tag">--&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;!--</span> 左上角装饰 <span class="tag">--&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="value">"/assets/decorations/cloud-corner-tl.svg"</span> 
+       <span class="attr">class</span>=<span class="value">"corner-tl"</span> <span class="tag">/&gt;</span>
+  
+  <span class="tag">&lt;!--</span> 右上角装饰 <span class="tag">--&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="value">"/assets/decorations/cloud-corner-tr.svg"</span> 
+       <span class="attr">class</span>=<span class="value">"corner-tr"</span> <span class="tag">/&gt;</span>
+  
+  <span class="tag">&lt;!--</span> 内容区域 <span class="tag">--&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card-body"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;!--</span> 分割线使用 <span class="tag">--&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="value">"/assets/decorations/cloud-divider.svg"</span> 
+     <span class="attr">class</span>=<span class="value">"section-divider"</span> <span class="tag">/&gt;</span>
+      </div>
+
+      <div class="file-list">
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">cloud-corner-tl.svg</span>
+          <span class="file-size">3.3 KB</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">cloud-corner-tr.svg</span>
+          <span class="file-size">2.2 KB</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">cloud-corner-bl.svg</span>
+          <span class="file-size">1.9 KB</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">cloud-corner-br.svg</span>
+          <span class="file-size">2.0 KB</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">hui-border.svg</span>
+          <span class="file-size">2.4 KB</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">cloud-divider.svg</span>
+          <span class="file-size">3.0 KB</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">knot-divider.svg</span>
+          <span class="file-size">4.1 KB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

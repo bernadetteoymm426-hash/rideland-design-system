@@ -1,0 +1,121 @@
+<svg width="800" height="100" viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5E6A3;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8941F;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C41E3A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B0000;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="lineGradientLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="lineGradientRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 左侧细线 -->
+  <line x1="0" y1="50" x2="320" y2="50" 
+        stroke="url(#lineGradientLeft)" 
+        stroke-width="2"/>
+  
+  <!-- 右侧细线 -->
+  <line x1="480" y1="50" x2="800" y2="50" 
+        stroke="url(#lineGradientRight)" 
+        stroke-width="2"/>
+  
+  <!-- 中央中国结 -->
+  <g transform="translate(400, 50)">
+    <!-- 中国结主体（简化版盘长结） -->
+    <g>
+      <!-- 外层环 -->
+      <ellipse cx="0" cy="0" rx="35" ry="25" 
+               fill="none" 
+               stroke="url(#redGradient)" 
+               stroke-width="4" 
+               opacity="0.9"/>
+      
+      <!-- 内层交叉 -->
+      <path d="M-20 -15 L20 15 M20 -15 L-20 15" 
+            stroke="url(#redGradient)" 
+            stroke-width="3" 
+            opacity="0.8"/>
+      
+      <!-- 中心装饰 -->
+      <circle cx="0" cy="0" r="8" 
+              fill="url(#goldGradient)" 
+              opacity="0.9"/>
+      
+      <!-- 上方环 -->
+      <ellipse cx="0" cy="-30" rx="12" ry="15" 
+               fill="none" 
+               stroke="url(#redGradient)" 
+               stroke-width="3" 
+               opacity="0.8"/>
+      
+      <!-- 下方环 -->
+      <ellipse cx="0" cy="30" rx="12" ry="15" 
+               fill="none" 
+               stroke="url(#redGradient)" 
+               stroke-width="3" 
+               opacity="0.8"/>
+      
+      <!-- 左侧环 -->
+      <ellipse cx="-30" cy="0" rx="15" ry="12" 
+               fill="none" 
+               stroke="url(#redGradient)" 
+               stroke-width="3" 
+               opacity="0.8"/>
+      
+      <!-- 右侧环 -->
+      <ellipse cx="30" cy="0" rx="15" ry="12" 
+               fill="none" 
+               stroke="url(#redGradient)" 
+               stroke-width="3" 
+               opacity="0.8"/>
+    </g>
+    
+    <!-- 金色流苏（简化） -->
+    <g transform="translate(0, 45)">
+      <line x1="-8" y1="0" x2="-8" y2="25" 
+            stroke="url(#goldGradient)" 
+            stroke-width="1.5" 
+            opacity="0.7"/>
+      <line x1="-4" y1="0" x2="-4" y2="30" 
+            stroke="url(#goldGradient)" 
+            stroke-width="1.5" 
+            opacity="0.8"/>
+      <line x1="0" y1="0" x2="0" y2="35" 
+            stroke="url(#goldGradient)" 
+            stroke-width="2" 
+            opacity="0.9"/>
+      <line x1="4" y1="0" x2="4" y2="30" 
+            stroke="url(#goldGradient)" 
+            stroke-width="1.5" 
+            opacity="0.8"/>
+      <line x1="8" y1="0" x2="8" y2="25" 
+            stroke="url(#goldGradient)" 
+            stroke-width="1.5" 
+            opacity="0.7"/>
+      
+      <!-- 流苏顶部装饰 -->
+      <rect x="-10" y="-3" width="20" height="6" 
+            fill="url(#goldGradient)" 
+            opacity="0.8"/>
+    </g>
+    
+    <!-- 装饰圆点 -->
+    <circle cx="-30" cy="0" r="3" fill="#D4AF37" opacity="0.8"/>
+    <circle cx="30" cy="0" r="3" fill="#D4AF37" opacity="0.8"/>
+    <circle cx="0" cy="-30" r="3" fill="#D4AF37" opacity="0.8"/>
+    <circle cx="0" cy="30" r="3" fill="#D4AF37" opacity="0.8"/>
+  </g>
+</svg>

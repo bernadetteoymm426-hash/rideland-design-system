@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "stitch": {
+      "type": "local",
+      "command": ["/Users/mark/.nvm/versions/node/v25.7.0/bin/npx", "-y", "stitch-mcp"],
+      "enabled": true,
+      "environment": {
+        "GOOGLE_CLOUD_PROJECT": "secure-memory-8cdf0"
+      }
+    }
+  }
+}

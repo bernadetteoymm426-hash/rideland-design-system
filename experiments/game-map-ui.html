@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kingdom Conquest - Chinese Fantasy Map</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=Ma+Shan+Zheng&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "gold": "#d4af37",
+                        "jade": "#00a86b",
+                        "imperial-blue": "#002366",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"],
+                        "calligraphy": ["Ma Shan Zheng", "cursive"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .parchment-bg {
+            background-color: #f4e4bc;
+            background-image: radial-gradient(#ead29c 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .filigree-border {
+            border: 4px solid #d4af37;
+            border-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm5 5v30h30V5H5z' fill='%23d4af37'/%3E%3C/svg%3E") 10 stretch;
+        }
+        .silk-texture {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark overflow-hidden">
+<div class="relative h-screen w-full flex flex-col overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center opacity-90" data-alt="Ancient hand-drawn map of Chinese territories" data-location="Ancient China" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_YwhgyDaYhOBehV7gD37p9fmVHmtMbKrOIlUtIwBbYT4xboA62invjkyDyt5_h67nRUZ7aQma7UT_LFNu3muqelDNnuecyPazbZvPfHjRQraSfwKf_zdufKZ4_3l02JS5X9MKvCOFJJxMZ0sfofNVbJlRgfxwH632DpEGzxif82eG5JErY62ja4-SUOrLWaV98lWFGK54BjFGb6Vhu6imaxmQCSJPFb-rv7WVmIbIBfShx5q37X3Z5fYIH9qcGjbxRv5T1ksPjuA');">
+<div class="absolute inset-0 bg-imperial-blue/10 pointer-events-none"></div>
+<div class="absolute top-1/3 left-1/4 group cursor-pointer">
+<div class="flex flex-col items-center">
+<div class="bg-red-600 px-2 py-1 border-2 border-gold rounded-sm shadow-lg mb-1">
+<span class="text-white font-calligraphy text-sm">Luoyang</span>
+</div>
+<span class="material-symbols-outlined text-red-600 text-4xl drop-shadow-md">flag</span>
+</div>
+</div>
+<div class="absolute top-1/2 right-1/3 group cursor-pointer">
+<div class="flex flex-col items-center">
+<div class="bg-imperial-blue px-2 py-1 border-2 border-gold rounded-sm shadow-lg mb-1">
+<span class="text-white font-calligraphy text-sm">Chang'an</span>
+</div>
+<span class="material-symbols-outlined text-imperial-blue text-4xl drop-shadow-md">flag</span>
+</div>
+</div>
+<div class="absolute bottom-1/4 left-1/2 group cursor-pointer">
+<div class="flex flex-col items-center">
+<div class="bg-jade px-2 py-1 border-2 border-gold rounded-sm shadow-lg mb-1">
+<span class="text-white font-calligraphy text-sm">Chengdu</span>
+</div>
+<span class="material-symbols-outlined text-jade text-4xl drop-shadow-md">flag</span>
+</div>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex flex-col w-full">
+<div class="flex items-center justify-between p-4 bg-gradient-to-b from-black/60 to-transparent">
+<div class="flex items-center gap-4">
+<div class="size-14 rounded-full border-4 border-gold bg-imperial-blue overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Chinese General character portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk315kDlkFVJRo63gJ8ROwJj4Lq7ga8EX9z3gi8VbsQ4ytVNk79LGJbG2ttQ1RplHYWnRxu4-uQ61qzYHVgd9L0Ii48RhC7LTfJE6t7aA78ZL1VSauLz-Ahrvn3fvVKTqVDIbQGc96a0h2Ubf_rmdcr8UIybx1cQEvtfq_rt2VM6IQqpbHjU9VUoIeRd0_fM6h_euTkYowDPzyYozOXeTghlUaQH20X--0CJ7-Wa8IZQuPdOIsjG99MPUVeYPDt856E1CA8lBDItQ"/>
+</div>
+<div>
+<h1 class="text-gold font-calligraphy text-2xl drop-shadow-md">General Zhao</h1>
+<div class="w-32 h-2 bg-slate-800 rounded-full overflow-hidden border border-gold/30">
+<div class="w-3/4 h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 bg-black/40 border border-gold/50 rounded-lg px-4 py-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-gold">payments</span>
+<span class="text-slate-100 font-bold">128,500</span>
+<button class="text-gold font-bold text-xl">+</button>
+</div>
+<div class="flex items-center gap-2 bg-black/40 border border-gold/50 rounded-lg px-4 py-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-red-500">swords</span>
+<span class="text-slate-100 font-bold">45.2k</span>
+</div>
+<div class="flex items-center gap-2 bg-black/40 border border-gold/50 rounded-lg px-4 py-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-jade">history_edu</span>
+<span class="text-slate-100 font-bold">85/100</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="size-10 flex items-center justify-center bg-black/40 border border-gold/50 rounded-lg text-gold">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="size-10 flex items-center justify-center bg-black/40 border border-gold/50 rounded-lg text-gold">
+<span class="material-symbols-outlined">mail</span>
+</button>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex-1 flex justify-end items-start pt-12 pr-6">
+<div class="w-64 parchment-bg border-4 border-gold rounded-lg shadow-2xl relative">
+<div class="absolute -left-3 top-4 w-6 h-24 bg-primary/80 border border-gold rounded-full flex flex-col items-center justify-center gap-2 py-2">
+<div class="size-2 rounded-full bg-gold"></div>
+<div class="size-2 rounded-full bg-gold"></div>
+</div>
+<div class="p-4">
+<h3 class="font-calligraphy text-2xl text-imperial-blue border-b-2 border-gold/30 pb-2 mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">auto_stories</span>
+                        Imperial Decree
+                    </h3>
+<ul class="space-y-4">
+<li class="flex flex-col gap-1 border-b border-gold/20 pb-2">
+<span class="text-sm font-bold text-slate-800">Conquer the West</span>
+<span class="text-xs text-slate-600">Capture 3 cities in the Shu territory.</span>
+<div class="w-full h-1 bg-slate-300 rounded-full mt-1">
+<div class="w-1/3 h-full bg-jade"></div>
+</div>
+</li>
+<li class="flex flex-col gap-1 border-b border-gold/20 pb-2">
+<span class="text-sm font-bold text-slate-800">Gather Provisions</span>
+<span class="text-xs text-slate-600">Collect 50,000 Gold from tributes.</span>
+<div class="w-full h-1 bg-slate-300 rounded-full mt-1">
+<div class="w-full h-full bg-jade"></div>
+</div>
+</li>
+<li class="flex flex-col gap-1">
+<span class="text-sm font-bold text-slate-800">Strengthen Walls</span>
+<span class="text-xs text-slate-600">Upgrade Luoyang Defense to Lv. 5.</span>
+</li>
+</ul>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2">
+<div class="w-24 h-1 bg-gold rounded-full shadow-lg"></div>
+</div>
+</div>
+</div>
+<div class="relative z-20 flex justify-between items-end p-8 w-full">
+<div class="relative">
+<div class="size-48 rounded-full border-[6px] border-gold bg-imperial-blue/80 shadow-2xl overflow-hidden relative backdrop-blur-sm">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="Aerial terrain mini map" data-location="Mountainous Region" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ2reFTYha-q0lWfT4tUx6SfrhP0hB-RSFLkAjF0emB3EeIY_5fc1rIwl5dk7fM1dW6ixpexOIk07a0m-xRFwry5kaK8BSo_3ePv0MmopIX64i-foqZk0LS-t5JZKPo2oSHz9LswsQATNsbTVzKW807hiTLWulNNvIMyml0qT1-pH2Abf1oEGHByeTkBvAMaLyN6IetKdS8Qi36DbsaMWPD1eL51jdn8xin9M7j9ZOvmdg7qvPEyFj__VoQRSdP3osa1aMCndrmMU"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="size-4 bg-primary rounded-full border-2 border-white animate-pulse"></div>
+</div>
+</div>
+<div class="absolute -bottom-2 -left-2 bg-gold text-imperial-blue font-bold px-3 py-1 rounded-lg border-2 border-imperial-blue shadow-lg">
+                    MINIMAP
+                </div>
+</div>
+<div class="flex items-end gap-6 mb-2">
+<div class="flex flex-col gap-4">
+<button class="px-8 py-3 parchment-bg border-2 border-gold rounded-xl shadow-xl hover:scale-105 transition-transform">
+<span class="font-calligraphy text-xl text-imperial-blue">DEFEND</span>
+</button>
+<button class="px-8 py-3 parchment-bg border-2 border-gold rounded-xl shadow-xl hover:scale-105 transition-transform">
+<span class="font-calligraphy text-xl text-imperial-blue">REINFORCE</span>
+</button>
+</div>
+<button class="group relative px-16 py-8 bg-gradient-to-br from-primary to-orange-700 border-[6px] border-gold rounded-2xl shadow-[0_0_30px_rgba(236,91,19,0.4)] hover:shadow-[0_0_50px_rgba(236,91,19,0.6)] transition-all overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/silk.png')]"></div>
+<div class="flex flex-col items-center relative z-10">
+<span class="font-calligraphy text-6xl text-gold drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">EXPEDITION</span>
+<div class="mt-2 flex gap-4">
+<div class="w-12 h-0.5 bg-gold/50"></div>
+<span class="text-white text-sm font-bold tracking-[0.2em]">BATTLE NOW</span>
+<div class="w-12 h-0.5 bg-gold/50"></div>
+</div>
+</div>
+<div class="absolute top-0 right-0 p-2">
+<span class="material-symbols-outlined text-gold animate-bounce">arrow_forward</span>
+</div>
+</button>
+</div>
+</div>
+<div class="absolute bottom-1/3 left-8 z-10 flex flex-col gap-4">
+<div class="flex flex-col items-center">
+<div class="size-16 rounded-full border-2 border-gold bg-imperial-blue flex items-center justify-center text-gold shadow-lg cursor-pointer hover:bg-imperial-blue/90">
+<span class="material-symbols-outlined text-3xl">map</span>
+</div>
+<span class="text-xs font-bold text-gold mt-1 drop-shadow-md">REGIONS</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="size-16 rounded-full border-2 border-gold bg-imperial-blue flex items-center justify-center text-gold shadow-lg cursor-pointer hover:bg-imperial-blue/90">
+<span class="material-symbols-outlined text-3xl">group</span>
+</div>
+<span class="text-xs font-bold text-gold mt-1 drop-shadow-md">ALLIANCE</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="size-16 rounded-full border-2 border-gold bg-imperial-blue flex items-center justify-center text-gold shadow-lg cursor-pointer hover:bg-imperial-blue/90">
+<span class="material-symbols-outlined text-3xl">storefront</span>
+</div>
+<span class="text-xs font-bold text-gold mt-1 drop-shadow-md">MARKET</span>
+</div>
+</div>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 pointer-events-none opacity-20">
+<span class="font-calligraphy text-[12rem] text-gold select-none">天下</span>
+</div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+<div class="parchment-bg px-10 py-2 border-x-4 border-gold filigree-border shadow-xl">
+<h2 class="text-imperial-blue font-calligraphy text-3xl tracking-widest">KINGDOM AT WAR</h2>
+</div>
+</div>
+</div>
+</body></html>

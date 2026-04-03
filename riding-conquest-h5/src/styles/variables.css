@@ -1,0 +1,17 @@
+:root {
+  --van-primary-color: #00B8D9;
+  --van-success-color: #00C853;
+  --van-warning-color: #FFB300;
+  --van-danger-color: #FF5252;
+  --van-background-color: #0D1B2A;
+  --van-background-color-light: #1B263B;
+  --van-text-color: #FFFFFF;
+  --van-text-color-secondary: #B0BEC5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeIn 0.5s ease-out; }

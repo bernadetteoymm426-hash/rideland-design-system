@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>骑迹大陆 - 排行浮层设计</title>
+    <style>
+        :root {
+            --deep-space: #070E1B;
+            --tech-blue: #3B82F6;
+            --emerald-green: #10B981;
+            --victory-gold: #F59E0B;
+            --silver: #9CA3AF;
+            --bronze: #D97706;
+            --passion-red: #EF4444;
+            --light-gray: #F1F5F9;
+            --medium-gray: #94A3B8;
+            --dark-gray: #64748B;
+            --card-bg: rgba(26, 39, 64, 0.95);
+            --card-border: rgba(59, 130, 246, 0.3);
+            --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--deep-space);
+            color: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .overlay-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay {
+            width: 600px;
+            max-width: 90%;
+            max-height: 85vh;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+            animation: overlay-enter 0.4s var(--ease-standard);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @keyframes overlay-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .overlay-header {
+            padding: 24px 32px 0;
+            flex-shrink: 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FBBF24 0%, var(--victory-gold) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-icon svg {
+            width: 22px;
+            height: 22px;
+            color: white;
+        }
+
+        .header-title h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            color: var(--medium-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            color: var(--medium-gray);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--tech-blue);
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .overlay-content {
+            flex: 1;
+            padding: 20px 32px;
+            overflow-y: auto;
+        }
+
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-top: 16px;
+        }
+
+        .podium-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .podium-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .podium-avatar.gold {
+            background: linear-gradient(135deg, #FBBF24 0%, var(--victory-gold) 100%);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .podium-avatar.silver {
+            background: linear-gradient(135deg, #D1D5DB 0%, var(--silver) 100%);
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.3);
+        }
+
+        .podium-avatar.bronze {
+            background: linear-gradient(135deg, #F59E0B 0%, var(--bronze) 100%);
+            box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
+        }
+
+        .crown {
+            position: absolute;
+            top: -12px;
+            font-size: 18px;
+        }
+
+        .podium-name {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .podium-score {
+            font-size: 12px;
+            color: var(--medium-gray);
+        }
+
+        .podium-stand {
+            width: 80px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 12px;
+        }
+
+        .podium-stand.first {
+            height: 80px;
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0.1) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .podium-stand.second {
+            height: 60px;
+            background: linear-gradient(180deg, rgba(156, 163, 175, 0.2) 0%, rgba(156, 163, 175, 0.05) 100%);
+            border: 1px solid rgba(156, 163, 175, 0.2);
+        }
+
+        .podium-stand.third {
+            height: 45px;
+            background: linear-gradient(180deg, rgba(217, 119, 6, 0.2) 0%, rgba(217, 119, 6, 0.05) 100%);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+        }
+
+        .rank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .rank-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .rank-item.self {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .rank-number {
+            width: 32px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--medium-gray);
+        }
+
+        .rank-number.gold { color: var(--victory-gold); }
+        .rank-number.silver { color: var(--silver); }
+        .rank-number.bronze { color: var(--bronze); }
+
+        .rank-badge {
+            font-size: 20px;
+        }
+
+        .rank-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1E40AF 0%, var(--tech-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .rank-meta {
+            font-size: 12px;
+            color: var(--medium-gray);
+        }
+
+        .rank-stats {
+            text-align: right;
+        }
+
+        .rank-score {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--tech-blue);
+        }
+
+        .rank-label {
+            font-size: 11px;
+            color: var(--medium-gray);
+        }
+
+        .self-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0;
+            color: var(--medium-gray);
+            font-size: 12px;
+        }
+
+        .self-divider::before,
+        .self-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .overlay-footer {
+            padding: 16px 32px;
+            border-top: 1px solid rgba(59, 130, 246, 0.15);
+            flex-shrink: 0;
+        }
+
+        .my-rank {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+        }
+
+        .my-rank-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .my-rank-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--emerald-green);
+        }
+
+        .my-rank-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .my-rank-label {
+            font-size: 11px;
+            color: var(--medium-gray);
+        }
+
+        .my-rank-score {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--tech-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-backdrop">
+        <div class="overlay">
+            <div class="overlay-header">
+                <div class="header-top">
+                    <div class="header-title">
+                        <div class="header-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m2 4v2h2V7H7m4 0v2h2V7h-2m4 0v2h2V7h-2m-8 4v2h2v-2H7m4 0v2h2v-2h-2m4 0v2h2v-2h-2m-8 4v2h2v-2H7m4 0v2h2v-2h-2m4 0v2h2v-2h-2"/>
+                            </svg>
+                        </div>
+                        <h2>排行榜</h2>
+                    </div>
+                    <button class="close-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active">🏆 战队榜</button>
+                    <button class="tab">👤 个人榜</button>
+                </div>
+            </div>
+
+            <div class="overlay-content">
+                <div class="podium">
+                    <div class="podium-item">
+                        <div class="podium-avatar silver">风</div>
+                        <span class="podium-name">风行者</span>
+                        <span class="podium-score">8,234 km</span>
+                        <div class="podium-stand second"></div>
+                    </div>
+                    <div class="podium-item">
+                        <div class="podium-avatar gold">
+                            <span class="crown">👑</span>
+                            骑
+                        </div>
+                        <span class="podium-name">骑行者联盟</span>
+                        <span class="podium-score">12,456 km</span>
+                        <div class="podium-stand first"></div>
+                    </div>
+                    <div class="podium-item">
+                        <div class="podium-avatar bronze">闪</div>
+                        <span class="podium-name">闪电车队</span>
+                        <span class="podium-score">6,789 km</span>
+                        <div class="podium-stand third"></div>
+                    </div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-item">
+                        <span class="rank-number gold">1</span>
+                        <div class="rank-avatar">骑</div>
+                        <div class="rank-info">
+                            <div class="rank-name">骑行者联盟</div>
+                            <div class="rank-meta">47 领土 · 128 成员</div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="rank-score">12,456</div>
+                            <div class="rank-label">总里程 (km)</div>
+                        </div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-number silver">2</span>
+                        <div class="rank-avatar" style="background: linear-gradient(135deg, #6B7280 0%, #9CA3AF 100%);">风</div>
+                        <div class="rank-info">
+                            <div class="rank-name">风行者</div>
+                            <div class="rank-meta">38 领土 · 96 成员</div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="rank-score">8,234</div>
+                            <div class="rank-label">总里程 (km)</div>
+                        </div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-number bronze">3</span>
+                        <div class="rank-avatar">闪</div>
+                        <div class="rank-info">
+                            <div class="rank-name">闪电车队</div>
+                            <div class="rank-meta">35 领土 · 84 成员</div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="rank-score">6,789</div>
+                            <div class="rank-label">总里程 (km)</div>
+                        </div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-number">4</span>
+                        <div class="rank-avatar" style="background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);">魔</div>
+                        <div class="rank-info">
+                            <div class="rank-name">魔骑行</div>
+                            <div class="rank-meta">32 领土 · 72 成员</div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="rank-score">5,678</div>
+                            <div class="rank-label">总里程 (km)</div>
+                        </div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-number">5</span>
+                        <div class="rank-avatar" style="background: linear-gradient(135deg, #059669 0%, #10B981 100%);">山</div>
+                        <div class="rank-info">
+                            <div class="rank-name">山地之王</div>
+                            <div class="rank-meta">28 领土 · 64 成员</div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="rank-score">4,567</div>
+                            <div class="rank-label">总里程 (km)</div>
+                        </div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-number">6</span>
+                        <div class="rank-avatar" style="background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);">极</div>
+                        <div class="rank-info">
+                            <div class="rank-name">极速传说</div>
+                            <div class="rank-meta">24 领土 · 58 成员</div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="rank-score">3,890</div>
+                            <div class="rank-label">总里程 (km)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overlay-footer">
+                <div class="my-rank">
+                    <div class="my-rank-info">
+                        <span class="my-rank-number">#12</span>
+                        <div>
+                            <div class="my-rank-name">闪电车队</div>
+                            <div class="my-rank-label">你的战队</div>
+                        </div>
+                    </div>
+                    <span class="my-rank-score">1,234 km</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

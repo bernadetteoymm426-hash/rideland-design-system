@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>白金帝王风 · 征服疆域 - 最终版</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: url('./public/assets/images/bg-conquest-abstract.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-color: #F5E6D3;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2D2D2D;
+      font-size: 32px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #8B7355;
+      font-size: 16px;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .theme-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: linear-gradient(135deg, #D4AF37, #B8941F);
+      color: white;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .color-palette {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+    }
+
+    .color-swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .swatch-label {
+      font-size: 12px;
+      color: #2D2D2D;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .swatch-code {
+      font-size: 11px;
+      color: #8B7355;
+      font-family: monospace;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #2D2D2D;
+      margin: 40px 0 20px 0;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      background-image: url('./public/assets/images/texture-card-subtle.jpg');
+      background-size: 400px;
+      background-blend-mode: multiply;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+      border: 2px solid rgba(212, 175, 55, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(212, 175, 55, 0.25);
+    }
+
+    /* 边角装饰 */
+    .card::before,
+    .card::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: url('./public/assets/images/corner-abstract-gold.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.4;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .card::before {
+      top: 0;
+      left: 0;
+    }
+
+    .card::after {
+      bottom: 0;
+      right: 0;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background: #f5f5f5;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .card-image.tall {
+      height: 400px;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .card-image.wide {
+      height: 150px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+    }
+
+    .card-image.square {
+      height: 280px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2D2D2D;
+      margin-bottom: 8px;
+    }
+
+    .card-info {
+      font-size: 13px;
+      color: #8B7355;
+      margin-bottom: 4px;
+    }
+
+    .card-info code {
+      background: rgba(212, 175, 55, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #2D2D2D;
+    }
+
+    .card-usage {
+      font-size: 12px;
+      color: #A09070;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .badge-p0 {
+      background: linear-gradient(135deg, #D4AF37 0%, #C9A961 100%);
+      color: white;
+    }
+
+    /* 分割线示例 */
+    .divider-demo {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 16px;
+      margin: 30px 0;
+      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+    }
+
+    .divider-gold {
+      height: 2px;
+      background: url('./public/assets/images/divider-abstract-gold.jpg') center center no-repeat;
+      background-size: contain;
+      border: none;
+      opacity: 0.7;
+      margin: 20px 0;
+    }
+
+    /* 头像徽章示例 */
+    .avatar-demo {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 16px;
+      margin: 30px 0;
+    }
+
+    .avatar-badge-frame {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: url('./public/assets/images/badge-frame-gold.jpg');
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-badge-frame img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #8B7355;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+
+    .footer a {
+      color: #D4AF37;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer strong {
+      color: #2D2D2D;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-image.tall {
+        height: 300px;
+      }
+
+      .avatar-demo {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="theme-badge">🏆 白金帝王风 · 征服疆域</span>
+    </div>
+    
+    <h1>骑行征服 H5 - 美术素材最终版</h1>
+    <p class="subtitle">抽象疆域 · 权力美学 · 指点江山</p>
+
+    <!-- 配色方案 -->
+    <div class="color-palette">
+      <div class="color-swatch">
+        <div class="swatch" style="background: #F5E6D3;"></div>
+        <div class="swatch-label">玉脂白</div>
+        <div class="swatch-code">#F5E6D3</div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch" style="background: #D4AF37;"></div>
+        <div class="swatch-label">鎏金色</div>
+        <div class="swatch-code">#D4AF37</div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch" style="background: #C9A961;"></div>
+        <div class="swatch-label">古铜金</div>
+        <div class="swatch-code">#C9A961</div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch" style="background: #2D2D2D;"></div>
+        <div class="swatch-label">墨黑色</div>
+        <div class="swatch-code">#2D2D2D</div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch" style="background: #FFF8E7;"></div>
+        <div class="swatch-label">米白色</div>
+        <div class="swatch-code">#FFF8E7</div>
+      </div>
+    </div>
+
+    <!-- 主背景 -->
+    <h2 class="section-title">🎨 主背景</h2>
+    <div class="grid">
+      <div class="card" style="grid-column: span 2;">
+        <img src="./public/assets/images/bg-conquest-abstract.jpg" alt="主背景" class="card-image tall">
+        <div class="card-content">
+          <span class="badge badge-p0">P0 核心</span>
+          <h3 class="card-title">主背景 - 抽象疆域图</h3>
+          <div class="card-info">文件：<code>bg-conquest-abstract.jpg</code></div>
+          <div class="card-info">尺寸：<code>1600 × 2848px (9:16)</code></div>
+          <div class="card-usage">
+            <strong>设计元素：</strong>抽象疆域脉络 + 金色路线标记 + 顶部光晕 + 云海层次<br>
+            <strong>应用位置：</strong>App.vue 全局背景
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 装饰元素 -->
+    <h2 class="section-title">✨ 装饰元素</h2>
+    <div class="grid">
+      <!-- 边角装饰 -->
+      <div class="card">
+        <img src="./public/assets/images/corner-abstract-gold.jpg" alt="边角装饰" class="card-image square">
+        <div class="card-content">
+          <span class="badge badge-p0">P0 核心</span>
+          <h3 class="card-title">边角装饰 - 抽象几何</h3>
+          <div class="card-info">文件：<code>corner-abstract-gold.jpg</code></div>
+          <div class="card-info">尺寸：<code>2048 × 2048px (1:1)</code></div>
+          <div class="card-usage">
+            <strong>用途：</strong>卡片四角装饰<br>
+            <strong>透明度：</strong>40% 融合背景
+          </div>
+        </div>
+      </div>
+
+      <!-- 分割线 -->
+      <div class="card">
+        <img src="./public/assets/images/divider-abstract-gold.jpg" alt="分割线" class="card-image wide">
+        <div class="card-content">
+          <span class="badge badge-p0">P0 核心</span>
+          <h3 class="card-title">分割线 - 金色虚线</h3>
+          <div class="card-info">文件：<code>divider-abstract-gold.jpg</code></div>
+          <div class="card-info">尺寸：<code>5888 × 736px (8:1)</code></div>
+          <div class="card-usage">
+            <strong>用途：</strong>内容区域分隔<br>
+            <strong>样式：</strong>虚线 + 圆点节点
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片底纹 -->
+      <div class="card">
+        <img src="./public/assets/images/texture-card-subtle.jpg" alt="卡片底纹" class="card-image square">
+        <div class="card-content">
+          <span class="badge badge-p0">P0 核心</span>
+          <h3 class="card-title">卡片底纹 - 山川脉络</h3>
+          <div class="card-info">文件：<code>texture-card-subtle.jpg</code></div>
+          <div class="card-info">尺寸：<code>2048 × 2048px (1:1)</code></div>
+          <div class="card-usage">
+            <strong>用途：</strong>卡片内部叠加底纹<br>
+            <strong>混合模式：</strong>Multiply
+          </div>
+        </div>
+      </div>
+
+      <!-- 徽章边框 -->
+      <div class="card">
+        <img src="./public/assets/images/badge-frame-gold.jpg" alt="徽章边框" class="card-image square">
+        <div class="card-content">
+          <span class="badge badge-p0">P0 核心</span>
+          <h3 class="card-title">徽章边框 - 同心圆环</h3>
+          <div class="card-info">文件：<code>badge-frame-gold.jpg</code></div>
+          <div class="card-info">尺寸：<code>2048 × 2048px (1:1)</code></div>
+          <div class="card-usage">
+            <strong>用途：</strong>头像/等级标识边框<br>
+            <strong>样式：</strong>同心圆环 + 星点装饰
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分割线效果演示 -->
+    <h2 class="section-title">📏 分割线效果演示</h2>
+    <div class="divider-demo">
+      <div style="text-align: center; color: #2D2D2D; padding: 20px;">
+        内容区块 1
+      </div>
+      <div class="divider-gold"></div>
+      <div style="text-align: center; color: #2D2D2D; padding: 20px;">
+        内容区块 2
+      </div>
+    </div>
+
+    <!-- 头像徽章演示 -->
+    <h2 class="section-title">🎖️ 头像徽章演示</h2>
+    <div class="avatar-demo">
+      <div class="avatar-badge-frame">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #D4AF37, #F5E6D3); display: flex; align-items: center; justify-content: center; color: #2D2D2D; font-weight: bold; font-size: 24px;">
+          M
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>生成工具：<strong>seedream-image-gen</strong> (Seedream 5.0 Lite)</p>
+      <p>生成时间：2026-03-16 | 主题：征服疆域</p>
+      <p style="margin-top: 12px;">
+        <a href="./ART-GUIDE-CONQUEST.md">📋 查看应用指南</a> · 
+        <a href="./PROJECT-STATUS.md">📊 项目进度</a> · 
+        <a href="./ART-RESOURCES.md">🎨 美术需求</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
