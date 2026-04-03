@@ -1,0 +1,74 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E8C547;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8941F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 主云纹线 -->
+  <path d="M10 100 
+           Q30 70, 50 100 
+           T90 100 
+           T130 100 
+           T170 100 
+           T210 100 
+           T250 100 
+           T290 100 
+           T330 100 
+           T370 100 
+           T410 100 
+           T450 100 
+           T490 100 
+           T530 100 
+           T570 100 
+           T590 100" 
+        stroke="url(#goldGradient)" 
+        stroke-width="3" 
+        fill="none"
+        stroke-linecap="round"
+        opacity="0.8"/>
+  
+  <!-- 辅助云纹线 -->
+  <path d="M10 120 
+           Q30 90, 50 120 
+           T90 120 
+           T130 120 
+           T170 120 
+           T210 120 
+           T250 120" 
+        stroke="url(#goldGradient)" 
+        stroke-width="1.5" 
+        fill="none"
+        opacity="0.4"/>
+  
+  <path d="M350 120 
+           Q370 90, 390 120 
+           T430 120 
+           T470 120 
+           T510 120 
+           T550 120 
+           T590 120" 
+        stroke="url(#goldGradient)" 
+        stroke-width="1.5" 
+        fill="none"
+        opacity="0.4"/>
+  
+  <!-- 装饰圆点 -->
+  <circle cx="50" cy="100" r="4" fill="#D4AF37" opacity="0.6"/>
+  <circle cx="130" cy="100" r="3" fill="#D4AF37" opacity="0.5"/>
+  <circle cx="210" cy="100" r="4" fill="#D4AF37" opacity="0.6"/>
+  <circle cx="290" cy="100" r="3" fill="#D4AF37" opacity="0.5"/>
+  <circle cx="370" cy="100" r="4" fill="#D4AF37" opacity="0.6"/>
+  <circle cx="450" cy="100" r="3" fill="#D4AF37" opacity="0.5"/>
+  <circle cx="530" cy="100" r="4" fill="#D4AF37" opacity="0.6"/>
+  
+  <!-- 两端装饰 -->
+  <circle cx="10" cy="100" r="6" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="590" cy="100" r="6" fill="url(#goldGradient)" opacity="0.8"/>
+  
+  <!-- 祥云点缀 -->
+  <path d="M100 60 Q115 45, 130 60 T160 60" stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M440 60 Q455 45, 470 60 T500 60" stroke="url(#goldGradient)" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

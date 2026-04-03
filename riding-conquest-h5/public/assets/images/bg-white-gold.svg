@@ -1,0 +1,123 @@
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 主渐变 -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8E7;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#F5E6D3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8D5C0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 金色渐变 -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C9A961;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 月光渐变 -->
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFF8E7;stop-opacity:0.8" />
+      <stop offset="70%" style="stop-color:#D4AF37;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- 宣纸纹理滤镜 -->
+    <filter id="paperTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.08" />
+      </feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic" />
+    </filter>
+    
+    <!-- 祥云图案 -->
+    <pattern id="cloudPattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+      <path d="M50,100 Q60,90 70,100 T90,100 M110,100 Q120,90 130,100 T150,100" 
+            fill="none" stroke="url(#goldGradient)" stroke-width="1.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1080" height="1920" fill="url(#mainGradient)" />
+  
+  <!-- 宣纸纹理叠加 -->
+  <rect width="1080" height="1920" fill="#D4C5B0" opacity="0.05" filter="url(#paperTexture)" />
+  
+  <!-- 顶部光晕 -->
+  <ellipse cx="540" cy="0" rx="600" ry="400" fill="url(#moonGlow)" opacity="0.4" />
+  
+  <!-- 月亮 -->
+  <circle cx="540" cy="180" r="80" fill="#FFF8E7" opacity="0.9" />
+  <circle cx="540" cy="180" r="100" fill="url(#moonGlow)" opacity="0.5" />
+  
+  <!-- 左侧祥云 -->
+  <g transform="translate(380, 160)" opacity="0.6">
+    <path d="M0,0 Q20,-15 40,0 Q60,-10 80,5 Q100,0 120,10 Q140,5 160,15 Q170,25 160,35 Q140,40 120,35 Q100,45 80,40 Q60,50 40,40 Q20,45 0,35 Q-10,25 0,15 Z" 
+          fill="#FFF8E7" stroke="url(#goldGradient)" stroke-width="2"/>
+  </g>
+  
+  <!-- 右侧祥云 -->
+  <g transform="translate(700, 170) scale(-1, 1)" opacity="0.6">
+    <path d="M0,0 Q20,-15 40,0 Q60,-10 80,5 Q100,0 120,10 Q140,5 160,15 Q170,25 160,35 Q140,40 120,35 Q100,45 80,40 Q60,50 40,40 Q20,45 0,35 Q-10,25 0,15 Z" 
+          fill="#FFF8E7" stroke="url(#goldGradient)" stroke-width="2"/>
+  </g>
+  
+  <!-- 远山 - 第一层（最淡） -->
+  <path d="M0,800 L150,750 L300,780 L450,720 L600,760 L750,700 L900,740 L1080,720 L1080,920 L0,920 Z" 
+        fill="#B0A090" opacity="0.15" />
+  
+  <!-- 远山 - 第二层 -->
+  <path d="M0,850 L200,800 L350,830 L500,780 L650,820 L800,770 L950,810 L1080,790 L1080,950 L0,950 Z" 
+        fill="#A09080" opacity="0.2" />
+  
+  <!-- 远山 - 第三层（最近） -->
+  <path d="M0,900 L180,860 L320,880 L480,840 L620,870 L780,830 L920,860 L1080,850 L1080,1000 L0,1000 Z" 
+        fill="#908070" opacity="0.25" />
+  
+  <!-- 底部海浪纹装饰带 -->
+  <g transform="translate(0, 1600)" opacity="0.7">
+    <!-- 第一层波浪 -->
+    <path d="M0,0 L1080,0 L1080,150 L0,150 Z" fill="none" />
+    <path d="M0,50 Q60,30 120,50 T240,50 T360,50 T480,50 T600,50 T720,50 T840,50 T960,50 T1080,50 L1080,80 Q1020,60 960,80 T840,80 T720,80 T600,80 T480,80 T360,80 T240,80 T120,80 T0,80 Z" 
+          fill="url(#goldGradient)" opacity="0.3" />
+    
+    <!-- 第二层波浪 -->
+    <path d="M0,100 Q60,80 120,100 T240,100 T360,100 T480,100 T600,100 T720,100 T840,100 T960,100 T1080,100 L1080,130 Q1020,110 960,130 T840,130 T720,130 T600,130 T480,130 T360,130 T240,130 T120,130 T0,130 Z" 
+          fill="url(#goldGradient)" opacity="0.4" />
+    
+    <!-- 祥云装饰 - 左 -->
+    <path d="M50,120 Q70,105 90,120 Q110,115 130,125 Q150,120 170,130 Q185,140 170,150 Q150,155 130,150 Q110,160 90,150 Q70,160 50,150 Q35,140 50,130 Z" 
+          fill="#FFF8E7" stroke="url(#goldGradient)" stroke-width="1.5" opacity="0.8"/>
+    
+    <!-- 祥云装饰 - 右 -->
+    <path d="M910,120 Q930,105 950,120 Q970,115 990,125 Q1010,120 1030,130 Q1045,140 1030,150 Q1010,155 990,150 Q970,160 950,150 Q930,160 910,150 Q895,140 910,130 Z" 
+          fill="#FFF8E7" stroke="url(#goldGradient)" stroke-width="1.5" opacity="0.8"/>
+    
+    <!-- 回纹边框 -->
+    <rect x="0" y="0" width="1080" height="320" fill="none" stroke="url(#goldGradient)" stroke-width="2" opacity="0.3"/>
+  </g>
+  
+  <!-- 边角装饰 - 左上 -->
+  <g transform="translate(0, 0)" opacity="0.5">
+    <path d="M0,0 L80,0 L80,15 L15,15 L15,80 L0,80 Z" fill="url(#goldGradient)" />
+  </g>
+  
+  <!-- 边角装饰 - 右上 -->
+  <g transform="translate(1080, 0) scale(-1, 1)" opacity="0.5">
+    <path d="M0,0 L80,0 L80,15 L15,15 L15,80 L0,80 Z" fill="url(#goldGradient)" />
+  </g>
+  
+  <!-- 边角装饰 - 左下 -->
+  <g transform="translate(0, 1920) scale(1, -1)" opacity="0.5">
+    <path d="M0,0 L80,0 L80,15 L15,15 L15,80 L0,80 Z" fill="url(#goldGradient)" />
+  </g>
+  
+  <!-- 边角装饰 - 右下 -->
+  <g transform="translate(1080, 1920) scale(-1, -1)" opacity="0.5">
+    <path d="M0,0 L80,0 L80,15 L15,15 L15,80 L0,80 Z" fill="url(#goldGradient)" />
+  </g>
+  
+  <!-- 整体纹理叠加 -->
+  <rect width="1080" height="1920" fill="url(#cloudPattern)" opacity="0.05" />
+</svg>

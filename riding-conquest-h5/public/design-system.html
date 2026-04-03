@@ -204,6 +204,7 @@
             border-radius: 16px;
             overflow: hidden;
             margin-top: var(--space-4);
+            position: relative;
         }
         
         .top-bar {
@@ -245,7 +246,7 @@
         
         /* 底部导航栏 - 悬浮图标按钮风格 */
         .bottom-nav {
-            position: fixed;
+            position: absolute;
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
@@ -257,6 +258,7 @@
             border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.2);
+            z-index: 10;
         }
         
         .nav-button {
@@ -302,7 +304,7 @@
         }
         
         .user-avatar {
-            position: fixed;
+            position: absolute;
             top: 100px;
             right: 40px;
             width: 64px;
@@ -315,6 +317,7 @@
             align-items: center;
             justify-content: center;
             animation: avatar-rotate 8s linear infinite;
+            z-index: 10;
         }
         
         @keyframes avatar-rotate {

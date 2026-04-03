@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MapView - 骑行征服 - 高保真原型</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .device-frame {
+      width: 375px;
+      height: 812px;
+      background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 
+        0 0 0 12px #2a2a3e,
+        0 30px 80px rgba(0, 217, 255, 0.15),
+        0 60px 120px rgba(0, 0, 0, 0.6),
+        inset 0 0 60px rgba(0, 217, 255, 0.05);
+    }
+
+    /* 设备刘海 */
+    .device-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 30px;
+      background: #2a2a3e;
+      border-radius: 0 0 20px 20px;
+      z-index: 1000;
+    }
+
+    /* 周循环状态条 - 渐变背景 */
+    .status-bar {
+      height: 60px;
+      background: linear-gradient(90deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .phase-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #00d9ff;
+      font-size: 14px;
+      font-weight: 600;
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    }
+
+    .phase-indicator i {
+      font-size: 16px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* 地图容器 - 真实地图背景 */
+    .map-container {
+      height: 652px;
+      background: 
+        linear-gradient(180deg, rgba(26, 26, 46, 0.8) 0%, rgba(15, 15, 26, 0.9) 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 652"><rect fill="%231a1a2e" width="375" height="652"/><path d="M50,100 Q100,80 150,100 T250,100 T350,100" stroke="%232a2a3e" stroke-width="2" fill="none"/><path d="M30,200 Q80,180 130,200 T230,200 T330,200" stroke="%232a2a3e" stroke-width="1.5" fill="none"/><path d="M50,300 Q100,280 150,300 T250,300 T350,300" stroke="%232a2a3e" stroke-width="1.5" fill="none"/><circle cx="180" cy="320" r="3" fill="%233a3a4e"/><circle cx="220" cy="280" r="2" fill="%233a3a4e"/><circle cx="140" cy="360" r="2.5" fill="%233a3a4e"/></svg>');
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 地图网格线 */
+    .map-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    /* 领土多边形 - 渐变填充 */
+    .territory-overlay {
+      position: absolute;
+      top: 180px;
+      left: 80px;
+      width: 200px;
+      height: 140px;
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.3) 0%, rgba(0, 217, 255, 0.1) 100%);
+      border: 2px solid #00d9ff;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        0 0 30px rgba(0, 217, 255, 0.4),
+        inset 0 0 30px rgba(0, 217, 255, 0.1);
+      animation: territoryGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes territoryGlow {
+      0%, 100% { box-shadow: 0 0 30px rgba(0, 217, 255, 0.4), inset 0 0 30px rgba(0, 217, 255, 0.1); }
+      50% { box-shadow: 0 0 50px rgba(0, 217, 255, 0.6), inset 0 0 50px rgba(0, 217, 255, 0.2); }
+    }
+
+    .territory-icon {
+      font-size: 32px;
+      color: #00d9ff;
+      margin-bottom: 8px;
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+    }
+
+    .territory-label {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .territory-status {
+      color: #00d9ff;
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* 定位按钮 - 渐变 + 阴影 */
+    .location-button {
+      position: absolute;
+      bottom: 140px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #1a1a2e;
+      cursor: pointer;
+      box-shadow: 
+        0 6px 20px rgba(0, 217, 255, 0.5),
+        0 0 0 4px rgba(0, 217, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .location-button:hover {
+      transform: scale(1.1);
+      box-shadow: 
+        0 8px 30px rgba(0, 217, 255, 0.7),
+        0 0 0 6px rgba(0, 217, 255, 0.3);
+    }
+
+    .location-button:active {
+      transform: scale(0.95);
+    }
+
+    /* 缩放控制 - 玻璃态 */
+    .zoom-controls {
+      position: absolute;
+      bottom: 210px;
+      right: 16px;
+      width: 48px;
+      height: 100px;
+      background: rgba(15, 15, 26, 0.9);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding: 16px 0;
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .zoom-btn {
+      color: #ffffff;
+      font-size: 22px;
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .zoom-btn:hover {
+      background: rgba(0, 217, 255, 0.2);
+      color: #00d9ff;
+    }
+
+    /* 骑行贡献浮层 - 玻璃态 + 渐变 */
+    .contribution-float {
+      position: absolute;
+      top: 80px;
+      left: 16px;
+      right: 16px;
+      height: 90px;
+      background: linear-gradient(135deg, rgba(15, 15, 26, 0.95) 0%, rgba(26, 26, 46, 0.9) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 217, 255, 0.4);
+      padding: 18px 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 
+        0 12px 40px rgba(0, 217, 255, 0.25),
+        inset 0 0 20px rgba(0, 217, 255, 0.05);
+      animation: floatUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .float-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .float-icon {
+      font-size: 18px;
+      animation: bike 1s ease-in-out infinite;
+    }
+
+    @keyframes bike {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(3px); }
+    }
+
+    .float-title {
+      color: #00d9ff;
+      font-size: 14px;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    }
+
+    .float-content {
+      color: #ffffff;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .float-highlight {
+      color: #00ff00;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    /* 底部 Tab 导航 - 玻璃态 + 渐变 */
+    .tab-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(180deg, rgba(15, 15, 26, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
+      display: flex;
+      border-top: 1px solid rgba(0, 217, 255, 0.2);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .tab-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .tab-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00d9ff, transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tab-item.active::before {
+      opacity: 1;
+    }
+
+    .tab-item.active {
+      background: linear-gradient(180deg, rgba(0, 217, 255, 0.1) 0%, transparent 100%);
+    }
+
+    .tab-icon {
+      font-size: 24px;
+      margin-bottom: 6px;
+      transition: all 0.3s;
+    }
+
+    .tab-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .tab-item.active .tab-icon,
+    .tab-item.active .tab-label {
+      color: #00d9ff;
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .tab-item:not(.active) .tab-icon,
+    .tab-item:not(.active) .tab-label {
+      color: #666666;
+    }
+
+    /* 设备底部 Home Indicator */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+    }
+
+    /* 预览信息 */
+    .preview-info {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 12px 24px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preview-info strong {
+      color: #00d9ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <!-- 设备刘海 -->
+    <div class="device-notch"></div>
+
+    <!-- 周循环状态条 -->
+    <div class="status-bar">
+      <div class="phase-indicator">
+        <i class="ri-alarm-warning-fill"></i>
+        <span>对战期 - 还剩 3 天 12:00</span>
+      </div>
+      <div class="timer">
+        <i class="ri-time-line"></i>
+        <span>72:00:00</span>
+      </div>
+    </div>
+
+    <!-- 地图展示区 -->
+    <div class="map-container">
+      <!-- 地图网格 -->
+      <div class="map-grid"></div>
+
+      <!-- 领土覆盖层 -->
+      <div class="territory-overlay">
+        <i class="ri-map-pin-2-fill territory-icon"></i>
+        <div class="territory-label">北京市朝阳区</div>
+        <div class="territory-status">⚡ 闪电车队 · 占领中</div>
+      </div>
+
+      <!-- 定位按钮 -->
+      <div class="location-button">
+        <i class="ri-navigation-fill"></i>
+      </div>
+
+      <!-- 缩放控制 -->
+      <div class="zoom-controls">
+        <div class="zoom-btn" title="放大">
+          <i class="ri-add-line"></i>
+        </div>
+        <div class="zoom-btn" title="缩小">
+          <i class="ri-subtract-line"></i>
+        </div>
+      </div>
+
+      <!-- 骑行贡献浮层 -->
+      <div class="contribution-float">
+        <div class="float-header">
+          <i class="ri-bike-fill float-icon"></i>
+          <div class="float-title">你的本次骑行贡献</div>
+        </div>
+        <div class="float-content">
+          23km 推动了攻城进度 <span class="float-highlight">52% → 58%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部 Tab 导航 -->
+    <div class="tab-bar">
+      <div class="tab-item active">
+        <i class="ri-map-2-fill tab-icon"></i>
+        <div class="tab-label">地图</div>
+      </div>
+      <div class="tab-item">
+        <i class="ri-team-fill tab-icon"></i>
+        <div class="tab-label">战队</div>
+      </div>
+      <div class="tab-item">
+        <i class="ri-bike-fill tab-icon"></i>
+        <div class="tab-label">骑行</div>
+      </div>
+      <div class="tab-item">
+        <i class="ri-sword-fill tab-icon"></i>
+        <div class="tab-label">战斗</div>
+      </div>
+      <div class="tab-item">
+        <i class="ri-bar-chart-fill tab-icon"></i>
+        <div class="tab-label">战报</div>
+      </div>
+    </div>
+
+    <!-- Home Indicator -->
+    <div class="home-indicator"></div>
+  </div>
+
+  <!-- 预览信息 -->
+  <div class="preview-info">
+    <strong>MapView</strong> - 高保真原型预览<br>
+    文件位置：docs/designs/map-view-pro.html
+  </div>
+
+  <script>
+    // Tab 切换交互
+    document.querySelectorAll('.tab-item').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        const tabName = this.querySelector('.tab-label').textContent;
+        console.log('切换到:', tabName);
+        
+        // 添加点击反馈动画
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+      });
+    });
+
+    // 定位按钮交互
+    document.querySelector('.location-button').addEventListener('click', function() {
+      this.style.animation = 'locationPulse 0.5s ease-in-out';
+      setTimeout(() => {
+        this.style.animation = '';
+      }, 500);
+      alert('📍 定位功能：将地图中心移动到用户当前位置');
+    });
+
+    // 缩放按钮交互
+    document.querySelectorAll('.zoom-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const action = this.querySelector('i').classList.contains('ri-add-line') ? '放大' : '缩小';
+        console.log('地图操作:', action);
+        
+        // 添加点击反馈
+        this.style.background = 'rgba(0, 217, 255, 0.3)';
+        setTimeout(() => {
+          this.style.background = '';
+        }, 200);
+      });
+    });
+
+    // 领土点击交互
+    document.querySelector('.territory-overlay').addEventListener('click', function() {
+      alert('🏰 北京市朝阳区\n\n归属：⚡ 闪电车队\n占领时间：2026-03-05\n贡献进度：58%');
+    });
+
+    // 添加 CSS 动画
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes locationPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); box-shadow: 0 0 40px rgba(0, 217, 255, 0.8); }
+        100% { transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

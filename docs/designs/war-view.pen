@@ -1,0 +1,588 @@
+{
+  "id": "war-view-root",
+  "type": "frame",
+  "name": "WarView - 战斗视图",
+  "x": 0,
+  "y": 0,
+  "width": 375,
+  "height": 812,
+  "fill": "#1a1a2e",
+  "children": [
+    {
+      "id": "status-bar",
+      "type": "frame",
+      "name": "周循环状态条",
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 60,
+      "fill": "#0f0f1a",
+      "children": [
+        {
+          "id": "phase-indicator",
+          "type": "text",
+          "name": "阶段指示器",
+          "x": 16,
+          "y": 20,
+          "width": 200,
+          "height": 20,
+          "textColor": "#ff6b6b",
+          "fontSize": 14,
+          "content": "⚔️ 战斗进行中"
+        },
+        {
+          "id": "timer",
+          "type": "text",
+          "name": "战斗倒计时",
+          "x": 220,
+          "y": 20,
+          "width": 139,
+          "height": 20,
+          "textColor": "#ff6b6b",
+          "fontSize": 14,
+          "content": "⏰ 还剩 18:32:15"
+        }
+      ]
+    },
+    {
+      "id": "war-header",
+      "type": "frame",
+      "name": "战斗信息头部",
+      "x": 0,
+      "y": 60,
+      "width": 375,
+      "height": 140,
+      "fill": "#0f0f1a",
+      "children": [
+        {
+          "id": "war-title",
+          "type": "text",
+          "name": "战斗标题",
+          "x": 16,
+          "y": 16,
+          "width": 343,
+          "height": 24,
+          "textColor": "#ffffff",
+          "fontSize": 20,
+          "content": "⚔️ 闪电车队 vs 雄鹰战队"
+        },
+        {
+          "id": "war-territory",
+          "type": "text",
+          "name": "争夺领土",
+          "x": 16,
+          "y": 48,
+          "width": 343,
+          "height": 18,
+          "textColor": "#666666",
+          "fontSize": 14,
+          "content": "🏰 争夺目标：上海市浦东新区"
+        },
+        {
+          "id": "war-progress",
+          "type": "frame",
+          "name": "战斗进度条",
+          "x": 16,
+          "y": 76,
+          "width": 343,
+          "height": 48,
+          "children": [
+            {
+              "id": "progress-bar-bg",
+              "type": "frame",
+              "name": "进度条背景",
+              "x": 0,
+              "y": 14,
+              "width": 343,
+              "height": 20,
+              "fill": "#333333",
+              "cornerRadius": [10],
+              "children": [
+                {
+                  "id": "progress-bar-fill",
+                  "type": "frame",
+                  "name": "进度条填充",
+                  "x": 0,
+                  "y": 0,
+                  "width": 206,
+                  "height": 20,
+                  "fill": "#00d9ff",
+                  "cornerRadius": [10]
+                }
+              ]
+            },
+            {
+              "id": "progress-labels",
+              "type": "text",
+              "name": "进度标签",
+              "x": 0,
+              "y": 0,
+              "width": 343,
+              "height": 12,
+              "textColor": "#ffffff",
+              "fontSize": 12,
+              "content": "我方 60%  vs  敌方 40%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "action-section",
+      "type": "frame",
+      "name": "操作区",
+      "x": 16,
+      "y": 216,
+      "width": 343,
+      "height": 120,
+      "fill": "#0f0f1a",
+      "cornerRadius": [12],
+      "children": [
+        {
+          "id": "action-title",
+          "type": "text",
+          "name": "标题",
+          "x": 16,
+          "y": 16,
+          "width": 311,
+          "height": 20,
+          "textColor": "#ffffff",
+          "fontSize": 16,
+          "content": "💪 我的行动"
+        },
+        {
+          "id": "stamina-info",
+          "type": "text",
+          "name": "体力值",
+          "x": 16,
+          "y": 44,
+          "width": 150,
+          "height": 16,
+          "textColor": "#00d9ff",
+          "fontSize": 14,
+          "content": "体力值：8/10"
+        },
+        {
+          "id": "btn-attack",
+          "type": "frame",
+          "name": "攻击按钮",
+          "x": 16,
+          "y": 68,
+          "width": 150,
+          "height": 44,
+          "fill": "#ff6b6b",
+          "cornerRadius": [22],
+          "children": [
+            {
+              "id": "btn-attack-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 0,
+              "y": 0,
+              "width": 150,
+              "height": 44,
+              "textColor": "#ffffff",
+              "fontSize": 16,
+              "content": "⚔️ 攻击 (-3 体力)"
+            }
+          ]
+        },
+        {
+          "id": "btn-defend",
+          "type": "frame",
+          "name": "防守按钮",
+          "x": 177,
+          "y": 68,
+          "width": 150,
+          "height": 44,
+          "fill": "#00d9ff",
+          "cornerRadius": [22],
+          "children": [
+            {
+              "id": "btn-defend-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 0,
+              "y": 0,
+              "width": 150,
+              "height": 44,
+              "textColor": "#1a1a2e",
+              "fontSize": 16,
+              "content": "🛡️ 防守 (-1 体力)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "actions-list",
+      "type": "frame",
+      "name": "行动记录区",
+      "x": 0,
+      "y": 352,
+      "width": 375,
+      "height": 360,
+      "children": [
+        {
+          "id": "actions-title",
+          "type": "text",
+          "name": "标题",
+          "x": 16,
+          "y": 16,
+          "width": 343,
+          "height": 20,
+          "textColor": "#ffffff",
+          "fontSize": 16,
+          "content": "📜 战斗记录"
+        },
+        {
+          "id": "action-1",
+          "type": "frame",
+          "name": "行动记录 1",
+          "x": 16,
+          "y": 44,
+          "width": 343,
+          "height": 60,
+          "fill": "#0f0f1a",
+          "cornerRadius": [8],
+          "children": [
+            {
+              "id": "action-1-user",
+              "type": "text",
+              "name": "用户",
+              "x": 16,
+              "y": 14,
+              "width": 200,
+              "height": 16,
+              "textColor": "#ffffff",
+              "fontSize": 14,
+              "content": "你 发起了攻击"
+            },
+            {
+              "id": "action-1-result",
+              "type": "text",
+              "name": "结果",
+              "x": 16,
+              "y": 34,
+              "width": 200,
+              "height": 14,
+              "textColor": "#00ff00",
+              "fontSize": 12,
+              "content": "+120 贡献 | 敌方进度 -5%"
+            },
+            {
+              "id": "action-1-time",
+              "type": "text",
+              "name": "时间",
+              "x": 280,
+              "y": 22,
+              "width": 50,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "2 分钟前"
+            }
+          ]
+        },
+        {
+          "id": "action-2",
+          "type": "frame",
+          "name": "行动记录 2",
+          "x": 16,
+          "y": 112,
+          "width": 343,
+          "height": 60,
+          "fill": "#0f0f1a",
+          "cornerRadius": [8],
+          "children": [
+            {
+              "id": "action-2-user",
+              "type": "text",
+              "name": "用户",
+              "x": 16,
+              "y": 14,
+              "width": 200,
+              "height": 16,
+              "textColor": "#ffffff",
+              "fontSize": 14,
+              "content": "老周 发起了防守"
+            },
+            {
+              "id": "action-2-result",
+              "type": "text",
+              "name": "结果",
+              "x": 16,
+              "y": 34,
+              "width": 200,
+              "height": 14,
+              "textColor": "#00d9ff",
+              "fontSize": 12,
+              "content": "+80 贡献 | 我方进度 +3%"
+            },
+            {
+              "id": "action-2-time",
+              "type": "text",
+              "name": "时间",
+              "x": 280,
+              "y": 22,
+              "width": 50,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "5 分钟前"
+            }
+          ]
+        },
+        {
+          "id": "action-3",
+          "type": "frame",
+          "name": "行动记录 3",
+          "x": 16,
+          "y": 180,
+          "width": 343,
+          "height": 60,
+          "fill": "#0f0f1a",
+          "cornerRadius": [8],
+          "children": [
+            {
+              "id": "action-3-user",
+              "type": "text",
+              "name": "用户",
+              "x": 16,
+              "y": 14,
+              "width": 200,
+              "height": 16,
+              "textColor": "#ffffff",
+              "fontSize": 14,
+              "content": "小王 发起了攻击"
+            },
+            {
+              "id": "action-3-result",
+              "type": "text",
+              "name": "结果",
+              "x": 16,
+              "y": 34,
+              "width": 200,
+              "height": 14,
+              "textColor": "#00ff00",
+              "fontSize": 12,
+              "content": "+95 贡献 | 敌方进度 -4%"
+            },
+            {
+              "id": "action-3-time",
+              "type": "text",
+              "name": "时间",
+              "x": 280,
+              "y": 22,
+              "width": 50,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "12 分钟前"
+            }
+          ]
+        },
+        {
+          "id": "actions-placeholder",
+          "type": "text",
+          "name": "列表占位",
+          "x": 16,
+          "y": 260,
+          "width": 343,
+          "height": 40,
+          "textColor": "#666666",
+          "fontSize": 14,
+          "content": "（更多战斗记录...）"
+        }
+      ]
+    },
+    {
+      "id": "tab-bar",
+      "type": "frame",
+      "name": "底部 Tab 导航",
+      "x": 0,
+      "y": 712,
+      "width": 375,
+      "height": 100,
+      "fill": "#0f0f1a",
+      "children": [
+        {
+          "id": "tab-map",
+          "type": "frame",
+          "name": "地图 Tab",
+          "x": 0,
+          "y": 0,
+          "width": 75,
+          "height": 100,
+          "children": [
+            {
+              "id": "tab-map-icon",
+              "type": "text",
+              "name": "地图图标",
+              "x": 28,
+              "y": 20,
+              "width": 19,
+              "height": 24,
+              "textColor": "#666666",
+              "fontSize": 20,
+              "content": "🗺️"
+            },
+            {
+              "id": "tab-map-label",
+              "type": "text",
+              "name": "地图标签",
+              "x": 22,
+              "y": 52,
+              "width": 31,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "地图"
+            }
+          ]
+        },
+        {
+          "id": "tab-team",
+          "type": "frame",
+          "name": "战队 Tab",
+          "x": 75,
+          "y": 0,
+          "width": 75,
+          "height": 100,
+          "children": [
+            {
+              "id": "tab-team-icon",
+              "type": "text",
+              "name": "战队图标",
+              "x": 28,
+              "y": 20,
+              "width": 19,
+              "height": 24,
+              "textColor": "#666666",
+              "fontSize": 20,
+              "content": "👥"
+            },
+            {
+              "id": "tab-team-label",
+              "type": "text",
+              "name": "战队标签",
+              "x": 22,
+              "y": 52,
+              "width": 31,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "战队"
+            }
+          ]
+        },
+        {
+          "id": "tab-ride",
+          "type": "frame",
+          "name": "骑行 Tab",
+          "x": 150,
+          "y": 0,
+          "width": 75,
+          "height": 100,
+          "children": [
+            {
+              "id": "tab-ride-icon",
+              "type": "text",
+              "name": "骑行图标",
+              "x": 28,
+              "y": 20,
+              "width": 19,
+              "height": 24,
+              "textColor": "#666666",
+              "fontSize": 20,
+              "content": "🚴"
+            },
+            {
+              "id": "tab-ride-label",
+              "type": "text",
+              "name": "骑行标签",
+              "x": 22,
+              "y": 52,
+              "width": 31,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "骑行"
+            }
+          ]
+        },
+        {
+          "id": "tab-war",
+          "type": "frame",
+          "name": "战斗 Tab（激活）",
+          "x": 225,
+          "y": 0,
+          "width": 75,
+          "height": 100,
+          "fill": "#1a1a2e",
+          "children": [
+            {
+              "id": "tab-war-icon",
+              "type": "text",
+              "name": "战斗图标",
+              "x": 28,
+              "y": 20,
+              "width": 19,
+              "height": 24,
+              "textColor": "#ff6b6b",
+              "fontSize": 20,
+              "content": "⚔️"
+            },
+            {
+              "id": "tab-war-label",
+              "type": "text",
+              "name": "战斗标签",
+              "x": 22,
+              "y": 52,
+              "width": 31,
+              "height": 14,
+              "textColor": "#ff6b6b",
+              "fontSize": 12,
+              "content": "战斗"
+            }
+          ]
+        },
+        {
+          "id": "tab-report",
+          "type": "frame",
+          "name": "战报 Tab",
+          "x": 300,
+          "y": 0,
+          "width": 75,
+          "height": 100,
+          "children": [
+            {
+              "id": "tab-report-icon",
+              "type": "text",
+              "name": "战报图标",
+              "x": 28,
+              "y": 20,
+              "width": 19,
+              "height": 24,
+              "textColor": "#666666",
+              "fontSize": 20,
+              "content": "📊"
+            },
+            {
+              "id": "tab-report-label",
+              "type": "text",
+              "name": "战报标签",
+              "x": 22,
+              "y": 52,
+              "width": 31,
+              "height": 14,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "战报"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

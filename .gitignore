@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.sw?
+
+# Environment
+*.local
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+*.tsbuildinfo
+.eslintcache
+
+# Generated
+coverage/
+generated-ui-images/
+
+# Claude Code internal
+.claude/
+
+# Sisyphus
+.sisyphus/
+.omo-stop-continuation
+
+# Output folder
+{output_folder}/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Large binary presentations (超过 GitHub 50MB 建议上限)
+docs/business-references/presentations/*.pptx

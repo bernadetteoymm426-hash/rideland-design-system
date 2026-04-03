@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>即梦 4.1 - 中国风游戏 UI 设计稿</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0a0e1a;
+      color: #f0e6d2;
+      padding: 40px;
+      line-height: 1.5;
+    }
+
+    .design-title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #f0e6d2;
+      margin-bottom: 10px;
+    }
+
+    .style-note {
+      font-size: 14px;
+      color: #8b7355;
+      margin-bottom: 40px;
+    }
+
+    .screens-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .screen {
+      width: 375px;
+      height: 812px;
+      background: #0f1525;
+      border: 2px solid #2a3550;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    /* ========== Screen 1 - 好友切磋 ========== */
+    .screen-1 {
+      background: linear-gradient(180deg, #0f1525 0%, #0f1525 40%, #1a2340 40%, #1a2340 100%);
+    }
+
+    .screen-1 .top-bar {
+      height: 60px;
+      background: #0a0e1a;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 16px;
+    }
+
+    .screen-1 .back-btn {
+      font-size: 20px;
+      color: #c9a962;
+    }
+
+    .screen-1 .title {
+      font-size: 16px;
+      color: #f0e6d2;
+      flex: 1;
+    }
+
+    .screen-1 .currency {
+      font-size: 14px;
+      color: #c9a962;
+    }
+
+    .screen-1 .opponent-area {
+      margin: 20px;
+      padding: 12px 16px;
+      background: #151d33;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+    }
+
+    .screen-1 .opponent-label {
+      font-size: 12px;
+      color: #8b9bb4;
+      margin-bottom: 8px;
+    }
+
+    .screen-1 .avatars {
+      display: flex;
+      gap: 4px;
+    }
+
+    .screen-1 .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #2a3550;
+      border: 2px solid #c9a962;
+    }
+
+    .screen-1 .start-btn {
+      position: absolute;
+      top: 350px;
+      left: 87px;
+      width: 200px;
+      height: 50px;
+      background: #c9a962;
+      border: 2px solid #f0e6d2;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0a0e1a;
+      cursor: pointer;
+    }
+
+    .screen-1 .return-btn {
+      position: absolute;
+      top: 420px;
+      left: 87px;
+      width: 200px;
+      height: 44px;
+      background: #1a2340;
+      border: 1px solid #4a5d7a;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #4a5d7a;
+    }
+
+    .screen-1 .stats {
+      position: absolute;
+      top: 200px;
+      right: 15px;
+      width: 110px;
+      background: #0a0e1a;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .screen-1 .stats-title {
+      font-size: 12px;
+      color: #c9a962;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .screen-1 .stat-item {
+      font-size: 11px;
+      color: #8b9bb4;
+      margin-bottom: 8px;
+    }
+
+    /* ========== Screen 2 - 竞技场 ========== */
+    .screen-2 {
+      background: #0f1525;
+    }
+
+    .screen-2 .top-bar {
+      height: 80px;
+      background: linear-gradient(180deg, #1a1025 0%, #151d33 100%);
+      padding: 20px;
+    }
+
+    .screen-2 .title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #f0e6d2;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .screen-2 .tabs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .screen-2 .tab {
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+
+    .screen-2 .tab.active {
+      color: #c9a962;
+      background: rgba(201, 169, 98, 0.1);
+    }
+
+    .screen-2 .tab.inactive {
+      color: #8b9bb4;
+    }
+
+    .screen-2 .rank-list {
+      margin: 20px;
+      background: #151d33;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .screen-2 .rank-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .screen-2 .rank-item.gold {
+      background: #2a2040;
+      border: 2px solid #ffd700;
+    }
+
+    .screen-2 .rank-item.silver {
+      background: #252840;
+      border: 1px solid #c0c0c0;
+    }
+
+    .screen-2 .rank-item.bronze {
+      background: #252840;
+      border: 1px solid #cd7f32;
+    }
+
+    .screen-2 .rank-num {
+      font-size: 20px;
+      font-weight: bold;
+      width: 30px;
+      margin-right: 15px;
+    }
+
+    .screen-2 .rank-num.gold { color: #ffd700; }
+    .screen-2 .rank-num.silver { color: #c0c0c0; }
+    .screen-2 .rank-num.bronze { color: #cd7f32; }
+
+    .screen-2 .rank-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #3a4560;
+      margin-right: 15px;
+    }
+
+    .screen-2 .rank-info {
+      flex: 1;
+    }
+
+    .screen-2 .rank-name {
+      font-size: 14px;
+      color: #f0e6d2;
+    }
+
+    .screen-2 .rank-score {
+      font-size: 14px;
+      color: #c9a962;
+    }
+
+    .screen-2 .action-btns {
+      position: absolute;
+      top: 650px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 60px;
+    }
+
+    .screen-2 .challenge-btn {
+      flex: 1;
+      height: 44px;
+      background: #c9a962;
+      border: 2px solid #f0e6d2;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #0a0e1a;
+    }
+
+    .screen-2 .defend-btn {
+      flex: 1;
+      height: 44px;
+      background: #1a2340;
+      border: 1px solid #4a5d7a;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #4a5d7a;
+    }
+
+    /* ========== Screen 3 - 道具图鉴 ========== */
+    .screen-3 {
+      background: #f5ebe0;
+    }
+
+    .screen-3 .side-border {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      background: #1a3a5c;
+      border-right: 2px solid #c9a962;
+    }
+
+    .screen-3 .side-border.left {
+      left: 0;
+      border-right: 2px solid #c9a962;
+    }
+
+    .screen-3 .side-border.right {
+      right: 0;
+      border-left: 2px solid #c9a962;
+    }
+
+    .screen-3 .search-bar {
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      right: 40px;
+      height: 50px;
+      background: #ffffff;
+      border: 1px solid #c9a962;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .screen-3 .search-text {
+      font-size: 14px;
+      color: #1a3a5c;
+    }
+
+    .screen-3 .close-btn {
+      font-size: 20px;
+      color: #1a3a5c;
+    }
+
+    .screen-3 .category-tag {
+      position: absolute;
+      top: 90px;
+      left: 45px;
+      padding: 7px 18px;
+      background: #1a3a5c;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #f0e6d2;
+    }
+
+    .screen-3 .item-card {
+      position: absolute;
+      top: 90px;
+      left: 120px;
+      width: 235px;
+      height: 180px;
+      background: #ffffff;
+      border: 1px solid #c9a962;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .screen-3 .item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #e8d5b7;
+      float: left;
+      margin-right: 15px;
+    }
+
+    .screen-3 .item-name {
+      font-size: 14px;
+      color: #1a3a5c;
+      margin-bottom: 4px;
+    }
+
+    .screen-3 .item-stars {
+      font-size: 14px;
+      color: #c9a962;
+      margin-bottom: 8px;
+    }
+
+    .screen-3 .item-desc {
+      font-size: 12px;
+      color: #666666;
+    }
+
+    .screen-3 .story-box {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+      height: 55px;
+      background: #f5ebe0;
+      border: 1px solid #d4c5a9;
+      border-radius: 4px;
+      padding: 8px;
+    }
+
+    .screen-3 .story-title {
+      font-size: 11px;
+      color: #1a3a5c;
+      margin-bottom: 4px;
+    }
+
+    .screen-3 .story-text {
+      font-size: 10px;
+      color: #666666;
+      line-height: 1.4;
+    }
+
+    .screen-3 .item-grid {
+      position: absolute;
+      top: 290px;
+      left: 60px;
+      right: 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 0 15px;
+    }
+
+    .screen-3 .grid-slot {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #e8d5b7;
+      border: 1px solid #c9a962;
+      margin: 0 auto;
+    }
+
+    .screen-3 .grid-slot.locked {
+      background: #d4c5a9;
+      border-color: #a0a0a0;
+    }
+
+    /* ========== Color Palette ========== */
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #f0e6d2;
+      margin: 60px 0 30px 0;
+      padding-top: 40px;
+      border-top: 2px solid #2a3550;
+    }
+
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .color-card {
+      width: 150px;
+      height: 100px;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .color-card.color-1 { background: #0f1525; color: #ffffff; }
+    .color-card.color-2 { background: #c9a962; color: #0a0e1a; }
+    .color-card.color-3 { background: #f0e6d2; color: #0a0e1a; }
+    .color-card.color-4 { background: #1a3a5c; color: #ffffff; }
+    .color-card.color-5 { background: #1a1025; color: #ffffff; }
+    .color-card.color-6 { background: #f5ebe0; color: #0a0e1a; }
+    .color-card.color-7 { background: #2a3550; color: #ffffff; }
+    .color-card.color-8 { background: #8b9bb4; color: #ffffff; }
+
+    /* ========== Components ========== */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+      padding: 20px;
+      background: #151d33;
+      border-radius: 12px;
+      border: 1px solid #2a3550;
+    }
+
+    .component-card {
+      background: #0a0e1a;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .component-label {
+      font-size: 12px;
+      color: #8b9bb4;
+      text-align: center;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      padding: 12px 32px;
+      background: #c9a962;
+      border: 2px solid #f0e6d2;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #0a0e1a;
+    }
+
+    .btn-secondary {
+      padding: 12px 32px;
+      background: #1a2340;
+      border: 1px solid #4a5d7a;
+      border-radius: 22px;
+      font-size: 16px;
+      color: #4a5d7a;
+    }
+
+    .btn-outline {
+      padding: 12px 32px;
+      background: transparent;
+      border: 2px solid #c9a962;
+      border-radius: 22px;
+      font-size: 16px;
+      color: #c9a962;
+    }
+
+    /* Cards */
+    .card-dark {
+      width: 100%;
+      background: #151d33;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .card-dark-title {
+      font-size: 14px;
+      color: #c9a962;
+      margin-bottom: 8px;
+    }
+
+    .card-dark-content {
+      font-size: 12px;
+      color: #8b9bb4;
+    }
+
+    .card-light {
+      width: 100%;
+      background: #f5ebe0;
+      border: 1px solid #c9a962;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .card-light-title {
+      font-size: 14px;
+      color: #1a3a5c;
+      margin-bottom: 8px;
+    }
+
+    .card-light-content {
+      font-size: 12px;
+      color: #666666;
+    }
+
+    /* Avatar */
+    .avatar-frame {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #3a4560;
+      border: 3px solid #c9a962;
+    }
+
+    /* Rank Badges */
+    .rank-badges {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rank-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0a0e1a;
+    }
+
+    .rank-badge.gold { background: #ffd700; border: 2px solid #f0e6d2; }
+    .rank-badge.silver { background: #c0c0c0; border: 2px solid #ffffff; }
+    .rank-badge.bronze { background: #cd7f32; border: 2px solid #f0e6d2; }
+
+    /* Input */
+    .input-field {
+      width: 100%;
+      padding: 12px 16px;
+      background: #0a0e1a;
+      border: 1px solid #4a5d7a;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #f0e6d2;
+    }
+
+    .input-field::placeholder {
+      color: #4a5d7a;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      height: 16px;
+      background: #1a2340;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 60%;
+      background: #c9a962;
+    }
+
+    /* Tabs */
+    .tabs-demo {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-demo {
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .tab-demo.active {
+      background: #1a3a5c;
+      border: 2px solid #c9a962;
+      color: #f0e6d2;
+    }
+
+    .tab-demo.inactive {
+      background: transparent;
+      border: 1px solid #4a5d7a;
+      color: #8b9bb4;
+    }
+
+    /* Decorations */
+    .decorations {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cloud-pattern {
+      width: 100px;
+      height: 50px;
+      background: #c9a962;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .cloud-pattern::before {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #c9a962;
+      border-radius: 50%;
+      top: -20px;
+      left: 20px;
+    }
+
+    .wave-pattern {
+      width: 100px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent 0%, #1a3a5c 50%, transparent 100%);
+      border-radius: 50%;
+    }
+
+    /* ========== Design Notes ========== */
+    .design-notes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      padding: 24px;
+      background: #151d33;
+      border-radius: 12px;
+      border: 1px solid #2a3550;
+    }
+
+    .note-card {
+      background: #0a0e1a;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .note-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #c9a962;
+      margin-bottom: 12px;
+    }
+
+    .note-content {
+      font-size: 13px;
+      color: #8b9bb4;
+      line-height: 1.8;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 60px;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid #2a3550;
+      color: #4a5d7a;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Title -->
+  <div class="design-title">即梦 4.1 - 中国风游戏 UI</div>
+  <div class="style-note">古风武侠风格 · 深蓝 + 金色主调 · 传统纹样装饰</div>
+
+  <!-- Screens -->
+  <div class="screens-container">
+    <!-- Screen 1 - 好友切磋 -->
+    <div class="screen screen-1">
+      <div class="top-bar">
+        <div class="back-btn">←</div>
+        <div class="title">好友切磋</div>
+        <div class="currency">💰 1669</div>
+      </div>
+
+      <div class="opponent-area">
+        <div class="opponent-label">对手</div>
+        <div class="avatars">
+          <div class="avatar"></div>
+          <div class="avatar"></div>
+          <div class="avatar"></div>
+          <div class="avatar"></div>
+        </div>
+      </div>
+
+      <div class="start-btn">开始切磋</div>
+      <div class="return-btn">返回</div>
+
+      <div class="stats">
+        <div class="stats-title">战绩</div>
+        <div class="stat-item">胜率 7.4%</div>
+        <div class="stat-item">伤害 1.9%</div>
+        <div class="stat-item">治疗 12%</div>
+      </div>
+    </div>
+
+    <!-- Screen 2 - 竞技场 -->
+    <div class="screen screen-2">
+      <div class="top-bar">
+        <div class="title">竞技场</div>
+        <div class="tabs">
+          <div class="tab active">排名</div>
+          <div class="tab inactive">榜入</div>
+          <div class="tab inactive">战绩胜场</div>
+        </div>
+      </div>
+
+      <div class="rank-list">
+        <div class="rank-item gold">
+          <div class="rank-num gold">1</div>
+          <div class="rank-avatar"></div>
+          <div class="rank-info">
+            <div class="rank-name">张三</div>
+          </div>
+          <div class="rank-score">2850</div>
+        </div>
+
+        <div class="rank-item silver">
+          <div class="rank-num silver">2</div>
+          <div class="rank-avatar"></div>
+          <div class="rank-info">
+            <div class="rank-name">李四</div>
+          </div>
+          <div class="rank-score">2720</div>
+        </div>
+
+        <div class="rank-item bronze">
+          <div class="rank-num bronze">3</div>
+          <div class="rank-avatar"></div>
+          <div class="rank-info">
+            <div class="rank-name">王五</div>
+          </div>
+          <div class="rank-score">2680</div>
+        </div>
+      </div>
+
+      <div class="action-btns">
+        <div class="challenge-btn">挑战</div>
+        <div class="defend-btn">防守阵容</div>
+      </div>
+    </div>
+
+    <!-- Screen 3 - 道具图鉴 -->
+    <div class="screen screen-3">
+      <div class="side-border left"></div>
+      <div class="side-border right"></div>
+
+      <div class="search-bar">
+        <div class="search-text">🔍 搜索图鉴</div>
+        <div class="close-btn">✕</div>
+      </div>
+
+      <div class="category-tag">分类</div>
+
+      <div class="item-card">
+        <div class="item-image"></div>
+        <div class="item-name">玄铁剑</div>
+        <div class="item-stars">★★★★★</div>
+        <div class="item-desc">用途：增加 10% 攻击</div>
+        <div class="story-box">
+          <div class="story-title">背景故事：</div>
+          <div class="story-text">此剑为铸剑大师欧冶子所制，历经千年仍锋利如初</div>
+        </div>
+      </div>
+
+      <div class="item-grid">
+        <div class="grid-slot"></div>
+        <div class="grid-slot"></div>
+        <div class="grid-slot"></div>
+        <div class="grid-slot locked"></div>
+        <div class="grid-slot locked"></div>
+        <div class="grid-slot locked"></div>
+        <div class="grid-slot locked"></div>
+        <div class="grid-slot locked"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color Palette -->
+  <h2 class="section-title">🎨 色彩系统</h2>
+  <div class="color-palette">
+    <div class="color-card color-1">深夜蓝<br>#0F1525</div>
+    <div class="color-card color-2">古铜金<br>#C9A962</div>
+    <div class="color-card color-3">米白<br>#F0E6D2</div>
+    <div class="color-card color-4">青蓝<br>#1A3A5C</div>
+    <div class="color-card color-5">暗紫<br>#1A1025</div>
+    <div class="color-card color-6">卷轴<br>#F5EBE0</div>
+    <div class="color-card color-7">边框<br>#2A3550</div>
+    <div class="color-card color-8">次要文字<br>#8B9BB4</div>
+  </div>
+
+  <!-- Components -->
+  <h2 class="section-title">🧩 核心组件</h2>
+  <div class="components-grid">
+    <div class="component-card">
+      <button class="btn-primary">主按钮</button>
+      <div class="component-label">主按钮 - 金色填充</div>
+    </div>
+
+    <div class="component-card">
+      <button class="btn-secondary">次级按钮</button>
+      <div class="component-label">次级按钮 - 深色填充</div>
+    </div>
+
+    <div class="component-card">
+      <button class="btn-outline">描边按钮</button>
+      <div class="component-label">描边按钮 - 金色边框</div>
+    </div>
+
+    <div class="component-card">
+      <div class="card-dark">
+        <div class="card-dark-title">深色卡片</div>
+        <div class="card-dark-content">用于暗色背景的内容区域</div>
+      </div>
+      <div class="component-label">深色卡片</div>
+    </div>
+
+    <div class="component-card">
+      <div class="card-light">
+        <div class="card-light-title">卷轴卡片</div>
+        <div class="card-light-content">用于仿古卷轴风格的内容区</div>
+      </div>
+      <div class="component-label">浅色卷轴卡片</div>
+    </div>
+
+    <div class="component-card">
+      <div class="avatar-frame"></div>
+      <div class="component-label">头像框 - 圆形金边</div>
+    </div>
+
+    <div class="component-card">
+      <div class="rank-badges">
+        <div class="rank-badge gold">1</div>
+        <div class="rank-badge silver">2</div>
+        <div class="rank-badge bronze">3</div>
+      </div>
+      <div class="component-label">排名徽章</div>
+    </div>
+
+    <div class="component-card">
+      <input class="input-field" placeholder="请输入搜索内容...">
+      <div class="component-label">输入框</div>
+    </div>
+
+    <div class="component-card">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="component-label">进度条 - 60%</div>
+    </div>
+
+    <div class="component-card">
+      <div class="tabs-demo">
+        <div class="tab-demo active">激活</div>
+        <div class="tab-demo inactive">普通</div>
+      </div>
+      <div class="component-label">Tab 切换</div>
+    </div>
+
+    <div class="component-card">
+      <div class="decorations">
+        <div class="cloud-pattern"></div>
+        <div class="wave-pattern"></div>
+      </div>
+      <div class="component-label">装饰纹样</div>
+    </div>
+  </div>
+
+  <!-- Design Notes -->
+  <h2 class="section-title">📐 设计规范</h2>
+  <div class="design-notes">
+    <div class="note-card">
+      <div class="note-title">色彩使用原则</div>
+      <div class="note-content">
+        • 主背景：深夜蓝 #0F1525（暗色页面）<br>
+        • 次级背景：卷轴米白 #F5EBE0（浅色卡片）<br>
+        • 强调色：古铜金 #C9A962（按钮/高亮/边框）<br>
+        • 文字：米白 #F0E6D2（主）/ 灰蓝 #8B9BB4（次）
+      </div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-title">圆角规范</div>
+      <div class="note-content">
+        • 卡片：8-12px<br>
+        • 按钮：22-30px（全圆角）<br>
+        • 头像框：50%（圆形）<br>
+        • 装饰元素：4-6px
+      </div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-title">边框使用</div>
+      <div class="note-content">
+        • 主边框：#2A3550（暗色卡片）<br>
+        • 强调边框：#C9A962（金色，用于重要元素）<br>
+        • 次级边框：#4A5D7A（用于输入框/次级按钮）<br>
+        • 描边宽度：1-2px（常规）/ 3px（强调）
+      </div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-title">字体层级</div>
+      <div class="note-content">
+        • 页面标题：20-24px Bold<br>
+        • 卡片标题：16-18px Normal<br>
+        • 正文：14px Normal<br>
+        • 次要文字：12-13px Normal<br>
+        • 标注：11px Normal
+      </div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-title">装饰元素</div>
+      <div class="note-content">
+        • 云纹：#C9A962 金色（顶部/底部装饰）<br>
+        • 波浪：#1A3A5C 青蓝（分隔线/底部）<br>
+        • 传统纹样：用于卡片边角/边框装饰
+      </div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-title">间距规范</div>
+      <div class="note-content">
+        • 页面边距：16-20px<br>
+        • 卡片内边距：16px<br>
+        • 元素间距：12-16px<br>
+        • 模块间距：24-32px
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    设计稿说明：基于即梦 4.1 中国风游戏 UI 风格 · 可用于 Vue 3 项目实现 · 下一步可生成代码
+  </div>
+</body>
+</html>

@@ -1,0 +1,1649 @@
+{
+  "id": "chinese-game-ui-root",
+  "type": "frame",
+  "name": "中国风游戏 UI 设计系统",
+  "x": 0,
+  "y": 0,
+  "width": 1200,
+  "height": 3600,
+  "fill": "#0a0e1a",
+  "children": [
+    {
+      "id": "design-title",
+      "type": "text",
+      "name": "设计标题",
+      "x": 40,
+      "y": 30,
+      "width": 400,
+      "height": 48,
+      "textColor": "#f0e6d2",
+      "fontSize": 36,
+      "fontWeight": "bold",
+      "content": "即梦 4.1 - 中国风游戏 UI"
+    },
+    {
+      "id": "style-note",
+      "type": "text",
+      "name": "风格说明",
+      "x": 40,
+      "y": 85,
+      "width": 600,
+      "height": 24,
+      "textColor": "#8b7355",
+      "fontSize": 14,
+      "content": "古风武侠风格 · 深蓝+金色主调 · 传统纹样装饰"
+    },
+    
+    {
+      "id": "screen-1-container",
+      "type": "frame",
+      "name": "界面 1 - 好友切磋",
+      "x": 40,
+      "y": 140,
+      "width": 375,
+      "height": 812,
+      "fill": "#0f1525",
+      "stroke": "#2a3550",
+      "strokeWidth": 2,
+      "children": [
+        {
+          "id": "screen-1-bg",
+          "type": "rectangle",
+          "name": "背景 - 古风圆形台",
+          "x": 0,
+          "y": 200,
+          "width": 375,
+          "height": 400,
+          "fill": "#1a2340"
+        },
+        {
+          "id": "screen-1-top-bar",
+          "type": "frame",
+          "name": "顶部状态栏",
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 60,
+          "fill": "#0a0e1a",
+          "children": [
+            {
+              "id": "screen-1-back",
+              "type": "text",
+              "name": "返回按钮",
+              "x": 16,
+              "y": 20,
+              "width": 24,
+              "height": 24,
+              "textColor": "#c9a962",
+              "fontSize": 20,
+              "content": "←"
+            },
+            {
+              "id": "screen-1-title",
+              "type": "text",
+              "name": "页面标题",
+              "x": 50,
+              "y": 22,
+              "width": 100,
+              "height": 20,
+              "textColor": "#f0e6d2",
+              "fontSize": 16,
+              "content": "好友切磋"
+            },
+            {
+              "id": "screen-1-currency",
+              "type": "text",
+              "name": "货币显示",
+              "x": 280,
+              "y": 22,
+              "width": 80,
+              "height": 20,
+              "textColor": "#c9a962",
+              "fontSize": 14,
+              "content": "💰 1669"
+            }
+          ]
+        },
+        {
+          "id": "screen-1-opponent-area",
+          "type": "frame",
+          "name": "对手选择区",
+          "x": 20,
+          "y": 80,
+          "width": 335,
+          "height": 80,
+          "fill": "#151d33",
+          "stroke": "#2a3550",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-1-opponent-label",
+              "type": "text",
+              "name": "对手标签",
+              "x": 16,
+              "y": 12,
+              "width": 60,
+              "height": 18,
+              "textColor": "#8b9bb4",
+              "fontSize": 12,
+              "content": "对手"
+            },
+            {
+              "id": "screen-1-avatars",
+              "type": "frame",
+              "name": "头像列表",
+              "x": 16,
+              "y": 35,
+              "width": 200,
+              "height": 32,
+              "children": [
+                {
+                  "id": "avatar-1",
+                  "type": "ellipse",
+                  "name": "头像 1",
+                  "x": 0,
+                  "y": 0,
+                  "width": 32,
+                  "height": 32,
+                  "fill": "#2a3550",
+                  "stroke": "#c9a962",
+                  "strokeWidth": 2
+                },
+                {
+                  "id": "avatar-2",
+                  "type": "ellipse",
+                  "name": "头像 2",
+                  "x": 36,
+                  "y": 0,
+                  "width": 32,
+                  "height": 32,
+                  "fill": "#2a3550",
+                  "stroke": "#c9a962",
+                  "strokeWidth": 2
+                },
+                {
+                  "id": "avatar-3",
+                  "type": "ellipse",
+                  "name": "头像 3",
+                  "x": 72,
+                  "y": 0,
+                  "width": 32,
+                  "height": 32,
+                  "fill": "#2a3550",
+                  "stroke": "#c9a962",
+                  "strokeWidth": 2
+                },
+                {
+                  "id": "avatar-4",
+                  "type": "ellipse",
+                  "name": "头像 4",
+                  "x": 108,
+                  "y": 0,
+                  "width": 32,
+                  "height": 32,
+                  "fill": "#2a3550",
+                  "stroke": "#c9a962",
+                  "strokeWidth": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "screen-1-start-btn",
+          "type": "frame",
+          "name": "开始切磋按钮",
+          "x": 87,
+          "y": 350,
+          "width": 200,
+          "height": 50,
+          "fill": "#c9a962",
+          "stroke": "#f0e6d2",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "screen-1-start-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 65,
+              "y": 15,
+              "width": 70,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 18,
+              "fontWeight": "bold",
+              "content": "开始切磋"
+            }
+          ]
+        },
+        {
+          "id": "screen-1-return-btn",
+          "type": "frame",
+          "name": "返回按钮",
+          "x": 87,
+          "y": 420,
+          "width": 200,
+          "height": 44,
+          "fill": "#1a2340",
+          "stroke": "#4a5d7a",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-1-return-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 75,
+              "y": 12,
+              "width": 50,
+              "height": 20,
+              "textColor": "#4a5d7a",
+              "fontSize": 16,
+              "content": "返回"
+            }
+          ]
+        },
+        {
+          "id": "screen-1-stats",
+          "type": "frame",
+          "name": "统计面板",
+          "x": 250,
+          "y": 200,
+          "width": 110,
+          "height": 200,
+          "fill": "#0a0e1a",
+          "stroke": "#2a3550",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-1-stats-title",
+              "type": "text",
+              "name": "统计标题",
+              "x": 35,
+              "y": 12,
+              "width": 40,
+              "height": 18,
+              "textColor": "#c9a962",
+              "fontSize": 12,
+              "content": "战绩"
+            },
+            {
+              "id": "screen-1-stat-1",
+              "type": "text",
+              "name": "统计项 1",
+              "x": 10,
+              "y": 40,
+              "width": 90,
+              "height": 16,
+              "textColor": "#8b9bb4",
+              "fontSize": 11,
+              "content": "胜率 7.4%"
+            },
+            {
+              "id": "screen-1-stat-2",
+              "type": "text",
+              "name": "统计项 2",
+              "x": 10,
+              "y": 60,
+              "width": 90,
+              "height": 16,
+              "textColor": "#8b9bb4",
+              "fontSize": 11,
+              "content": "伤害 1.9%"
+            },
+            {
+              "id": "screen-1-stat-3",
+              "type": "text",
+              "name": "统计项 3",
+              "x": 10,
+              "y": 80,
+              "width": 90,
+              "height": 16,
+              "textColor": "#8b9bb4",
+              "fontSize": 11,
+              "content": "治疗 12%"
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "id": "screen-2-container",
+      "type": "frame",
+      "name": "界面 2 - 竞技场排行榜",
+      "x": 455,
+      "y": 140,
+      "width": 375,
+      "height": 812,
+      "fill": "#0f1525",
+      "stroke": "#2a3550",
+      "strokeWidth": 2,
+      "children": [
+        {
+          "id": "screen-2-top-bar",
+          "type": "frame",
+          "name": "顶部状态栏",
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 80,
+          "fill": "#1a1025",
+          "children": [
+            {
+              "id": "screen-2-title",
+              "type": "text",
+              "name": "页面标题",
+              "x": 120,
+              "y": 25,
+              "width": 135,
+              "height": 30,
+              "textColor": "#f0e6d2",
+              "fontSize": 22,
+              "fontWeight": "bold",
+              "content": "竞技场"
+            },
+            {
+              "id": "screen-2-tabs",
+              "type": "frame",
+              "name": "Tab 切换",
+              "x": 40,
+              "y": 55,
+              "width": 295,
+              "height": 20,
+              "children": [
+                {
+                  "id": "screen-2-tab-1",
+                  "type": "text",
+                  "name": "Tab1",
+                  "x": 0,
+                  "y": 0,
+                  "width": 60,
+                  "height": 20,
+                  "textColor": "#c9a962",
+                  "fontSize": 13,
+                  "content": "排名"
+                },
+                {
+                  "id": "screen-2-tab-2",
+                  "type": "text",
+                  "name": "Tab2",
+                  "x": 70,
+                  "y": 0,
+                  "width": 60,
+                  "height": 20,
+                  "textColor": "#8b9bb4",
+                  "fontSize": 13,
+                  "content": "榜入"
+                },
+                {
+                  "id": "screen-2-tab-3",
+                  "type": "text",
+                  "name": "Tab3",
+                  "x": 140,
+                  "y": 0,
+                  "width": 80,
+                  "height": 20,
+                  "textColor": "#8b9bb4",
+                  "fontSize": 13,
+                  "content": "战绩胜场"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "screen-2-rank-list",
+          "type": "frame",
+          "name": "排行榜列表",
+          "x": 20,
+          "y": 100,
+          "width": 335,
+          "height": 500,
+          "fill": "#151d33",
+          "stroke": "#2a3550",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-2-rank-1",
+              "type": "frame",
+              "name": "排名第 1",
+              "x": 10,
+              "y": 10,
+              "width": 315,
+              "height": 60,
+              "fill": "#2a2040",
+              "stroke": "#c9a962",
+              "strokeWidth": 2,
+              "children": [
+                {
+                  "id": "screen-2-rank-1-num",
+                  "type": "text",
+                  "name": "排名数字",
+                  "x": 15,
+                  "y": 20,
+                  "width": 24,
+                  "height": 24,
+                  "textColor": "#ffd700",
+                  "fontSize": 20,
+                  "fontWeight": "bold",
+                  "content": "1"
+                },
+                {
+                  "id": "screen-2-rank-1-avatar",
+                  "type": "ellipse",
+                  "name": "头像",
+                  "x": 50,
+                  "y": 15,
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#3a4560",
+                  "stroke": "#c9a962",
+                  "strokeWidth": 2
+                },
+                {
+                  "id": "screen-2-rank-1-name",
+                  "type": "text",
+                  "name": "玩家名",
+                  "x": 100,
+                  "y": 20,
+                  "width": 120,
+                  "height": 20,
+                  "textColor": "#f0e6d2",
+                  "fontSize": 14,
+                  "content": "张三"
+                },
+                {
+                  "id": "screen-2-rank-1-score",
+                  "type": "text",
+                  "name": "积分",
+                  "x": 250,
+                  "y": 20,
+                  "width": 50,
+                  "height": 20,
+                  "textColor": "#c9a962",
+                  "fontSize": 14,
+                  "content": "2850"
+                }
+              ]
+            },
+            {
+              "id": "screen-2-rank-2",
+              "type": "frame",
+              "name": "排名第 2",
+              "x": 10,
+              "y": 75,
+              "width": 315,
+              "height": 60,
+              "fill": "#252840",
+              "stroke": "#a0a0a0",
+              "strokeWidth": 1,
+              "children": [
+                {
+                  "id": "screen-2-rank-2-num",
+                  "type": "text",
+                  "name": "排名数字",
+                  "x": 15,
+                  "y": 20,
+                  "width": 24,
+                  "height": 24,
+                  "textColor": "#c0c0c0",
+                  "fontSize": 20,
+                  "fontWeight": "bold",
+                  "content": "2"
+                },
+                {
+                  "id": "screen-2-rank-2-avatar",
+                  "type": "ellipse",
+                  "name": "头像",
+                  "x": 50,
+                  "y": 15,
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#3a4560"
+                },
+                {
+                  "id": "screen-2-rank-2-name",
+                  "type": "text",
+                  "name": "玩家名",
+                  "x": 100,
+                  "y": 20,
+                  "width": 120,
+                  "height": 20,
+                  "textColor": "#f0e6d2",
+                  "fontSize": 14,
+                  "content": "李四"
+                }
+              ]
+            },
+            {
+              "id": "screen-2-rank-3",
+              "type": "frame",
+              "name": "排名第 3",
+              "x": 10,
+              "y": 140,
+              "width": 315,
+              "height": 60,
+              "fill": "#252840",
+              "stroke": "#cd7f32",
+              "strokeWidth": 1,
+              "children": [
+                {
+                  "id": "screen-2-rank-3-num",
+                  "type": "text",
+                  "name": "排名数字",
+                  "x": 15,
+                  "y": 20,
+                  "width": 24,
+                  "height": 24,
+                  "textColor": "#cd7f32",
+                  "fontSize": 20,
+                  "fontWeight": "bold",
+                  "content": "3"
+                },
+                {
+                  "id": "screen-2-rank-3-avatar",
+                  "type": "ellipse",
+                  "name": "头像",
+                  "x": 50,
+                  "y": 15,
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#3a4560"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "screen-2-challenge-btn",
+          "type": "frame",
+          "name": "挑战按钮",
+          "x": 60,
+          "y": 650,
+          "width": 120,
+          "height": 44,
+          "fill": "#c9a962",
+          "stroke": "#f0e6d2",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "screen-2-challenge-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 35,
+              "y": 12,
+              "width": 50,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 16,
+              "fontWeight": "bold",
+              "content": "挑战"
+            }
+          ]
+        },
+        {
+          "id": "screen-2-defend-btn",
+          "type": "frame",
+          "name": "防守阵容按钮",
+          "x": 200,
+          "y": 650,
+          "width": 120,
+          "height": 44,
+          "fill": "#1a2340",
+          "stroke": "#4a5d7a",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-2-defend-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 25,
+              "y": 12,
+              "width": 70,
+              "height": 20,
+              "textColor": "#4a5d7a",
+              "fontSize": 14,
+              "content": "防守阵容"
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "id": "screen-3-container",
+      "type": "frame",
+      "name": "界面 3 - 道具图鉴",
+      "x": 870,
+      "y": 140,
+      "width": 375,
+      "height": 812,
+      "fill": "#0f1525",
+      "stroke": "#2a3550",
+      "strokeWidth": 2,
+      "children": [
+        {
+          "id": "screen-3-bg-pattern",
+          "type": "rectangle",
+          "name": "背景 - 卷轴纹理",
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 812,
+          "fill": "#f5ebe0"
+        },
+        {
+          "id": "screen-3-left-border",
+          "type": "rectangle",
+          "name": "左侧装饰边框",
+          "x": 0,
+          "y": 0,
+          "width": 40,
+          "height": 812,
+          "fill": "#1a3a5c",
+          "stroke": "#c9a962",
+          "strokeWidth": 2
+        },
+        {
+          "id": "screen-3-right-border",
+          "type": "rectangle",
+          "name": "右侧装饰边框",
+          "x": 335,
+          "y": 0,
+          "width": 40,
+          "height": 812,
+          "fill": "#1a3a5c",
+          "stroke": "#c9a962",
+          "strokeWidth": 2
+        },
+        {
+          "id": "screen-3-top-bar",
+          "type": "frame",
+          "name": "顶部搜索栏",
+          "x": 40,
+          "y": 20,
+          "width": 295,
+          "height": 50,
+          "fill": "#ffffff",
+          "stroke": "#c9a962",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-3-search-text",
+              "type": "text",
+              "name": "搜索按钮",
+              "x": 100,
+              "y": 15,
+              "width": 95,
+              "height": 20,
+              "textColor": "#1a3a5c",
+              "fontSize": 14,
+              "content": "🔍 搜索图鉴"
+            },
+            {
+              "id": "screen-3-close-btn",
+              "type": "text",
+              "name": "关闭按钮",
+              "x": 260,
+              "y": 12,
+              "width": 24,
+              "height": 24,
+              "textColor": "#1a3a5c",
+              "fontSize": 20,
+              "content": "✕"
+            }
+          ]
+        },
+        {
+          "id": "screen-3-category",
+          "type": "frame",
+          "name": "分类标签",
+          "x": 45,
+          "y": 90,
+          "width": 60,
+          "height": 30,
+          "fill": "#1a3a5c",
+          "children": [
+            {
+              "id": "screen-3-category-text",
+              "type": "text",
+              "name": "分类文字",
+              "x": 18,
+              "y": 7,
+              "width": 24,
+              "height": 16,
+              "textColor": "#f0e6d2",
+              "fontSize": 14,
+              "content": "分类"
+            }
+          ]
+        },
+        {
+          "id": "screen-3-item-card",
+          "type": "frame",
+          "name": "道具卡片",
+          "x": 120,
+          "y": 90,
+          "width": 235,
+          "height": 180,
+          "fill": "#ffffff",
+          "stroke": "#c9a962",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "screen-3-item-image",
+              "type": "ellipse",
+              "name": "道具图片",
+              "x": 15,
+              "y": 15,
+              "width": 80,
+              "height": 80,
+              "fill": "#e8d5b7"
+            },
+            {
+              "id": "screen-3-item-name",
+              "type": "text",
+              "name": "道具名称",
+              "x": 110,
+              "y": 20,
+              "width": 110,
+              "height": 18,
+              "textColor": "#1a3a5c",
+              "fontSize": 14,
+              "content": "玄铁剑"
+            },
+            {
+              "id": "screen-3-item-stars",
+              "type": "text",
+              "name": "星级",
+              "x": 110,
+              "y": 42,
+              "width": 80,
+              "height": 16,
+              "textColor": "#c9a962",
+              "fontSize": 14,
+              "content": "★★★★★"
+            },
+            {
+              "id": "screen-3-item-desc",
+              "type": "text",
+              "name": "道具描述",
+              "x": 110,
+              "y": 65,
+              "width": 110,
+              "height": 40,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "用途：增加 10% 攻击"
+            },
+            {
+              "id": "screen-3-item-bg-story",
+              "type": "frame",
+              "name": "背景故事区",
+              "x": 15,
+              "y": 110,
+              "width": 205,
+              "height": 55,
+              "fill": "#f5ebe0",
+              "stroke": "#d4c5a9",
+              "strokeWidth": 1,
+              "children": [
+                {
+                  "id": "screen-3-story-title",
+                  "type": "text",
+                  "name": "故事标题",
+                  "x": 8,
+                  "y": 8,
+                  "width": 60,
+                  "height": 14,
+                  "textColor": "#1a3a5c",
+                  "fontSize": 11,
+                  "content": "背景故事："
+                },
+                {
+                  "id": "screen-3-story-text",
+                  "type": "text",
+                  "name": "故事文字",
+                  "x": 8,
+                  "y": 26,
+                  "width": 189,
+                  "height": 24,
+                  "textColor": "#666666",
+                  "fontSize": 10,
+                  "content": "此剑为铸剑大师欧冶子所制..."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "screen-3-grid",
+          "type": "frame",
+          "name": "道具网格",
+          "x": 60,
+          "y": 290,
+          "width": 280,
+          "height": 300,
+          "children": [
+            {
+              "id": "grid-slot-1",
+              "type": "ellipse",
+              "name": "格子 1",
+              "x": 0,
+              "y": 0,
+              "width": 50,
+              "height": 50,
+              "fill": "#e8d5b7",
+              "stroke": "#c9a962",
+              "strokeWidth": 1
+            },
+            {
+              "id": "grid-slot-2",
+              "type": "ellipse",
+              "name": "格子 2",
+              "x": 60,
+              "y": 0,
+              "width": 50,
+              "height": 50,
+              "fill": "#e8d5b7",
+              "stroke": "#c9a962",
+              "strokeWidth": 1
+            },
+            {
+              "id": "grid-slot-3",
+              "type": "ellipse",
+              "name": "格子 3",
+              "x": 120,
+              "y": 0,
+              "width": 50,
+              "height": 50,
+              "fill": "#e8d5b7",
+              "stroke": "#c9a962",
+              "strokeWidth": 1
+            },
+            {
+              "id": "grid-slot-4",
+              "type": "ellipse",
+              "name": "格子 4",
+              "x": 180,
+              "y": 0,
+              "width": 50,
+              "height": 50,
+              "fill": "#d4c5a9",
+              "stroke": "#a0a0a0",
+              "strokeWidth": 1
+            },
+            {
+              "id": "grid-slot-5",
+              "type": "ellipse",
+              "name": "格子 5",
+              "x": 0,
+              "y": 70,
+              "width": 50,
+              "height": 50,
+              "fill": "#d4c5a9",
+              "stroke": "#a0a0a0",
+              "strokeWidth": 1
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "id": "color-palette",
+      "type": "frame",
+      "name": "=========== 色彩系统 ===========",
+      "x": 40,
+      "y": 1050,
+      "width": 1120,
+      "height": 200,
+      "fill": "#0a0e1a",
+      "stroke": "#2a3550",
+      "strokeWidth": 2,
+      "children": [
+        {
+          "id": "palette-title",
+          "type": "text",
+          "name": "标题",
+          "x": 20,
+          "y": 20,
+          "width": 200,
+          "height": 30,
+          "textColor": "#f0e6d2",
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "content": "🎨 色彩系统"
+        },
+        {
+          "id": "color-1",
+          "type": "frame",
+          "name": "主色 - 深蓝",
+          "x": 20,
+          "y": 60,
+          "width": 150,
+          "height": 100,
+          "fill": "#0f1525",
+          "children": [
+            {
+              "id": "color-1-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 75,
+              "width": 130,
+              "height": 20,
+              "textColor": "#ffffff",
+              "fontSize": 12,
+              "content": "深夜蓝 #0F1525"
+            }
+          ]
+        },
+        {
+          "id": "color-2",
+          "type": "frame",
+          "name": "主色 - 金色",
+          "x": 190,
+          "y": 60,
+          "width": 150,
+          "height": 100,
+          "fill": "#c9a962",
+          "children": [
+            {
+              "id": "color-2-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 75,
+              "width": 130,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 12,
+              "content": "古铜金 #C9A962"
+            }
+          ]
+        },
+        {
+          "id": "color-3",
+          "type": "frame",
+          "name": "次级色 - 米白",
+          "x": 360,
+          "y": 60,
+          "width": 150,
+          "height": 100,
+          "fill": "#f0e6d2",
+          "children": [
+            {
+              "id": "color-3-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 75,
+              "width": 130,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 12,
+              "content": "米白 #F0E6D2"
+            }
+          ]
+        },
+        {
+          "id": "color-4",
+          "type": "frame",
+          "name": "强调色 - 青蓝",
+          "x": 530,
+          "y": 60,
+          "width": 150,
+          "height": 100,
+          "fill": "#1a3a5c",
+          "children": [
+            {
+              "id": "color-4-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 75,
+              "width": 130,
+              "height": 20,
+              "textColor": "#ffffff",
+              "fontSize": 12,
+              "content": "青蓝 #1A3A5C"
+            }
+          ]
+        },
+        {
+          "id": "color-5",
+          "type": "frame",
+          "name": "装饰色 - 暗紫",
+          "x": 700,
+          "y": 60,
+          "width": 150,
+          "height": 100,
+          "fill": "#1a1025",
+          "children": [
+            {
+              "id": "color-5-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 75,
+              "width": 130,
+              "height": 20,
+              "textColor": "#ffffff",
+              "fontSize": 12,
+              "content": "暗紫 #1A1025"
+            }
+          ]
+        },
+        {
+          "id": "color-6",
+          "type": "frame",
+          "name": "背景色 - 卷轴",
+          "x": 870,
+          "y": 60,
+          "width": 150,
+          "height": 100,
+          "fill": "#f5ebe0",
+          "children": [
+            {
+              "id": "color-6-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 75,
+              "width": 130,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 12,
+              "content": "卷轴 #F5EBE0"
+            }
+          ]
+        },
+        {
+          "id": "color-7",
+          "type": "frame",
+          "name": "边框色",
+          "x": 20,
+          "y": 170,
+          "width": 150,
+          "height": 20,
+          "fill": "#2a3550",
+          "children": [
+            {
+              "id": "color-7-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 2,
+              "width": 130,
+              "height": 16,
+              "textColor": "#ffffff",
+              "fontSize": 11,
+              "content": "边框 #2A3550"
+            }
+          ]
+        },
+        {
+          "id": "color-8",
+          "type": "frame",
+          "name": "次级文字",
+          "x": 190,
+          "y": 170,
+          "width": 150,
+          "height": 20,
+          "fill": "#8b9bb4",
+          "children": [
+            {
+              "id": "color-8-label",
+              "type": "text",
+              "name": "颜色标签",
+              "x": 10,
+              "y": 2,
+              "width": 130,
+              "height": 16,
+              "textColor": "#ffffff",
+              "fontSize": 11,
+              "content": "次要文字 #8B9BB4"
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "id": "component-library",
+      "type": "frame",
+      "name": "=========== 组件库 ===========",
+      "x": 40,
+      "y": 1280,
+      "width": 1120,
+      "height": 400,
+      "fill": "#0a0e1a",
+      "stroke": "#2a3550",
+      "strokeWidth": 2,
+      "children": [
+        {
+          "id": "component-title",
+          "type": "text",
+          "name": "标题",
+          "x": 20,
+          "y": 20,
+          "width": 200,
+          "height": 30,
+          "textColor": "#f0e6d2",
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "content": "🧩 核心组件"
+        },
+        {
+          "id": "btn-primary",
+          "type": "frame",
+          "name": "主按钮",
+          "x": 20,
+          "y": 60,
+          "width": 160,
+          "height": 50,
+          "fill": "#c9a962",
+          "stroke": "#f0e6d2",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "btn-primary-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 55,
+              "y": 15,
+              "width": 50,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 16,
+              "fontWeight": "bold",
+              "content": "主按钮"
+            }
+          ]
+        },
+        {
+          "id": "btn-secondary",
+          "type": "frame",
+          "name": "次级按钮",
+          "x": 200,
+          "y": 60,
+          "width": 160,
+          "height": 50,
+          "fill": "#1a2340",
+          "stroke": "#4a5d7a",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "btn-secondary-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 55,
+              "y": 15,
+              "width": 50,
+              "height": 20,
+              "textColor": "#4a5d7a",
+              "fontSize": 16,
+              "content": "次级按钮"
+            }
+          ]
+        },
+        {
+          "id": "btn-outline",
+          "type": "frame",
+          "name": "描边按钮",
+          "x": 380,
+          "y": 60,
+          "width": 160,
+          "height": 50,
+          "fill": "transparent",
+          "stroke": "#c9a962",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "btn-outline-text",
+              "type": "text",
+              "name": "按钮文字",
+              "x": 55,
+              "y": 15,
+              "width": 50,
+              "height": 20,
+              "textColor": "#c9a962",
+              "fontSize": 16,
+              "content": "描边按钮"
+            }
+          ]
+        },
+        {
+          "id": "card-dark",
+          "type": "frame",
+          "name": "深色卡片",
+          "x": 20,
+          "y": 140,
+          "width": 200,
+          "height": 100,
+          "fill": "#151d33",
+          "stroke": "#2a3550",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "card-dark-title",
+              "type": "text",
+              "name": "卡片标题",
+              "x": 16,
+              "y": 12,
+              "width": 80,
+              "height": 18,
+              "textColor": "#c9a962",
+              "fontSize": 14,
+              "content": "深色卡片"
+            },
+            {
+              "id": "card-dark-content",
+              "type": "text",
+              "name": "卡片内容",
+              "x": 16,
+              "y": 40,
+              "width": 168,
+              "height": 40,
+              "textColor": "#8b9bb4",
+              "fontSize": 12,
+              "content": "用于暗色背景的内容区域"
+            }
+          ]
+        },
+        {
+          "id": "card-light",
+          "type": "frame",
+          "name": "浅色卡片",
+          "x": 240,
+          "y": 140,
+          "width": 200,
+          "height": 100,
+          "fill": "#f5ebe0",
+          "stroke": "#c9a962",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "card-light-title",
+              "type": "text",
+              "name": "卡片标题",
+              "x": 16,
+              "y": 12,
+              "width": 80,
+              "height": 18,
+              "textColor": "#1a3a5c",
+              "fontSize": 14,
+              "content": "卷轴卡片"
+            },
+            {
+              "id": "card-light-content",
+              "type": "text",
+              "name": "卡片内容",
+              "x": 16,
+              "y": 40,
+              "width": 168,
+              "height": 40,
+              "textColor": "#666666",
+              "fontSize": 12,
+              "content": "用于仿古卷轴风格的内容区"
+            }
+          ]
+        },
+        {
+          "id": "avatar-frame",
+          "type": "frame",
+          "name": "头像框",
+          "x": 460,
+          "y": 140,
+          "width": 120,
+          "height": 120,
+          "children": [
+            {
+              "id": "avatar-bg",
+              "type": "ellipse",
+              "name": "头像背景",
+              "x": 10,
+              "y": 10,
+              "width": 100,
+              "height": 100,
+              "fill": "#3a4560",
+              "stroke": "#c9a962",
+              "strokeWidth": 3
+            },
+            {
+              "id": "avatar-label",
+              "type": "text",
+              "name": "标签",
+              "x": 35,
+              "y": 105,
+              "width": 50,
+              "height": 14,
+              "textColor": "#8b9bb4",
+              "fontSize": 11,
+              "content": "头像框"
+            }
+          ]
+        },
+        {
+          "id": "rank-badge-gold",
+          "type": "ellipse",
+          "name": "金牌徽章",
+          "x": 620,
+          "y": 150,
+          "width": 60,
+          "height": 60,
+          "fill": "#ffd700",
+          "stroke": "#f0e6d2",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "rank-gold-text",
+              "type": "text",
+              "name": "排名文字",
+              "x": 25,
+              "y": 20,
+              "width": 10,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 18,
+              "fontWeight": "bold",
+              "content": "1"
+            }
+          ]
+        },
+        {
+          "id": "rank-badge-silver",
+          "type": "ellipse",
+          "name": "银牌徽章",
+          "x": 700,
+          "y": 150,
+          "width": 60,
+          "height": 60,
+          "fill": "#c0c0c0",
+          "stroke": "#ffffff",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "rank-silver-text",
+              "type": "text",
+              "name": "排名文字",
+              "x": 25,
+              "y": 20,
+              "width": 10,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 18,
+              "fontWeight": "bold",
+              "content": "2"
+            }
+          ]
+        },
+        {
+          "id": "rank-badge-bronze",
+          "type": "ellipse",
+          "name": "铜牌徽章",
+          "x": 780,
+          "y": 150,
+          "width": 60,
+          "height": 60,
+          "fill": "#cd7f32",
+          "stroke": "#f0e6d2",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "rank-bronze-text",
+              "type": "text",
+              "name": "排名文字",
+              "x": 25,
+              "y": 20,
+              "width": 10,
+              "height": 20,
+              "textColor": "#0a0e1a",
+              "fontSize": 18,
+              "fontWeight": "bold",
+              "content": "3"
+            }
+          ]
+        },
+        {
+          "id": "input-field",
+          "type": "frame",
+          "name": "输入框",
+          "x": 20,
+          "y": 270,
+          "width": 280,
+          "height": 44,
+          "fill": "#0a0e1a",
+          "stroke": "#4a5d7a",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "input-placeholder",
+              "type": "text",
+              "name": "占位符",
+              "x": 16,
+              "y": 12,
+              "width": 150,
+              "height": 20,
+              "textColor": "#4a5d7a",
+              "fontSize": 14,
+              "content": "请输入搜索内容..."
+            }
+          ]
+        },
+        {
+          "id": "progress-bar",
+          "type": "frame",
+          "name": "进度条",
+          "x": 320,
+          "y": 270,
+          "width": 200,
+          "height": 16,
+          "fill": "#1a2340",
+          "stroke": "#2a3550",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "progress-fill",
+              "type": "rectangle",
+              "name": "进度填充",
+              "x": 2,
+              "y": 2,
+              "width": 120,
+              "height": 12,
+              "fill": "#c9a962"
+            }
+          ]
+        },
+        {
+          "id": "tab-active",
+          "type": "frame",
+          "name": "激活 Tab",
+          "x": 540,
+          "y": 270,
+          "width": 100,
+          "height": 40,
+          "fill": "#1a3a5c",
+          "stroke": "#c9a962",
+          "strokeWidth": 2,
+          "children": [
+            {
+              "id": "tab-active-text",
+              "type": "text",
+              "name": "Tab 文字",
+              "x": 35,
+              "y": 10,
+              "width": 30,
+              "height": 20,
+              "textColor": "#f0e6d2",
+              "fontSize": 14,
+              "content": "激活"
+            }
+          ]
+        },
+        {
+          "id": "tab-inactive",
+          "type": "frame",
+          "name": "未激活 Tab",
+          "x": 660,
+          "y": 270,
+          "width": 100,
+          "height": 40,
+          "fill": "transparent",
+          "stroke": "#4a5d7a",
+          "strokeWidth": 1,
+          "children": [
+            {
+              "id": "tab-inactive-text",
+              "type": "text",
+              "name": "Tab 文字",
+              "x": 30,
+              "y": 10,
+              "width": 40,
+              "height": 20,
+              "textColor": "#8b9bb4",
+              "fontSize": 14,
+              "content": "普通"
+            }
+          ]
+        },
+        {
+          "id": "decoration-cloud",
+          "type": "path",
+          "name": "云纹装饰",
+          "x": 800,
+          "y": 270,
+          "width": 100,
+          "height": 50,
+          "fill": "#c9a962",
+          "path": "M10,30 Q30,10 50,30 T90,30"
+        },
+        {
+          "id": "decoration-wave",
+          "type": "path",
+          "name": "波浪装饰",
+          "x": 920,
+          "y": 280,
+          "width": 100,
+          "height": 40,
+          "fill": "#1a3a5c",
+          "path": "M0,20 Q25,0 50,20 T100,20"
+        }
+      ]
+    },
+    
+    {
+      "id": "design-notes",
+      "type": "frame",
+      "name": "=========== 设计规范 ===========",
+      "x": 40,
+      "y": 1710,
+      "width": 1120,
+      "height": 350,
+      "fill": "#0a0e1a",
+      "stroke": "#2a3550",
+      "strokeWidth": 2,
+      "children": [
+        {
+          "id": "notes-title",
+          "type": "text",
+          "name": "标题",
+          "x": 20,
+          "y": 20,
+          "width": 200,
+          "height": 30,
+          "textColor": "#f0e6d2",
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "content": "📐 设计规范"
+        },
+        {
+          "id": "note-1",
+          "type": "text",
+          "name": "规范 1",
+          "x": 20,
+          "y": 65,
+          "width": 500,
+          "height": 80,
+          "textColor": "#8b9bb4",
+          "fontSize": 13,
+          "content": "【色彩使用原则】\n• 主背景：深夜蓝 #0F1525（暗色页面）\n• 次级背景：卷轴米白 #F5EBE0（浅色卡片）\n• 强调色：古铜金 #C9A962（按钮/高亮/边框）\n• 文字：米白 #F0E6D2（主）/ 灰蓝 #8B9BB4（次）"
+        },
+        {
+          "id": "note-2",
+          "type": "text",
+          "name": "规范 2",
+          "x": 560,
+          "y": 65,
+          "width": 500,
+          "height": 80,
+          "textColor": "#8b9bb4",
+          "fontSize": 13,
+          "content": "【圆角规范】\n• 卡片：8-12px\n• 按钮：22-30px（全圆角）\n• 头像框：50%（圆形）\n• 装饰元素：4-6px"
+        },
+        {
+          "id": "note-3",
+          "type": "text",
+          "name": "规范 3",
+          "x": 20,
+          "y": 165,
+          "width": 500,
+          "height": 80,
+          "textColor": "#8b9bb4",
+          "fontSize": 13,
+          "content": "【边框使用】\n• 主边框：#2A3550（暗色卡片）\n• 强调边框：#C9A962（金色，用于重要元素）\n• 次级边框：#4A5D7A（用于输入框/次级按钮）\n• 描边宽度：1-2px（常规）/ 3px（强调）"
+        },
+        {
+          "id": "note-4",
+          "type": "text",
+          "name": "规范 4",
+          "x": 560,
+          "y": 165,
+          "width": 500,
+          "height": 80,
+          "textColor": "#8b9bb4",
+          "fontSize": 13,
+          "content": "【字体层级】\n• 页面标题：20-24px Bold\n• 卡片标题：16-18px Normal\n• 正文：14px Normal\n• 次要文字：12-13px Normal\n• 标注：11px Normal"
+        },
+        {
+          "id": "note-5",
+          "type": "text",
+          "name": "规范 5",
+          "x": 20,
+          "y": 265,
+          "width": 500,
+          "height": 70,
+          "textColor": "#8b9bb4",
+          "fontSize": 13,
+          "content": "【装饰元素】\n• 云纹：#C9A962 金色（顶部/底部装饰）\n• 波浪：#1A3A5C 青蓝（分隔线/底部）\n• 传统纹样：用于卡片边角/边框装饰"
+        },
+        {
+          "id": "note-6",
+          "type": "text",
+          "name": "规范 6",
+          "x": 560,
+          "y": 265,
+          "width": 500,
+          "height": 70,
+          "textColor": "#8b9bb4",
+          "fontSize": 13,
+          "content": "【间距规范】\n• 页面边距：16-20px\n• 卡片内边距：16px\n• 元素间距：12-16px\n• 模块间距：24-32px"
+        }
+      ]
+    },
+    
+    {
+      "id": "footer",
+      "type": "text",
+      "name": "页脚说明",
+      "x": 40,
+      "y": 2090,
+      "width": 800,
+      "height": 40,
+      "textColor": "#4a5d7a",
+      "fontSize": 12,
+      "content": "设计稿说明：基于即梦 4.1 中国风游戏 UI 风格 · 可用于 Vue 3 项目实现 · 下一步可生成代码"
+    }
+  ]
+}

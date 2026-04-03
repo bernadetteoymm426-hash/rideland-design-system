@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中国风游戏 UI 复刻 - 即梦 4.1 @五月的枫叶</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 40px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .header h1 {
+      font-size: 48px;
+      color: #c9a962;
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      font-size: 20px;
+      color: #8b9bb4;
+    }
+    
+    .ui-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .ui-frame {
+      background: #1a2332;
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px solid #c9a962;
+    }
+    
+    .ui-frame h2 {
+      font-size: 28px;
+      color: #c9a962;
+      margin-bottom: 20px;
+      font-family: "Times New Roman", serif;
+    }
+    
+    /* 01 - 好友切磋 */
+    .arena-bg {
+      background: #0d1118;
+      border-radius: 12px;
+      padding: 20px;
+      height: 300px;
+      position: relative;
+    }
+    
+    .arena-circle {
+      width: 400px;
+      height: 200px;
+      border: 3px solid #c9a962;
+      border-radius: 50%;
+      background: #2a3545;
+      margin: 40px auto;
+    }
+    
+    .btn-start {
+      background: #c9a962;
+      color: #0d1118;
+      border: none;
+      padding: 15px 60px;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+    }
+    
+    .btn-back {
+      background: #3a4a5c;
+      color: #f0e6d2;
+      border: none;
+      padding: 12px 60px;
+      font-size: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    .character-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .character-slot {
+      width: 60px;
+      height: 60px;
+      background: #3a4a5c;
+      border: 2px solid #c9a962;
+      border-radius: 8px;
+    }
+    
+    /* 02 - 竞技场 */
+    .ranking-panel {
+      background: #0d1118;
+      border-radius: 12px;
+      border: 2px solid #c9a962;
+      padding: 20px;
+    }
+    
+    .ranking-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      margin-bottom: 10px;
+      background: #2a3545;
+      border-radius: 6px;
+    }
+    
+    .ranking-row.gold { border: 2px solid #ffd700; }
+    .ranking-row.silver { border: 2px solid #c0c0c0; }
+    .ranking-row.bronze { border: 2px solid #cd7f32; }
+    
+    .rank-number {
+      width: 40px;
+      height: 40px;
+      background: #c9a962;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #0d1118;
+    }
+    
+    .player-avatar {
+      width: 50px;
+      height: 50px;
+      background: #3a4a5c;
+      border-radius: 50%;
+      border: 2px solid #c9a962;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .btn-challenge {
+      background: #c9a962;
+      color: #0d1118;
+      border: none;
+      padding: 12px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    
+    .btn-defense {
+      background: #3a4a5c;
+      color: #f0e6d2;
+      border: none;
+      padding: 12px 40px;
+      font-size: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    
+    /* 03 - 道具图鉴 */
+    .item-bg {
+      background: #f5ebe0;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .item-slot {
+      aspect-ratio: 1;
+      background: #ffffff;
+      border: 2px solid #c9a962;
+      border-radius: 6px;
+    }
+    
+    .character-display {
+      width: 200px;
+      height: 300px;
+      background: #e8d5c0;
+      border: 2px solid #c9a962;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    /* 04 - 天赋树 */
+    .talent-bg {
+      background: #0d1118;
+      border-radius: 12px;
+      padding: 20px;
+      height: 400px;
+      position: relative;
+    }
+    
+    .talent-tree {
+      position: relative;
+      height: 300px;
+    }
+    
+    .talent-node {
+      width: 60px;
+      height: 60px;
+      background: #2a3545;
+      border: 3px solid #c9a962;
+      border-radius: 50%;
+      position: absolute;
+    }
+    
+    .node-row-1 { bottom: 0; left: 220px; }
+    .node-row-2 { bottom: 70px; left: 150px; }
+    .node-row-3 { bottom: 70px; left: 220px; }
+    .node-row-4 { bottom: 70px; left: 290px; }
+    .node-row-5 { bottom: 140px; left: 100px; }
+    .node-row-6 { bottom: 140px; left: 180px; }
+    .node-row-7 { bottom: 140px; left: 260px; }
+    .node-row-8 { bottom: 140px; left: 340px; }
+    
+    /* 05 - 原动公告 */
+    .scroll-bg {
+      background: #f5ebe0;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    .notice-item {
+      background: #ffffff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border-left: 4px solid #c9a962;
+    }
+    
+    .notice-item:first-child {
+      background: #e8d5c0;
+    }
+    
+    /* 06 - 节日活动 */
+    .festival-bg {
+      background: #f5ebe0;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .activity-card {
+      background: linear-gradient(135deg, #e8d5c0 0%, #f5ebe0 100%);
+      border: 3px solid #c9a962;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      margin: 20px auto;
+      max-width: 400px;
+    }
+    
+    /* 07 - 好友列表 */
+    .friend-list {
+      background: #f5ebe0;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    .friend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px;
+      background: #ffffff;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    
+    .friend-avatar {
+      width: 40px;
+      height: 40px;
+      background: #3a4a5c;
+      border-radius: 50%;
+      border: 2px solid #c9a962;
+    }
+    
+    /* 08 - 编武战队 */
+    .team-panel {
+      background: #0d1118;
+      border-radius: 12px;
+      border: 2px solid #c9a962;
+      padding: 20px;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .team-slot {
+      aspect-ratio: 4/5;
+      background: #2a3545;
+      border: 2px solid #c9a962;
+      border-radius: 6px;
+    }
+    
+    .team-slot:nth-child(n+6) {
+      margin-top: 20px;
+    }
+    
+    /* 颜色图例 */
+    .color-legend {
+      margin-top: 80px;
+      padding: 40px;
+      background: #1a2332;
+      border-radius: 16px;
+      border: 2px solid #c9a962;
+    }
+    
+    .color-legend h2 {
+      color: #c9a962;
+      margin-bottom: 20px;
+    }
+    
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    
+    .color-swatch {
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .color-swatch span {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #8b9bb4;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>游戏 UI 复刻</h1>
+    <p>即梦 4.1 - @五月的枫叶</p>
+  </div>
+  
+  <div class="ui-grid">
+    <!-- 01 - 好友切磋 -->
+    <div class="ui-frame">
+      <h2>好友切磋</h2>
+      <div class="arena-bg">
+        <div class="arena-circle"></div>
+        <button class="btn-start">开始切磋</button>
+        <button class="btn-back">返回</button>
+        <div class="character-row">
+          <div class="character-slot"></div>
+          <div class="character-slot"></div>
+          <div class="character-slot"></div>
+          <div class="character-slot"></div>
+          <div class="character-slot"></div>
+          <div class="character-slot"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 02 - 竞技场 -->
+    <div class="ui-frame">
+      <h2>竞技场</h2>
+      <div class="ranking-panel">
+        <div class="ranking-row gold">
+          <div class="rank-number">1</div>
+          <div class="player-avatar"></div>
+          <div>
+            <div style="color: #ffd700; font-weight: bold;">王者</div>
+            <div style="color: #8b9bb4; font-size: 14px;">2800 战力</div>
+          </div>
+        </div>
+        <div class="ranking-row silver">
+          <div class="rank-number">2</div>
+          <div class="player-avatar"></div>
+          <div>
+            <div style="color: #c0c0c0; font-weight: bold;">宗师</div>
+            <div style="color: #8b9bb4; font-size: 14px;">2650 战力</div>
+          </div>
+        </div>
+        <div class="ranking-row bronze">
+          <div class="rank-number">3</div>
+          <div class="player-avatar"></div>
+          <div>
+            <div style="color: #cd7f32; font-weight: bold;">大师</div>
+            <div style="color: #8b9bb4; font-size: 14px;">2500 战力</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn-challenge">挑战</button>
+        <button class="btn-defense">防守阵容设置</button>
+      </div>
+    </div>
+    
+    <!-- 03 - 道具图鉴 -->
+    <div class="ui-frame">
+      <h2>道具图鉴</h2>
+      <div class="item-bg">
+        <div class="character-display"></div>
+        <div class="item-grid">
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+          <div class="item-slot"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 04 - 天赋树 -->
+    <div class="ui-frame">
+      <h2>天赋树</h2>
+      <div class="talent-bg">
+        <div class="talent-tree">
+          <div class="talent-node node-row-1"></div>
+          <div class="talent-node node-row-2"></div>
+          <div class="talent-node node-row-3"></div>
+          <div class="talent-node node-row-4"></div>
+          <div class="talent-node node-row-5"></div>
+          <div class="talent-node node-row-6"></div>
+          <div class="talent-node node-row-7"></div>
+          <div class="talent-node node-row-8"></div>
+        </div>
+        <div class="btn-group">
+          <button class="btn-challenge">升级</button>
+          <button class="btn-defense">重置</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 05 - 原动公告 -->
+    <div class="ui-frame">
+      <h2>原动公告</h2>
+      <div class="scroll-bg">
+        <div class="notice-item">
+          <strong style="color: #c9a962;">版本更新公告</strong>
+          <p style="color: #8b9bb4; font-size: 14px; margin-top: 5px;">2026-03-10 10:00</p>
+        </div>
+        <div class="notice-item">
+          <strong style="color: #2d3748;">活动开启公告</strong>
+          <p style="color: #8b9bb4; font-size: 14px; margin-top: 5px;">2026-03-09 16:30</p>
+        </div>
+        <div class="notice-item">
+          <strong style="color: #2d3748;">游戏公告</strong>
+          <p style="color: #8b9bb4; font-size: 14px; margin-top: 5px;">2026-03-08 14:20</p>
+        </div>
+        <div class="notice-item">
+          <strong style="color: #2d3748;">维护通知</strong>
+          <p style="color: #8b9bb4; font-size: 14px; margin-top: 5px;">2026-03-07 09:00</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 06 - 节日活动 -->
+    <div class="ui-frame">
+      <h2>节日活动</h2>
+      <div class="festival-bg">
+        <div class="activity-card">
+          <h3 style="color: #c9a962; font-size: 24px; margin-bottom: 15px;">🏮 春节庆典 🏮</h3>
+          <p style="color: #8b9bb4; font-size: 16px;">完成任务赢取限定奖励</p>
+          <div style="margin: 20px 0; padding: 15px; background: rgba(201, 169, 98, 0.2); border-radius: 8px;">
+            <p style="color: #c9a962; font-size: 18px;">进度：3/5</p>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <button class="btn-challenge">参与活动</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 07 - 好友列表 -->
+    <div class="ui-frame">
+      <h2>好友列表</h2>
+      <div class="friend-list">
+        <div class="friend-item">
+          <div class="friend-avatar"></div>
+          <div style="flex: 1;">
+            <div style="font-weight: bold; color: #2d3748;">逍遥剑客</div>
+            <div style="color: #8b9bb4; font-size: 14px;">在线</div>
+          </div>
+          <div style="color: #48bb78; font-size: 12px;">●</div>
+        </div>
+        <div class="friend-item">
+          <div class="friend-avatar"></div>
+          <div style="flex: 1;">
+            <div style="font-weight: bold; color: #2d3748;">清风明月</div>
+            <div style="color: #8b9bb4; font-size: 14px;">在线</div>
+          </div>
+          <div style="color: #48bb78; font-size: 12px;">●</div>
+        </div>
+        <div class="friend-item">
+          <div class="friend-avatar"></div>
+          <div style="flex: 1;">
+            <div style="font-weight: bold; color: #2d3748;">独孤求败</div>
+            <div style="color: #8b9bb4; font-size: 14px;">离线</div>
+          </div>
+          <div style="color: #a0aec0; font-size: 12px;">●</div>
+        </div>
+        <div class="friend-item">
+          <div class="friend-avatar"></div>
+          <div style="flex: 1;">
+            <div style="font-weight: bold; color: #2d3748;">令狐冲</div>
+            <div style="color: #8b9bb4; font-size: 14px;">战斗中</div>
+          </div>
+          <div style="color: #f56565; font-size: 12px;">⚔</div>
+        </div>
+        <div class="friend-item">
+          <div class="friend-avatar"></div>
+          <div style="flex: 1;">
+            <div style="font-weight: bold; color: #2d3748;">东方不败</div>
+            <div style="color: #8b9bb4; font-size: 14px;">在线</div>
+          </div>
+          <div style="color: #48bb78; font-size: 12px;">●</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 08 - 编武战队 -->
+    <div class="ui-frame">
+      <h2>编武战队</h2>
+      <div class="team-panel">
+        <div class="team-grid">
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+          <div class="team-slot"></div>
+        </div>
+        <div class="btn-group" style="justify-content: flex-end; margin-top: 20px;">
+          <button class="btn-defense">保存阵容</button>
+          <button class="btn-challenge">解散战队</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 颜色图例 -->
+  <div class="color-legend">
+    <h2>🎨 配色方案</h2>
+    <div class="color-grid">
+      <div class="color-swatch" style="background: #0d1118;">
+        <span>#0d1118 深夜蓝</span>
+      </div>
+      <div class="color-swatch" style="background: #1a2332;">
+        <span>#1a2332 深蓝</span>
+      </div>
+      <div class="color-swatch" style="background: #2a3545;">
+        <span>#2a3545 青蓝</span>
+      </div>
+      <div class="color-swatch" style="background: #3a4a5c;">
+        <span>#3a4a5c 灰蓝</span>
+      </div>
+      <div class="color-swatch" style="background: #c9a962;">
+        <span>#c9a962 古铜金</span>
+      </div>
+      <div class="color-swatch" style="background: #f5ebe0;">
+        <span>#f5ebe0 米白</span>
+      </div>
+      <div class="color-swatch" style="background: #e8d5c0;">
+        <span>#e8d5c0 浅棕</span>
+      </div>
+      <div class="color-swatch" style="background: #f0e6d2;">
+        <span>#f0e6d2 米黄</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

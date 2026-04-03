@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Login Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #1a1a2e; color: #fff; }
+    .result { background: rgba(255,255,255,0.1); padding: 1rem; margin: 1rem 0; border-radius: 8px; }
+    .success { border-left: 4px solid #22c55e; }
+    .error { border-left: 4px solid #ef4444; }
+    pre { background: rgba(0,0,0,0.3); padding: 0.5rem; overflow-x: auto; }
+    button { background: #00d9ff; color: #1a1a2e; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>🧪 Mock API 测试</h1>
+  
+  <div>
+    <button onclick="testLogin()">测试登录</button>
+    <button onclick="testGetUser()">测试获取用户</button>
+    <button onclick="testGetStats()">测试统计数据</button>
+    <button onclick="testAll()">全部测试</button>
+  </div>
+
+  <div id="results"></div>
+
+  <script type="module">
+    import mockApi from './riding-conquest-h5/src/utils/mock-api.js'
+
+    window.testLogin = async () => {
+      try {
+        const result = await mockApi.login({
+          phone: '13800138000',
+          nickname: '测试用户',
+          avatar: ''
+        })
+        addResult('登录成功', 'success', result)
+      } catch (err) {
+        addResult('登录失败', 'error', err.message)
+      }
+    }
+
+    window.testGetUser = async () => {
+      try {
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJwaG9uZSI6IjEzODAwMTM4MDAwIiwibmlja25hbWUiOiLmlocg57Sg5LiAIn0.mock-token'
+        const result = await mockApi.getCurrentUser(token)
+        addResult('获取用户成功', 'success', result)
+      } catch (err) {
+        addResult('获取用户失败', 'error', err.message)
+      }
+    }
+
+    window.testGetStats = async () => {
+      try {
+        const token = 'mock-token'
+        const result = await mockApi.getProfileStats(token)
+        addResult('获取统计成功', 'success', result)
+      } catch (err) {
+        addResult('获取统计失败', 'error', err.message)
+      }
+    }
+
+    window.testAll = async () => {
+      await testLogin()
+      await new Promise(r => setTimeout(r, 500))
+      await testGetUser()
+      await new Promise(r => setTimeout(r, 500))
+      await testGetStats()
+    }
+
+    function addResult(title, type, data) {
+      const div = document.createElement('div')
+      div.className = `result ${type}`
+      div.innerHTML = `<h3>${title}</h3><pre>${JSON.stringify(data, null, 2)}</pre>`
+      document.getElementById('results').appendChild(div)
+    }
+  </script>
+</body>
+</html>
